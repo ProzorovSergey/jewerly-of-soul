@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <title>Профиль · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Профиль · Jewerly of Soul">
+    <meta property="og:description" content="Личный кабинет: мои идеи, избранное, понравившиеся работы.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Профиль · Jewerly of Soul">
+    <meta name="twitter:description" content="Личный кабинет: мои идеи, избранное, понравившиеся работы.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/profile.css">
+</head>
+<body data-page="profile">
+
+    <header id="siteHeader"></header>
+
+    <main class="profile-page">
+        <div class="container">
+
+            <header class="profile-hero" data-reveal>
+                <div class="avatar avatar--xl" id="profileAvatar">…</div>
+                <div>
+                    <p class="eyebrow">профиль</p>
+                    <h1 class="h-2" id="profileName">…</h1>
+                    <p class="muted" id="profileMeta">…</p>
+                </div>
+                <div class="profile-hero__actions">
+                    <a href="create-idea.html" class="btn btn--primary btn--sm">
+                        <span>Новая идея</span>
+                        <span class="btn__arrow">→</span>
+                    </a>
+                    <button type="button" class="btn btn--ghost btn--sm" id="logoutBtn">
+                        <svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <path d="M16 17l5-5-5-5M21 12H9"/>
+                        </svg>
+                        <span>Выйти</span>
+                    </button>
+                </div>
+            </header>
+
+            <nav class="profile-tabs" data-reveal role="tablist">
+                <button class="profile-tab is-active" data-tab="my">Мои идеи <span class="profile-tab__count" id="cntMy">0</span></button>
+                <button class="profile-tab" data-tab="favorites">Избранные <span class="profile-tab__count" id="cntFav">0</span></button>
+                <button class="profile-tab" data-tab="liked">Понравились <span class="profile-tab__count" id="cntLiked">0</span></button>
+            </nav>
+
+            <div class="profile-content">
+                <div id="ideaGrid" class="idea-grid"></div>
+                <p class="empty-note is-hidden" id="emptyNote">Пусто. Создайте идею в конструкторе.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/profile.js"></script>
+</body>
+</html>

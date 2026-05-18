@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Приватные пути — не индексируем
+Disallow: /profile.html
+Disallow: /create-idea.html
+
+Sitemap: https://prozorovsergey.github.io/jewerly-of-soul/sitemap.xml

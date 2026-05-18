@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <title>Вход · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Вход · Jewerly of Soul">
+    <meta property="og:description" content="Войти в аккаунт Jewerly of Soul.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Вход · Jewerly of Soul">
+    <meta name="twitter:description" content="Войти в аккаунт Jewerly of Soul.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/auth.css">
+</head>
+<body data-page="login">
+
+    <header id="siteHeader"></header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-card" data-reveal>
+                <p class="eyebrow">вход</p>
+                <h1 class="h-2">С возвращением.</h1>
+                <p class="lead">Ваши идеи ждут.</p>
+
+                <form id="loginForm" class="auth-form" novalidate>
+                    <div>
+                        <label class="field-label" for="username">Логин</label>
+                        <input class="field" id="username" name="username" required autocomplete="username">
+                    </div>
+                    <div>
+                        <label class="field-label" for="password">Пароль</label>
+                        <input class="field" type="password" id="password" name="password" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Войти</button>
+                    <p class="auth-form__alt">
+                        Нет аккаунта? <a href="register.html" class="accent">Создать.</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/login.js"></script>
+</body>
+</html>

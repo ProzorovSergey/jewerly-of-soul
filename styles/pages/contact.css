@@ -1,0 +1,131 @@
+/* =================================================================
+ * contact.css — страница "Связаться"
+ * ================================================================= */
+
+.contact-page { padding-block: 40px 80px; }
+
+.page-hero {
+    max-width: 720px;
+    margin-bottom: 56px;
+}
+.page-hero .h-1 { margin-top: 12px; }
+.page-hero .lead { margin-top: 18px; max-width: 580px; }
+
+/* --- Сетка ----------------------------------------------------- */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    align-items: start;
+}
+
+/* --- Контакты -------------------------------------------------- */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-info__item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 18px 20px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color var(--dur-mid) var(--ease), background var(--dur-mid) var(--ease);
+}
+
+a.contact-info__item:hover {
+    border-color: var(--accent);
+    background: var(--bg-elev-2);
+}
+
+.contact-info__icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+}
+.contact-info__icon svg { width: 20px; height: 20px; }
+
+.contact-info__body { display: flex; flex-direction: column; gap: 2px; }
+.contact-info__label {
+    font-size: var(--text-xxs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.contact-info__value {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: var(--text);
+    line-height: 1.3;
+}
+.contact-info__hint {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.contact-quote {
+    margin-top: 12px;
+    padding: 22px 24px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-soft);
+    line-height: 1.55;
+    font-size: var(--text-sm);
+    position: relative;
+}
+
+.contact-quote cite {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-family: var(--font-ui);
+    font-size: var(--text-xxs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* --- Форма ----------------------------------------------------- */
+
+.contact-form {
+    padding: 36px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.contact-form__body {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form__hint {
+    margin-top: 4px;
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    line-height: 1.55;
+}
+
+/* --- Адаптив --------------------------------------------------- */
+
+@media (max-width: 880px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { padding: 28px; }
+}

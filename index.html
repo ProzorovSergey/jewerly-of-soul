@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <meta name="description" content="Jewerly of Soul — личная мастерская браслетов из натуральных полудрагоценных камней. Композиции по запросу, ручная сборка. Ижевск, Россия.">
+    <title>Jewerly of Soul · Браслеты из натуральных камней</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:title" content="Jewerly of Soul · Браслеты из натуральных камней">
+    <meta property="og:description" content="Личная мастерская браслетов из натуральных полудрагоценных камней. Композиции по запросу, ручная сборка. Собери свой браслет в конструкторе.">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jewerly of Soul · Браслеты из натуральных камней">
+    <meta name="twitter:description" content="Личная мастерская браслетов из натуральных полудрагоценных камней. Ижевск, Россия.">
+
+    <!-- JSON-LD: Organization + WebSite для богатой выдачи Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Jewerly of Soul",
+          "alternateName": "Jewerly of Soul · мастерская",
+          "url": "https://prozorovsergey.github.io/jewerly-of-soul/",
+          "logo": "https://prozorovsergey.github.io/jewerly-of-soul/assets/favicon.svg",
+          "image": "https://prozorovsergey.github.io/jewerly-of-soul/assets/og-image.svg",
+          "description": "Личная мастерская браслетов из натуральных полудрагоценных камней.",
+          "foundingDate": "2025",
+          "founder": { "@type": "Person", "name": "Сергей Прозоров" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ижевск",
+            "addressCountry": "RU"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "jewerlyofsoul25@gmail.com",
+            "contactType": "customer service",
+            "availableLanguage": "ru"
+          },
+          "sameAs": ["https://t.me/sdproz"]
+        },
+        {
+          "@type": "WebSite",
+          "name": "Jewerly of Soul",
+          "url": "https://prozorovsergey.github.io/jewerly-of-soul/",
+          "inLanguage": "ru"
+        }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/home.css">
+</head>
+<body data-page="home">
+
+    <header id="siteHeader"></header>
+
+    <main>
+
+        <!-- ========== HERO ========== -->
+        <section class="hero">
+            <div class="container hero__inner">
+                <div class="hero__copy">
+                    <p class="eyebrow">личная мастерская · с 2025 · Ижевск</p>
+                    <h1 class="font-display hero__title">
+                        Браслеты из<br>
+                        <em>натуральных</em><br>
+                        камней.
+                    </h1>
+                    <p class="lead hero__lead">
+                        Собери свой браслет — я соберу его для тебя.
+                    </p>
+                    <div class="hero__cta">
+                        <a href="constructor.html" class="btn btn--primary">
+                            <span>Открыть конструктор</span>
+                            <span class="btn__arrow">→</span>
+                        </a>
+                        <a href="inspiration.html" class="btn btn--ghost">Сообщество</a>
+                    </div>
+                    <div class="hero__proof" id="heroProof">
+                        <!-- цифры подставляются из home.js -->
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__visual-main" aria-hidden="true">
+                        <canvas
+                            id="heroCanvas"
+                            data-mini-bracelet
+                            data-stones="amethyst,labradorite,moonstone,lapis,rose-quartz,green-jade,tiger-eye,carnelian,amazonite,rock-crystal,malachite,sunstone"
+                            data-size="9"
+                            data-length="200"
+                            width="540" height="540"></canvas>
+                    </div>
+                    <div class="hero__visual-trio" id="heroTrio" aria-label="Популярные идеи сообщества">
+                        <!-- триптих из топ-3 идей подставляется из home.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider-thin" aria-hidden="true">
+
+        <!-- ========== ЧТО УЖЕ СОБРАНО ========== -->
+        <section class="section section--portfolio" data-reveal>
+            <div class="container">
+                <header class="section__head">
+                    <p class="eyebrow">фрагмент работы</p>
+                    <h2 class="h-2">Что уже собрано</h2>
+                </header>
+                <div class="featured-grid" id="featuredGrid"></div>
+                <div class="section__foot">
+                    <a href="inspiration.html" class="btn btn--ghost btn--sm">
+                        <span>В сообщество</span>
+                        <span class="btn__arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider-thin" aria-hidden="true">
+
+        <!-- ========== ЧЕТЫРЕ ТИХИХ ГОЛОСА ========== -->
+        <section class="section section--stones" data-reveal>
+            <div class="container">
+                <header class="section__head section__head--center">
+                    <p class="eyebrow">камни в фокусе</p>
+                    <h2 class="h-2">Четыре тихих голоса</h2>
+                </header>
+                <div class="stone-quartet" id="stoneQuartet"></div>
+                <div class="section__foot">
+                    <a href="stones.html" class="btn btn--ghost btn--sm">
+                        <span>Все камни</span>
+                        <span class="btn__arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider-thin" aria-hidden="true">
+
+        <!-- ========== ПРО ХОББИ ========== -->
+        <section class="section section--about" data-reveal>
+            <div class="container about">
+                <div class="about__visual" aria-hidden="true">
+                    <canvas
+                        id="aboutCanvas"
+                        data-mini-bracelet
+                        data-stones="moonstone,labradorite,rose-quartz,amethyst,white-jade,moonstone,labradorite,rose-quartz,amethyst,white-jade,moonstone,labradorite"
+                        data-size="8"
+                        data-length="180"
+                        width="360" height="360"></canvas>
+                </div>
+                <div class="about__copy">
+                    <p class="eyebrow">о мастерской</p>
+                    <h2 class="h-3">Это моё <em>хобби</em>.</h2>
+                    <p class="about__text">
+                        Это моё хобби — я собираю браслеты из натуральных камней,
+                        выбираю сочетания по смыслу и эстетике.
+                    </p>
+                    <p class="about__text muted">
+                        Я не магазин на потоке. Я собираю каждый браслет руками,
+                        для конкретного человека и под его историю. Если вы хотите —
+                        вы можете либо открыть конструктор и попробовать собрать
+                        идею сами, либо просто написать мне.
+                    </p>
+                    <a href="contact.html" class="btn btn--ghost">
+                        <span>Связаться со мной</span>
+                        <span class="btn__arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

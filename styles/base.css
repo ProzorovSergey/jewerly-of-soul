@@ -1,0 +1,354 @@
+/* =================================================================
+ * base.css — reset + типографика + базовые элементы
+ * ВАЖНО: @import должен быть ПЕРВОЙ строкой (после комментариев),
+ * иначе токены не загрузятся и весь дизайн поедет.
+ * ================================================================= */
+
+@import url('tokens.css');
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217, 184, 121, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 30%, rgba(124, 79, 191, 0.04) 0%, transparent 70%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+img, svg, canvas, video { display: block; max-width: 100%; }
+
+button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+button { cursor: pointer; }
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--dur-mid) var(--ease);
+}
+
+a:hover { color: var(--accent); }
+
+::selection { background: var(--accent-soft); color: var(--accent); }
+
+/* --- Focus-rings (видимы только при keyboard-навигации) ------- */
+:focus { outline: none; }
+:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+}
+/* Для chip/button focus-ring подкручен под форму */
+.chip:focus-visible,
+.btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* --- prefers-reduced-motion: гасим transition вне токенов ---- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- Типографические утилиты ----------------------------------- */
+
+.font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+
+.font-display em,
+.font-display .em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.eyebrow {
+    font-family: var(--font-ui);
+    font-size: var(--text-xxs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.muted { color: var(--text-muted); }
+.soft  { color: var(--text-soft); }
+.accent{ color: var(--accent); }
+
+.h-1 { font-family: var(--font-display); font-size: clamp(40px, 6vw, var(--text-3xl)); line-height: 1.05; letter-spacing: -0.015em; }
+.h-2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, var(--text-2xl)); line-height: 1.1; letter-spacing: -0.01em; }
+.h-3 { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.2; }
+.h-4 { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.3; }
+
+.lead {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-md);
+    color: var(--text-soft);
+    line-height: 1.55;
+}
+
+/* --- Контейнер ------------------------------------------------- */
+
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+/* --- Утилиты -------------------------------------------------- */
+
+.is-hidden { display: none !important; }
+.visually-hidden,
+.sr-only {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* =================================================================
+ * UTILITY CLASSES
+ * Краткие переиспользуемые классы. Не злоупотреблять — для
+ * крупных блоков лучше делать семантические BEM-классы.
+ * ============================================================== */
+
+/* Display */
+.u-flex       { display: flex; }
+.u-flex-col   { display: flex; flex-direction: column; }
+.u-grid       { display: grid; }
+.u-inline     { display: inline; }
+.u-block      { display: block; }
+.u-inline-block { display: inline-block; }
+.u-inline-flex  { display: inline-flex; }
+
+/* Flex выравнивание */
+.u-items-center  { align-items: center; }
+.u-items-start   { align-items: flex-start; }
+.u-items-end     { align-items: flex-end; }
+.u-items-baseline{ align-items: baseline; }
+.u-justify-center  { justify-content: center; }
+.u-justify-between { justify-content: space-between; }
+.u-justify-end     { justify-content: flex-end; }
+.u-flex-wrap     { flex-wrap: wrap; }
+.u-flex-1        { flex: 1; }
+
+/* Gap по spacing-токенам */
+.u-gap-1 { gap: var(--space-1); }
+.u-gap-2 { gap: var(--space-2); }
+.u-gap-3 { gap: var(--space-3); }
+.u-gap-4 { gap: var(--space-4); }
+.u-gap-5 { gap: var(--space-5); }
+.u-gap-6 { gap: var(--space-6); }
+.u-gap-7 { gap: var(--space-7); }
+
+/* Margin top/bottom по spacing-токенам */
+.u-mt-1 { margin-top: var(--space-1); }
+.u-mt-2 { margin-top: var(--space-2); }
+.u-mt-3 { margin-top: var(--space-3); }
+.u-mt-4 { margin-top: var(--space-4); }
+.u-mt-5 { margin-top: var(--space-5); }
+.u-mt-6 { margin-top: var(--space-6); }
+.u-mt-7 { margin-top: var(--space-7); }
+.u-mb-1 { margin-bottom: var(--space-1); }
+.u-mb-2 { margin-bottom: var(--space-2); }
+.u-mb-3 { margin-bottom: var(--space-3); }
+.u-mb-4 { margin-bottom: var(--space-4); }
+.u-mb-5 { margin-bottom: var(--space-5); }
+.u-mb-6 { margin-bottom: var(--space-6); }
+.u-mb-7 { margin-bottom: var(--space-7); }
+
+/* Текстовые утилиты */
+.u-text-xs    { font-size: var(--text-xs); }
+.u-text-sm    { font-size: var(--text-sm); }
+.u-text-base  { font-size: var(--text-base); }
+.u-text-md    { font-size: var(--text-md); }
+.u-text-lg    { font-size: var(--text-lg); }
+.u-text-center{ text-align: center; }
+.u-text-right { text-align: right; }
+.u-text-left  { text-align: left; }
+.u-uppercase  { text-transform: uppercase; letter-spacing: 0.12em; }
+
+/* Цвета */
+.u-text-muted   { color: var(--text-muted); }
+.u-text-soft    { color: var(--text-soft); }
+.u-text-faint   { color: var(--text-faint); }
+.u-text-accent  { color: var(--accent); }
+
+/* Ширина / выравнивание */
+.u-full     { width: 100%; }
+.u-max-w-sm { max-width: 420px; }
+.u-max-w-md { max-width: 640px; }
+.u-max-w-lg { max-width: 920px; }
+.u-mx-auto  { margin-inline: auto; }
+
+/* Радиус */
+.u-rounded-sm { border-radius: var(--radius-sm); }
+.u-rounded-md { border-radius: var(--radius-md); }
+.u-rounded-lg { border-radius: var(--radius-lg); }
+.u-rounded-full { border-radius: var(--radius-full); }
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin-block: 80px;
+}
+
+/* ----- Премиум-разделитель «золотая нить»: расходится из тонкой
+ *       линии в центре в прозрачные концы. Используется между
+ *       секциями ради «дыхания» полотна.
+ */
+.divider-thin {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    margin-block: var(--space-9);
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(217, 184, 121, 0.32) 50%,
+        transparent 100%
+    );
+}
+
+@media (max-width: 720px) {
+    .divider { margin-block: 48px; }
+    .divider-thin { margin-block: var(--space-7); }
+    :root { --gutter: 16px; }
+}
+
+/* =================================================================
+ * SCROLL-REVEAL — общая анимация появления секций
+ * Все блоки с [data-reveal] стартуют opacity:0 + translateY,
+ * после .is-revealed мягко въезжают.
+ * ============================================================== */
+
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity calc(var(--dur-page) * 0.9) var(--ease-out),
+        transform calc(var(--dur-page) * 0.9) var(--ease-out);
+    will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger для прямых детей — задержка через CSS-переменную */
+.reveal-stagger-child {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal-fade-up var(--dur-page) var(--ease-out) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes reveal-fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-reveal].is-revealed,
+    .reveal-stagger-child {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* =================================================================
+ * VIEW TRANSITIONS API — плавный кроссфейд между страницами
+ * (Chrome/Edge 126+; Firefox/Safari игнорируют).
+ * ============================================================== */
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+    animation-name: vt-fade-out;
+}
+::view-transition-new(root) {
+    animation-name: vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+@keyframes vt-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation: none; }
+}
+
+/* =================================================================
+ * DISPLAY-ТИПОГРАФИКА
+ * Гипер-крупные размеры для премиум-акцентов (proof-цифры,
+ * редкие keynote-заголовки).
+ * ============================================================== */
+
+.h-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 144px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    font-weight: 400;
+}
+
+.h-display-xl em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+/* keynote-цифра — для proof-блоков, статистики */
+.keynote-num {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    font-weight: 400;
+}

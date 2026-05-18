@@ -1,0 +1,87 @@
+{
+    "version": 2,
+    "updated": "2026-05-13",
+    "compositions": [
+        {
+            "id": "calm",
+            "title": "Для спокойствия",
+            "subtitle": "тихие воды и приглушённый свет",
+            "description": "Композиция, где доминирует холодная палитра. Хорошо подходит, если хочется замедлиться.",
+            "stones": ["amethyst","rock-crystal","moonstone","amazonite","rose-quartz","white-jade","amethyst","moonstone","amazonite","rock-crystal","rose-quartz","amethyst"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "protection",
+            "title": "Для защиты",
+            "subtitle": "плотные тёмные камни-проводники",
+            "description": "Тёмная плотная композиция: чёрный турмалин, обсидиан, шунгит, гематит. Браслет-броня.",
+            "stones": ["black-tourmaline","obsidian","shungite","hematite","onyx","black-agate","black-tourmaline","obsidian","shungite","hematite","onyx","black-agate"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "love",
+            "title": "Для любви и нежности",
+            "subtitle": "розовое, перламутровое, тёплое",
+            "description": "Розовый кварц, кунцит, родохрозит, родонит. Палитра, на которую приятно смотреть.",
+            "stones": ["rose-quartz","kunzite","rhodochrosite","rhodonite","pink-opal","rose-quartz","kunzite","rhodochrosite","rhodonite","pink-opal","rose-quartz","kunzite"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "action",
+            "title": "Для энергии и действия",
+            "subtitle": "огонь, гранат, сердолик",
+            "description": "Горячая композиция. Подходит, когда нужно заякорить решительность и движение.",
+            "stones": ["almandine-garnet","carnelian","mexican-agate","sunstone","red-jasper","tiger-eye","almandine-garnet","carnelian","mexican-agate","sunstone","red-jasper","tiger-eye"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "speech",
+            "title": "Для ясной речи",
+            "subtitle": "синие и аквамариновые тона",
+            "description": "Лазурит, содалит, синий апатит, амазонит. Когда важно быть точно понятым.",
+            "stones": ["lapis","sodalite","blue-apatite","amazonite","kyanite","lapis","sodalite","blue-apatite","amazonite","kyanite","lapis","sodalite"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "growth",
+            "title": "Для роста и удачи",
+            "subtitle": "зелёная палитра — нефрит, авантюрин",
+            "description": "Зелёный нефрит, авантюрин, малахит, гранат-гроссуляр. Композиция плавного движения.",
+            "stones": ["green-jade","aventurine","malachite","green-grossular","green-apatite","moss-agate","green-jade","aventurine","malachite","green-grossular","green-apatite","moss-agate"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "deep_water",
+            "title": "Для глубокой воды",
+            "subtitle": "лабрадорит, лунный камень, ларимар",
+            "description": "Композиция для интуиции и тонкой настройки. Холодные переливы.",
+            "stones": ["labradorite","moonstone","larimar","blue-apatite","lapis","labradorite","moonstone","larimar","blue-apatite","lapis","labradorite","moonstone"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "silence",
+            "title": "Для тишины ума",
+            "subtitle": "белое, прозрачное, лёгкое",
+            "description": "Горный хрусталь, лунный камень, белый нефрит, перламутр. Очень светлый браслет.",
+            "stones": ["rock-crystal","moonstone","white-jade","mother-of-pearl","rock-crystal","moonstone","white-jade","mother-of-pearl","rock-crystal","moonstone","white-jade","mother-of-pearl"],
+            "size": 8,
+            "length": 180
+        },
+        {
+            "id": "rare",
+            "title": "Коллекция редкого",
+            "subtitle": "ларимар, чароит, астрофиллит",
+            "description": "Браслет-витрина из редких минералов: ларимар, чароит, азурмалахит, питерсит, астрофиллит, иолит. Каждый камень — отдельная история.",
+            "stones": ["larimar","charoite","azurmalachite","pietersite","astrophyllite","iolite","larimar","charoite","azurmalachite","pietersite","astrophyllite","iolite"],
+            "size": 8,
+            "length": 180
+        }
+    ]
+}

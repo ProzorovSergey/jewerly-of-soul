@@ -1,0 +1,26 @@
+{
+  "name": "Jewerly of Soul",
+  "short_name": "Jewerly of Soul",
+  "description": "Личная мастерская браслетов из натуральных камней",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#06060A",
+  "theme_color": "#06060A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

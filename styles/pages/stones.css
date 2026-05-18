@@ -1,0 +1,677 @@
+/* =================================================================
+ * stones.css — каталог камней с расширенными фильтрами
+ * ================================================================= */
+
+.stones-page { padding-block: 40px 60px; }
+
+.page-hero {
+    max-width: 920px;
+    margin-bottom: var(--space-7);
+}
+.page-hero .h-1 { margin-top: var(--space-3); }
+.page-hero .lead { margin-top: var(--space-4); max-width: 600px; }
+
+/* --- Sticky filter-bar ------------------------------------------- */
+
+.filter-bar {
+    position: sticky;
+    top: 64px;                  /* высота шапки */
+    z-index: 40;
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-3) 0;
+    margin-bottom: var(--space-5);
+    background: rgba(6, 6, 10, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-bar__search {
+    flex: 1;
+    max-width: 520px;
+}
+
+.filter-bar__toggle {
+    flex-shrink: 0;
+    gap: var(--space-2);
+    padding: 0 var(--space-4);
+}
+.filter-bar__toggle[aria-expanded="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.filter-bar__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    letter-spacing: 0;
+}
+
+.filter-bar__clear {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 var(--space-2);
+    transition: color var(--dur-mid) var(--ease);
+}
+.filter-bar__clear:hover { color: var(--accent); }
+
+/* --- Раскрываемая панель фильтров ------------------------------- */
+
+.filter-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-7);
+    padding: var(--space-5) var(--space-6);
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    animation: filter-panel-in var(--dur-mid) var(--ease-out);
+}
+
+.filter-panel[hidden] {
+    display: none;
+}
+
+@keyframes filter-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.filter-row__label {
+    flex-shrink: 0;
+    width: 76px;
+    padding-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.filter-chips {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.filter-chips .chip {
+    font-size: 11px;
+    padding: 0 12px;
+    height: 30px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+}
+
+/* Цветной свотч на цветовых чипах */
+.chip.color-chip {
+    padding-left: 8px;
+    gap: 8px;
+}
+.chip.color-chip::before {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--swatch, var(--text-soft));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+    flex-shrink: 0;
+}
+
+/* Маркер редкости */
+.rare-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    margin-left: 4px;
+}
+
+/* --- Сетка камней ------------------------------------------------ */
+
+.stone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stone-card {
+    position: relative;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    cursor: default;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform:
+        perspective(900px)
+        rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg))
+        translateY(calc(var(--tilt-active, 0) * -4px));
+    transition:
+        transform var(--dur-mid) var(--ease-out),
+        border-color var(--dur-mid) var(--ease),
+        box-shadow var(--dur-mid) var(--ease-out);
+    will-change: transform;
+}
+
+.stone-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+}
+
+/* Рамка и свечение для редких камней */
+.stone-card.is-rare {
+    background:
+        linear-gradient(135deg, rgba(217, 184, 121, 0.07) 0%, transparent 70%),
+        var(--bg-elev-1);
+    border-color: rgba(217, 184, 121, 0.35);
+    box-shadow: 0 0 0 1px rgba(217, 184, 121, 0.1) inset,
+                0 12px 40px rgba(217, 184, 121, 0.06);
+}
+
+.stone-card.is-rare:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(217, 184, 121, 0.18) inset,
+                0 20px 60px rgba(217, 184, 121, 0.12);
+}
+
+/* "rare" значок в углу */
+.rare-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 4px 9px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    border-radius: 999px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(217, 184, 121, 0.45);
+}
+
+.stone-card__visual {
+    width: 140px;
+    height: 140px;
+    align-self: center;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+}
+
+/* Свечение под редким камнем */
+.stone-card.is-rare .stone-card__visual::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(217, 184, 121, 0.15) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stone-card__visual canvas {
+    width: 100%; height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.stone-card__name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    text-align: center;
+    transition: transform var(--dur-mid) var(--ease-out);
+}
+
+/* На лице карточки — только название и element-tag */
+.stone-card__meta {
+    display: flex;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+}
+/* Скрываем второстепенные элементы метаданных с лица */
+.stone-card__meta .stone-card__color,
+.stone-card__meta .stone-card__sizes {
+    display: none;
+}
+
+.stone-card__color {
+    color: var(--text-faint);
+    font-style: italic;
+}
+
+/* Energy перебираем в overlay, не на лице */
+.stone-card__energy {
+    display: none;
+}
+
+/* ---- Overlay по hover: появляется снизу с полной инфой ---- */
+.stone-card__overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: var(--space-5) var(--space-6) var(--space-6);
+    background: linear-gradient(to top,
+        rgba(14, 14, 20, 0.96) 0%,
+        rgba(14, 14, 20, 0.88) 70%,
+        rgba(14, 14, 20, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transform: translateY(100%);
+    opacity: 0;
+    transition:
+        transform var(--dur-mid) var(--ease-out),
+        opacity var(--dur-mid) var(--ease-out);
+    pointer-events: none;
+}
+.stone-card:hover .stone-card__overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.stone-card__overlay-row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+
+.stone-card__overlay-energy {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.stone-card__overlay-energy span {
+    padding: 3px 9px;
+    background: var(--bg-elev-2);
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+}
+
+.stone-card.is-rare .stone-card__overlay-energy span {
+    background: rgba(217, 184, 121, 0.10);
+    color: var(--accent);
+}
+
+/* --- Пустой результат -------------------------------------------- */
+
+.empty-note {
+    text-align: center;
+    color: var(--text-faint);
+    padding: 60px 0;
+    font-style: italic;
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+}
+
+/* --- Тулбар над сеткой: сортировка + «только избранные» --------- */
+
+.stones-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin: var(--space-6) 0 var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+}
+
+.favs-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-soft);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        border-color var(--dur-mid) var(--ease),
+        color var(--dur-mid) var(--ease),
+        background var(--dur-mid) var(--ease);
+}
+
+.favs-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.favs-toggle.is-active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.favs-toggle__icon { width: 14px; height: 14px; }
+.favs-toggle.is-active .favs-toggle__icon { fill: currentColor; }
+
+.favs-toggle__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.sort-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-bar__label {
+    font-size: var(--text-xxs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.sort-bar__select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg-elev-1);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 8px 32px 8px 14px;
+    font: inherit;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+        linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position:
+        calc(100% - 16px) 50%,
+        calc(100% - 11px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    transition: border-color var(--dur-mid) var(--ease);
+}
+
+.sort-bar__select:hover,
+.sort-bar__select:focus-visible {
+    border-color: var(--accent);
+}
+
+/* --- Сердечко-избранное на карточке ----------------------------- */
+
+.stone-card__heart {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 6, 10, 0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-soft);
+    cursor: pointer;
+    z-index: 5;
+    transition:
+        color var(--dur-mid) var(--ease),
+        border-color var(--dur-mid) var(--ease),
+        background var(--dur-mid) var(--ease),
+        transform var(--dur-fast) var(--ease-spring);
+}
+
+.stone-card__heart svg { width: 17px; height: 17px; }
+
+.stone-card__heart:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.06);
+}
+
+.stone-card__heart.is-active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.stone-card__heart.is-active:hover {
+    transform: scale(1.06);
+}
+
+/* На светлой теме сердечко на тёмном фоне → светлый фон-чип */
+html[data-theme="light"] .stone-card__heart {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* Карточка кликабельна — курсор pointer */
+.stone-card[role="button"] { cursor: pointer; }
+.stone-card[role="button"]:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* --- Детальная модалка камня ------------------------------------ */
+
+/* Кастомная ширина модалки — переопределяем глобальный max-width: 520px */
+.modal.modal--stone-detail {
+    max-width: 760px;
+}
+
+.stone-detail {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-7);
+    align-items: start;
+    width: 100%;
+}
+
+.stone-detail__visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 50% 50%, #161219 0%, #06060A 75%);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.stone-detail.is-rare .stone-detail__visual {
+    border-color: rgba(217, 184, 121, 0.35);
+    box-shadow: 0 0 0 1px rgba(217, 184, 121, 0.18) inset,
+                0 20px 60px rgba(217, 184, 121, 0.12);
+}
+
+.stone-detail.is-rare .stone-detail__visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(217, 184, 121, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.stone-detail__visual canvas {
+    width: 88%;
+    height: 88%;
+    position: relative;
+    z-index: 1;
+}
+
+.stone-detail__heart {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(6, 6, 10, 0.65);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-soft);
+    cursor: pointer;
+    z-index: 6;
+    transition:
+        color var(--dur-mid) var(--ease),
+        border-color var(--dur-mid) var(--ease),
+        background var(--dur-mid) var(--ease),
+        transform var(--dur-fast) var(--ease-spring);
+}
+.stone-detail__heart svg { width: 18px; height: 18px; }
+.stone-detail__heart:hover { color: var(--accent); border-color: var(--accent); transform: scale(1.06); }
+.stone-detail__heart.is-active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.stone-detail__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.stone-detail__name {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 38px);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.stone-detail__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.stone-detail__color {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+}
+
+.stone-detail__desc {
+    color: var(--text-soft);
+    font-size: var(--text-base);
+    line-height: 1.55;
+}
+
+.stone-detail__energies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: var(--space-2);
+}
+
+.stone-detail__energy {
+    padding: 5px 11px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    color: var(--text-soft);
+}
+
+.stone-detail.is-rare .stone-detail__energy {
+    background: rgba(217, 184, 121, 0.10);
+    color: var(--accent);
+    border-color: rgba(217, 184, 121, 0.25);
+}
+
+.stone-detail__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-2);
+}
+
+.stone-detail__row-label {
+    font-size: var(--text-xxs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-width: 90px;
+}
+
+.stone-detail__row-value {
+    color: var(--text);
+    font-size: var(--text-sm);
+}
+
+/* --- Адаптив ----------------------------------------------------- */
+
+@media (max-width: 980px) {
+    .stone-grid { grid-template-columns: repeat(2, 1fr); }
+    .filter-row { flex-direction: column; gap: 8px; }
+    .filter-row__label { width: auto; padding-top: 0; }
+    .stones-toolbar { gap: var(--space-3); }
+    .stone-detail {
+        grid-template-columns: 1fr;
+        min-width: auto;
+    }
+    .stone-detail__visual { max-width: 280px; margin: 0 auto; }
+}
+
+@media (max-width: 540px) {
+    .stone-grid { grid-template-columns: 1fr; }
+    .stone-card { padding: 22px; }
+    .sort-bar__label { display: none; }
+}

@@ -1,0 +1,38 @@
+# macOS / Windows / Linux артефакты
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Редакторы / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Логи и временные файлы
+*.log
+*.tmp
+.cache/
+
+# Бэкапы
+_backup_old/
+_backup_assets/
+*.bak
+
+# OS-thumbnails / preview
+*.iml
+
+# Архивы, которые не должны быть в репо
+*.zip
+*.rar
+*.7z
+
+# Node / npm (на случай, если когда-то появятся)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Окружения
+.env
+.env.local

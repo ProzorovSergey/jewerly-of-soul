@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <meta name="description" content="Конструктор браслетов Jewerly of Soul — собери свою композицию из натуральных камней.">
+    <title>Конструктор · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Конструктор браслета · Jewerly of Soul">
+    <meta property="og:description" content="Соберите свой браслет из 66 натуральных камней. AI-описание энергии композиции, сохранение идеи в личный кабинет.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Конструктор браслета · Jewerly of Soul">
+    <meta name="twitter:description" content="Соберите свой браслет из 66 натуральных камней. AI-описание энергии композиции, сохранение идеи в личный кабинет.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/constructor.css">
+</head>
+<body data-page="constructor">
+
+    <header id="siteHeader"></header>
+
+    <main class="constructor-page">
+        <div class="container">
+
+            <!-- ========== ЗАГОЛОВОК ========== -->
+            <header class="constructor-hero">
+                <p class="eyebrow">конструктор</p>
+                <h1 class="h-1">Соберите свой <em>браслет</em>.</h1>
+                <p class="lead">Выберите камни, длину и размер бусины. Я соберу композицию по вашей идее.</p>
+            </header>
+
+            <!-- ========== ТРИ КОЛОНКИ ========== -->
+            <div class="constructor-grid">
+
+                <!-- ---------- ЛЕВАЯ: палитра ---------- -->
+                <aside class="panel panel--left">
+
+                    <!-- Поиск + фильтры -->
+                    <section class="panel__section">
+                        <h2 class="panel__title">Камни</h2>
+                        <input
+                            type="search"
+                            id="paletteSearch"
+                            class="field"
+                            placeholder="поиск по названию или энергии…"
+                            aria-label="поиск камня">
+
+                        <div class="filter-chips compact" id="elementFilters" role="group" aria-label="фильтр по стихиям">
+                            <button class="chip is-active" data-el="all">Все</button>
+                            <button class="chip" data-el="земля"  data-element="земля"><span class="chip__icon"></span>земля</button>
+                            <button class="chip" data-el="вода"   data-element="вода"><span class="chip__icon"></span>вода</button>
+                            <button class="chip" data-el="огонь"  data-element="огонь"><span class="chip__icon"></span>огонь</button>
+                            <button class="chip" data-el="воздух" data-element="воздух"><span class="chip__icon"></span>воздух</button>
+                            <button class="chip" data-el="эфир"   data-element="эфир"><span class="chip__icon"></span>эфир</button>
+                        </div>
+
+                        <details class="filter-extra">
+                            <summary>цвет и редкость</summary>
+                            <div class="filter-chips compact" id="colorFilters" role="group" aria-label="фильтр по цветам">
+                                <button class="chip is-active" data-color="all">Любой</button>
+                                <button class="chip color-chip" data-color="черные"     style="--swatch:#15151A">чёрный</button>
+                                <button class="chip color-chip" data-color="белые"      style="--swatch:#E8E4DD">белый</button>
+                                <button class="chip color-chip" data-color="прозрачные" style="--swatch:#C0CDE0">прозрачный</button>
+                                <button class="chip color-chip" data-color="зеленые"    style="--swatch:#4D9B73">зелёный</button>
+                                <button class="chip color-chip" data-color="синие"      style="--swatch:#1F3A8A">синий</button>
+                                <button class="chip color-chip" data-color="голубые"    style="--swatch:#7BA8C9">голубой</button>
+                                <button class="chip color-chip" data-color="красные"    style="--swatch:#B14924">красный</button>
+                                <button class="chip color-chip" data-color="оранжевые"  style="--swatch:#D08A48">оранжевый</button>
+                                <button class="chip color-chip" data-color="розовые"    style="--swatch:#E5AEC2">розовый</button>
+                                <button class="chip color-chip" data-color="фиолетовые" style="--swatch:#7B5BA0">фиолетовый</button>
+                                <button class="chip color-chip" data-color="золотые"    style="--swatch:#D9B879">золотой</button>
+                                <button class="chip color-chip" data-color="коричневые" style="--swatch:#6E4A2E">коричневый</button>
+                            </div>
+                            <div class="filter-chips compact" id="rarityFilters" role="group" aria-label="фильтр по редкости" style="margin-top:6px">
+                                <button class="chip is-active" data-rarity="all">Все</button>
+                                <button class="chip" data-rarity="common">обычные</button>
+                                <button class="chip" data-rarity="rare">редкие <span class="rare-dot"></span></button>
+                            </div>
+                        </details>
+
+                        <div id="palette" class="palette" aria-label="каталог камней"></div>
+                    </section>
+
+                    <!-- Длина -->
+                    <section class="panel__section">
+                        <header class="panel__head">
+                            <h2 class="panel__title">Длина браслета</h2>
+                            <span id="lengthValue" class="panel__value">18 см</span>
+                        </header>
+                        <div class="length-chips" id="lengthChips" role="group" aria-label="длина браслета">
+                            <button class="chip" data-len="14">14</button>
+                            <button class="chip" data-len="15">15</button>
+                            <button class="chip is-active" data-len="16">16</button>
+                            <button class="chip" data-len="17">17</button>
+                            <button class="chip" data-len="18">18</button>
+                            <button class="chip" data-len="19">19</button>
+                            <button class="chip" data-len="20">20</button>
+                            <button class="chip" data-len="22">22</button>
+                            <button class="chip" data-len="24">24</button>
+                        </div>
+                        <p class="panel__hint">обхват — стандартный 16–18 см. Другой размер — по запросу.</p>
+                    </section>
+
+                    <!-- Размер бусины -->
+                    <section class="panel__section">
+                        <header class="panel__head">
+                            <h2 class="panel__title">Размер бусины</h2>
+                        </header>
+                        <div class="size-chips" id="sizeChips" role="group" aria-label="размер бусины">
+                            <button class="chip" data-size="6">6 мм</button>
+                            <button class="chip is-active" data-size="8">8 мм</button>
+                            <button class="chip" data-size="10">10 мм</button>
+                        </div>
+                    </section>
+
+                </aside>
+
+                <!-- ---------- ЦЕНТР: сцена ---------- -->
+                <section class="panel panel--stage">
+                    <div class="stage" id="stage">
+                        <canvas id="braceletCanvas" width="700" height="700" aria-label="превью браслета"></canvas>
+                    </div>
+                    <div class="stage-meta">
+                        <div class="stage-meta__cell">
+                            <span class="stage-meta__label">Бусин</span>
+                            <span class="stage-meta__value" id="metaCount">0 / 0</span>
+                        </div>
+                        <div class="stage-meta__cell">
+                            <span class="stage-meta__label">Заполнено</span>
+                            <span class="stage-meta__value" id="metaFill">0%</span>
+                        </div>
+                        <div class="stage-meta__cell">
+                            <span class="stage-meta__label">Размер</span>
+                            <span class="stage-meta__value" id="metaSize">8 мм</span>
+                        </div>
+                        <div class="stage-meta__cell">
+                            <span class="stage-meta__label">Длина</span>
+                            <span class="stage-meta__value" id="metaLength">16 см</span>
+                        </div>
+                    </div>
+
+                    <div class="stage-actions">
+                        <button class="btn btn--ghost btn--sm" id="undoBtn" title="отменить (Ctrl+Z)">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-4"/></svg>
+                            Отменить
+                        </button>
+                        <button class="btn btn--ghost btn--sm" id="clearBtn">Очистить</button>
+                        <button class="btn btn--ghost btn--sm" id="randomBtn">Случайно</button>
+                    </div>
+                </section>
+
+                <!-- ---------- ПРАВАЯ: состав ---------- -->
+                <aside class="panel panel--right">
+
+                    <section class="panel__section">
+                        <h2 class="panel__title">Состав</h2>
+                        <ul id="sequenceList" class="sequence" aria-label="состав браслета">
+                            <li class="sequence__empty" id="seqEmpty">Пусто. Добавьте первый камень слева.</li>
+                        </ul>
+                    </section>
+
+                    <section class="panel__section">
+                        <h2 class="panel__title">Энергетика браслета</h2>
+                        <div id="energyTags" class="energy-tags" aria-live="polite">
+                            <span class="muted" style="font-size:13px;">появится, когда добавите камни</span>
+                        </div>
+                        <p id="energyHint" class="panel__hint" style="margin-top:14px"></p>
+                        <button id="aiBtn" class="btn btn--ghost btn--sm" style="margin-top:14px" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+                            AI · описание энергии
+                        </button>
+                        <div id="aiResult" class="ai-result" hidden></div>
+                    </section>
+
+                    <section class="panel__section panel__section--actions">
+                        <button id="saveBtn" class="btn btn--primary btn--block" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+                            Сохранить идею
+                        </button>
+                        <button id="sendBtn" class="btn btn--ghost btn--block" style="margin-top:10px" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            Отправить мастеру
+                        </button>
+                        <button id="downloadBtn" class="btn btn--ghost btn--block" style="margin-top:10px" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                            Скачать изображение
+                        </button>
+                        <p class="panel__hint" style="margin-top:14px">
+                            «Скачать» сохранит PNG-превью. «Отправить» откроет почту с готовым письмом —
+                            не забудьте приложить картинку.
+                        </p>
+                    </section>
+
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/constructor.js"></script>
+</body>
+</html>

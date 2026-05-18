@@ -1,0 +1,1743 @@
+{
+  "version": 3,
+  "updated": "2026-05-13",
+  "stones": [
+    {
+      "id": "amethyst",
+      "name": "Аметист",
+      "color_category": "фиолетовые",
+      "element": "воздух",
+      "energy": [
+        "интуиция",
+        "спокойствие",
+        "вдохновение",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "crystalline",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#8A4FBF",
+      "palette": {
+        "base": "#7B3FB0",
+        "highlight": "#E0C6F5",
+        "shadow": "#2A0F45",
+        "accent": "#BE8AF0",
+        "deep": "#4A1D72"
+      }
+    },
+    {
+      "id": "rose-quartz",
+      "name": "Розовый кварц",
+      "color_category": "розовые",
+      "element": "вода",
+      "energy": [
+        "любовь",
+        "спокойствие",
+        "баланс",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "milky",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#F1B6C2",
+      "palette": {
+        "base": "#F1B6C2",
+        "highlight": "#FFFFFF",
+        "shadow": "#7A4E58",
+        "accent": "#FCD6DE",
+        "deep": "#6A3845"
+      }
+    },
+    {
+      "id": "lepidolite",
+      "name": "Лепидолит",
+      "color_category": "фиолетовые",
+      "element": "воздух",
+      "energy": [
+        "спокойствие",
+        "баланс",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B69DC7",
+      "palette": {
+        "base": "#A98EBE",
+        "highlight": "#E4D4F0",
+        "shadow": "#3E2F4E",
+        "accent": "#D5BCE6",
+        "deep": "#5A4570"
+      }
+    },
+    {
+      "id": "charoite",
+      "name": "Чароит",
+      "color_category": "фиолетовые",
+      "element": "воздух",
+      "energy": [
+        "интуиция",
+        "вдохновение",
+        "спокойствие"
+      ],
+      "rarity": "rare",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7B5BA0",
+      "palette": {
+        "base": "#6E4D94",
+        "highlight": "#D2BFE8",
+        "shadow": "#241934",
+        "accent": "#A788C9",
+        "deep": "#3D2A5A"
+      }
+    },
+    {
+      "id": "kunzite",
+      "name": "Кунцит",
+      "color_category": "розовые",
+      "element": "вода",
+      "energy": [
+        "любовь",
+        "спокойствие",
+        "баланс"
+      ],
+      "rarity": "rare",
+      "texture": "milky",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#E8B5C8",
+      "palette": {
+        "base": "#E5AEC2",
+        "highlight": "#FFFFFF",
+        "shadow": "#7C4756",
+        "accent": "#F5CFDE",
+        "deep": "#5C2F3F"
+      }
+    },
+    {
+      "id": "rhodonite",
+      "name": "Родонит",
+      "color_category": "розовые",
+      "element": "вода",
+      "energy": [
+        "любовь",
+        "баланс",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B85E72",
+      "palette": {
+        "base": "#A0455D",
+        "highlight": "#E89BAD",
+        "shadow": "#2B0E15",
+        "accent": "#D7818F",
+        "deep": "#4A1822"
+      }
+    },
+    {
+      "id": "rhodochrosite",
+      "name": "Родохрозит",
+      "color_category": "розовые",
+      "element": "вода",
+      "energy": [
+        "любовь",
+        "баланс",
+        "спокойствие"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#E08B9A",
+      "palette": {
+        "base": "#D87383",
+        "highlight": "#F8D6DD",
+        "shadow": "#5A2934",
+        "accent": "#EFADB8",
+        "deep": "#7A3848"
+      }
+    },
+    {
+      "id": "pink-opal",
+      "name": "Опал розовый",
+      "color_category": "розовые",
+      "element": "вода",
+      "energy": [
+        "любовь",
+        "спокойствие",
+        "интуиция"
+      ],
+      "rarity": "rare",
+      "texture": "milky",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#F0C6D0",
+      "palette": {
+        "base": "#EAB8C4",
+        "highlight": "#FFFFFF",
+        "shadow": "#7D5963",
+        "accent": "#F8D8DE",
+        "deep": "#5C3D45"
+      }
+    },
+    {
+      "id": "phosphosiderite",
+      "name": "Фосфосидерит",
+      "color_category": "фиолетовые",
+      "element": "воздух",
+      "energy": [
+        "любовь",
+        "интуиция",
+        "спокойствие"
+      ],
+      "rarity": "rare",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B388C5",
+      "palette": {
+        "base": "#A37AB8",
+        "highlight": "#E3D0EE",
+        "shadow": "#3B2447",
+        "accent": "#C9A6DB",
+        "deep": "#5A3870"
+      }
+    },
+    {
+      "id": "rock-crystal",
+      "name": "Горный хрусталь",
+      "color_category": "прозрачные",
+      "element": "эфир",
+      "energy": [
+        "спокойствие",
+        "интуиция",
+        "баланс",
+        "вдохновение"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#E4E8EC",
+      "palette": {
+        "base": "#E4E8EC",
+        "highlight": "#FFFFFF",
+        "shadow": "#5C6470",
+        "accent": "#FFFFFF",
+        "deep": "#3E444C"
+      },
+      "finish": "transparent"
+    },
+    {
+      "id": "clear-quartz",
+      "name": "Кварц",
+      "color_category": "прозрачные",
+      "element": "эфир",
+      "energy": [
+        "спокойствие",
+        "интуиция",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#DCE0E4",
+      "palette": {
+        "base": "#DCE0E4",
+        "highlight": "#FFFFFF",
+        "shadow": "#525861",
+        "accent": "#FFFFFF",
+        "deep": "#363B43"
+      },
+      "finish": "transparent"
+    },
+    {
+      "id": "moonstone",
+      "name": "Лунный камень",
+      "color_category": "белые",
+      "element": "вода",
+      "energy": [
+        "интуиция",
+        "спокойствие",
+        "любовь",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "iridescent",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#E0E6F0",
+      "palette": {
+        "base": "#DCE3EE",
+        "highlight": "#FFFFFF",
+        "shadow": "#6A7890",
+        "accent": "#9CC5F5",
+        "deep": "#4A5E7A"
+      },
+      "flashes": [
+        "#A8D0F5",
+        "#C8E0F8"
+      ]
+    },
+    {
+      "id": "white-jade",
+      "name": "Нефрит белый",
+      "color_category": "белые",
+      "element": "земля",
+      "energy": [
+        "спокойствие",
+        "баланс",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#E8E2D4",
+      "palette": {
+        "base": "#E8E2D4",
+        "highlight": "#FAF5E8",
+        "shadow": "#7A715E",
+        "accent": "#F0E8D6",
+        "deep": "#4F4636"
+      }
+    },
+    {
+      "id": "mother-of-pearl",
+      "name": "Перламутр",
+      "color_category": "белые",
+      "element": "вода",
+      "energy": [
+        "интуиция",
+        "спокойствие",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "iridescent",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#F0E4DC",
+      "palette": {
+        "base": "#EDDFD6",
+        "highlight": "#FFFFFF",
+        "shadow": "#766458",
+        "accent": "#F8DCC8",
+        "deep": "#564336"
+      },
+      "flashes": [
+        "#E8C8DC",
+        "#C8E0F0",
+        "#F0E8B8"
+      ]
+    },
+    {
+      "id": "obsidian",
+      "name": "Обсидиан",
+      "color_category": "черные",
+      "element": "огонь",
+      "energy": [
+        "защита",
+        "сила",
+        "спокойствие"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#0F0F12",
+      "palette": {
+        "base": "#1A1A1F",
+        "highlight": "#5A5560",
+        "shadow": "#000000",
+        "accent": "#3A3540",
+        "deep": "#000000"
+      }
+    },
+    {
+      "id": "onyx",
+      "name": "Оникс",
+      "color_category": "черные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "сила",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#1A1A1E",
+      "palette": {
+        "base": "#1F1F25",
+        "highlight": "#9090A0",
+        "shadow": "#000000",
+        "accent": "#5A5A6A",
+        "deep": "#000000"
+      }
+    },
+    {
+      "id": "shungite",
+      "name": "Шунгит",
+      "color_category": "черные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "очищение",
+        "сила"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#15151A",
+      "palette": {
+        "base": "#1B1B22",
+        "highlight": "#404048",
+        "shadow": "#000000",
+        "accent": "#2B2B33",
+        "deep": "#000000"
+      },
+      "finish": "matte"
+    },
+    {
+      "id": "black-tourmaline",
+      "name": "Турмалин чёрный",
+      "color_category": "черные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "заземление",
+        "сила"
+      ],
+      "rarity": "common",
+      "texture": "striated",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#141418",
+      "palette": {
+        "base": "#1E1E25",
+        "highlight": "#6A6A78",
+        "shadow": "#000000",
+        "accent": "#4A4A55",
+        "deep": "#000000"
+      }
+    },
+    {
+      "id": "hematite",
+      "name": "Гематит",
+      "color_category": "черные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "сила",
+        "заземление"
+      ],
+      "rarity": "common",
+      "texture": "metallic",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#3F3D44",
+      "palette": {
+        "base": "#4A4750",
+        "highlight": "#A8A2AE",
+        "shadow": "#0F0E12",
+        "accent": "#7E7884",
+        "deep": "#1B1A1F"
+      }
+    },
+    {
+      "id": "black-agate",
+      "name": "Агат чёрный",
+      "color_category": "черные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "сила",
+        "очищение"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#1A1A1F",
+      "palette": {
+        "base": "#22222A",
+        "highlight": "#6A6A7A",
+        "shadow": "#000000",
+        "accent": "#444452",
+        "deep": "#000000"
+      }
+    },
+    {
+      "id": "green-jade",
+      "name": "Нефрит зелёный",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "удача",
+        "деньги"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#5F8C6A",
+      "palette": {
+        "base": "#54805F",
+        "highlight": "#B5D8B8",
+        "shadow": "#1C2A20",
+        "accent": "#86B58E",
+        "deep": "#293E2F"
+      }
+    },
+    {
+      "id": "jadeite",
+      "name": "Жадеит",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "удача",
+        "деньги"
+      ],
+      "rarity": "rare",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#4D9B73",
+      "palette": {
+        "base": "#458F67",
+        "highlight": "#A8DBBC",
+        "shadow": "#162B1F",
+        "accent": "#7BC59A",
+        "deep": "#22422E"
+      }
+    },
+    {
+      "id": "malachite",
+      "name": "Малахит",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "деньги",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "concentric",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#1F6B4F",
+      "palette": {
+        "base": "#1A5E45",
+        "highlight": "#5DBE92",
+        "shadow": "#08221A",
+        "accent": "#48A578",
+        "deep": "#0F3022"
+      }
+    },
+    {
+      "id": "aventurine",
+      "name": "Авантюрин",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "удача",
+        "деньги",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "sparkle",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#4F8B6A",
+      "palette": {
+        "base": "#46805F",
+        "highlight": "#9CCAAA",
+        "shadow": "#162B20",
+        "accent": "#73B289",
+        "deep": "#22402E"
+      }
+    },
+    {
+      "id": "prehnite",
+      "name": "Пренит",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "спокойствие",
+        "деньги"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#A8C58A",
+      "palette": {
+        "base": "#9CBF80",
+        "highlight": "#E0F0CE",
+        "shadow": "#3E4D2C",
+        "accent": "#C2D8A4",
+        "deep": "#586E40"
+      }
+    },
+    {
+      "id": "unakite",
+      "name": "Унакит",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "любовь",
+        "удача"
+      ],
+      "rarity": "common",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7A8E5C",
+      "palette": {
+        "base": "#6D8051",
+        "highlight": "#D4B49C",
+        "shadow": "#2A3320",
+        "accent": "#A88560",
+        "deep": "#3C4628"
+      }
+    },
+    {
+      "id": "chrysoprase",
+      "name": "Хризопраз",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "удача",
+        "спокойствие",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7DB48A",
+      "palette": {
+        "base": "#71A87E",
+        "highlight": "#C8E4CC",
+        "shadow": "#243A28",
+        "accent": "#9FCAA8",
+        "deep": "#36563C"
+      }
+    },
+    {
+      "id": "amazonite",
+      "name": "Амазонит",
+      "color_category": "зеленые",
+      "element": "вода",
+      "energy": [
+        "спокойствие",
+        "баланс",
+        "вдохновение"
+      ],
+      "rarity": "common",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#6DB8B0",
+      "palette": {
+        "base": "#5FAFA6",
+        "highlight": "#B8DDD8",
+        "shadow": "#1F3D3A",
+        "accent": "#90C8C0",
+        "deep": "#2E5754"
+      }
+    },
+    {
+      "id": "chrysocolla",
+      "name": "Хризоколла",
+      "color_category": "синие",
+      "element": "вода",
+      "energy": [
+        "спокойствие",
+        "вдохновение",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#3E8A95",
+      "palette": {
+        "base": "#347D88",
+        "highlight": "#86C0C8",
+        "shadow": "#0D2A30",
+        "accent": "#5FA6AE",
+        "deep": "#143D44"
+      }
+    },
+    {
+      "id": "green-apatite",
+      "name": "Апатит зелёный",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "удача",
+        "баланс",
+        "вдохновение"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#4DA887",
+      "palette": {
+        "base": "#449A7B",
+        "highlight": "#A8DFC8",
+        "shadow": "#15302A",
+        "accent": "#76C2A8",
+        "deep": "#22473A"
+      }
+    },
+    {
+      "id": "variscite",
+      "name": "Варисцит",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "спокойствие",
+        "баланс",
+        "удача"
+      ],
+      "rarity": "rare",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#6FAE92",
+      "palette": {
+        "base": "#62A485",
+        "highlight": "#B8D8C8",
+        "shadow": "#1F3A30",
+        "accent": "#8FC2A8",
+        "deep": "#2E5444"
+      }
+    },
+    {
+      "id": "serpentine",
+      "name": "Серпентин",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "деньги",
+        "удача"
+      ],
+      "rarity": "common",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#8A9E62",
+      "palette": {
+        "base": "#7C9156",
+        "highlight": "#D0DEA8",
+        "shadow": "#2A331C",
+        "accent": "#A4B07E",
+        "deep": "#3E4828"
+      }
+    },
+    {
+      "id": "green-grossular",
+      "name": "Гранат гроссуляр",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "удача",
+        "деньги"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7AAE5C",
+      "palette": {
+        "base": "#6FA453",
+        "highlight": "#C8E0AE",
+        "shadow": "#243A1C",
+        "accent": "#A0C880",
+        "deep": "#36562A"
+      }
+    },
+    {
+      "id": "lapis",
+      "name": "Лазурит",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "мудрость"
+      ],
+      "rarity": "common",
+      "texture": "inclusions",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#1F3A8A",
+      "palette": {
+        "base": "#1B3380",
+        "highlight": "#5274C8",
+        "shadow": "#080F2A",
+        "accent": "#3A5BB0",
+        "deep": "#10204C"
+      }
+    },
+    {
+      "id": "sodalite",
+      "name": "Содалит",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "спокойствие",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "inclusions",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#2A4B8C",
+      "palette": {
+        "base": "#243F7A",
+        "highlight": "#5E7DC2",
+        "shadow": "#0A1230",
+        "accent": "#465EA8",
+        "deep": "#142150"
+      }
+    },
+    {
+      "id": "blue-apatite",
+      "name": "Апатит синий",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#2E7CB8",
+      "palette": {
+        "base": "#266FA8",
+        "highlight": "#7AB6E0",
+        "shadow": "#0C2638",
+        "accent": "#509BCC",
+        "deep": "#163E5C"
+      }
+    },
+    {
+      "id": "angelite",
+      "name": "Ангелит",
+      "color_category": "голубые",
+      "element": "воздух",
+      "energy": [
+        "спокойствие",
+        "интуиция",
+        "вдохновение"
+      ],
+      "rarity": "rare",
+      "texture": "smooth",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B0C9D4",
+      "palette": {
+        "base": "#A4BFCC",
+        "highlight": "#E2EEF2",
+        "shadow": "#3A4C57",
+        "accent": "#C2D6DE",
+        "deep": "#56707D"
+      }
+    },
+    {
+      "id": "kyanite",
+      "name": "Кианит",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "спокойствие",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "striated",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#3D6FAE",
+      "palette": {
+        "base": "#3463A2",
+        "highlight": "#8AB8E0",
+        "shadow": "#0F2244",
+        "accent": "#5E8AC4",
+        "deep": "#1A375E"
+      }
+    },
+    {
+      "id": "aquamarine",
+      "name": "Аквамарин",
+      "color_category": "голубые",
+      "element": "вода",
+      "energy": [
+        "спокойствие",
+        "интуиция",
+        "баланс"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#8FC8D6",
+      "palette": {
+        "base": "#80BCCB",
+        "highlight": "#D8EEF2",
+        "shadow": "#2E5560",
+        "accent": "#A8D4DD",
+        "deep": "#446E7A"
+      }
+    },
+    {
+      "id": "larimar",
+      "name": "Ларимар",
+      "color_category": "голубые",
+      "element": "вода",
+      "energy": [
+        "спокойствие",
+        "вдохновение",
+        "любовь"
+      ],
+      "rarity": "rare",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#6FB6CC",
+      "palette": {
+        "base": "#5FA9C0",
+        "highlight": "#C2E2EC",
+        "shadow": "#1F4554",
+        "accent": "#8FC8D8",
+        "deep": "#2E5C70"
+      }
+    },
+    {
+      "id": "blue-agate",
+      "name": "Агат голубой",
+      "color_category": "голубые",
+      "element": "воздух",
+      "energy": [
+        "спокойствие",
+        "вдохновение",
+        "баланс"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#8AB4C8",
+      "palette": {
+        "base": "#7DA8BD",
+        "highlight": "#D8E8F0",
+        "shadow": "#324754",
+        "accent": "#A8C8D6",
+        "deep": "#465E6E"
+      }
+    },
+    {
+      "id": "dumortierite",
+      "name": "Дюмортьерит",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "мудрость"
+      ],
+      "rarity": "rare",
+      "texture": "veined",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#33508A",
+      "palette": {
+        "base": "#2C467A",
+        "highlight": "#7896C8",
+        "shadow": "#0A1430",
+        "accent": "#4F70AC",
+        "deep": "#14224C"
+      }
+    },
+    {
+      "id": "iolite",
+      "name": "Иолит",
+      "color_category": "синие",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "мудрость"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#3F4480",
+      "palette": {
+        "base": "#373B72",
+        "highlight": "#7376AE",
+        "shadow": "#0F1030",
+        "accent": "#5A5E98",
+        "deep": "#1A1C4A"
+      }
+    },
+    {
+      "id": "carnelian",
+      "name": "Сердолик",
+      "color_category": "красные",
+      "element": "огонь",
+      "energy": [
+        "энергия",
+        "сила",
+        "уверенность"
+      ],
+      "rarity": "common",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#C0532A",
+      "palette": {
+        "base": "#B14924",
+        "highlight": "#EE9670",
+        "shadow": "#3E1208",
+        "accent": "#D27244",
+        "deep": "#5E1A0C"
+      }
+    },
+    {
+      "id": "almandine-garnet",
+      "name": "Гранат альмадин",
+      "color_category": "красные",
+      "element": "огонь",
+      "energy": [
+        "энергия",
+        "сила",
+        "любовь"
+      ],
+      "rarity": "common",
+      "texture": "crystalline",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7E1A22",
+      "palette": {
+        "base": "#71161E",
+        "highlight": "#C25864",
+        "shadow": "#2A0508",
+        "accent": "#A2333D",
+        "deep": "#3E0A0F"
+      }
+    },
+    {
+      "id": "hessonite-garnet",
+      "name": "Гранат гессонит",
+      "color_category": "оранжевые",
+      "element": "огонь",
+      "energy": [
+        "энергия",
+        "уверенность",
+        "сила"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#C46A2E",
+      "palette": {
+        "base": "#B65F26",
+        "highlight": "#EEA070",
+        "shadow": "#3E1808",
+        "accent": "#D2843E",
+        "deep": "#5E240C"
+      }
+    },
+    {
+      "id": "red-jasper",
+      "name": "Яшма красная",
+      "color_category": "красные",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "сила",
+        "заземление"
+      ],
+      "rarity": "common",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#9E3E2E",
+      "palette": {
+        "base": "#8E3526",
+        "highlight": "#D0786A",
+        "shadow": "#2E0A06",
+        "accent": "#B05A48",
+        "deep": "#46140A"
+      }
+    },
+    {
+      "id": "bull-eye",
+      "name": "Бычий глаз",
+      "color_category": "коричневые",
+      "element": "огонь",
+      "energy": [
+        "сила",
+        "защита",
+        "уверенность"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#6E2E22",
+      "palette": {
+        "base": "#622820",
+        "highlight": "#A85E4E",
+        "shadow": "#1C0604",
+        "accent": "#874530",
+        "deep": "#2E0A06"
+      }
+    },
+    {
+      "id": "tiger-eye",
+      "name": "Тигровый глаз",
+      "color_category": "коричневые",
+      "element": "огонь",
+      "energy": [
+        "уверенность",
+        "защита",
+        "сила"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#9C6824",
+      "palette": {
+        "base": "#8C5C1F",
+        "highlight": "#D8A864",
+        "shadow": "#2E1A08",
+        "accent": "#B8853E",
+        "deep": "#48280E"
+      }
+    },
+    {
+      "id": "hawk-eye",
+      "name": "Соколиный глаз",
+      "color_category": "синие",
+      "element": "огонь",
+      "energy": [
+        "защита",
+        "уверенность",
+        "интуиция"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#3A4A5E",
+      "palette": {
+        "base": "#324054",
+        "highlight": "#7C8CA0",
+        "shadow": "#0E1424",
+        "accent": "#566B82",
+        "deep": "#1A2236"
+      }
+    },
+    {
+      "id": "cat-eye",
+      "name": "Кошачий глаз",
+      "color_category": "золотые",
+      "element": "воздух",
+      "energy": [
+        "защита",
+        "интуиция",
+        "удача"
+      ],
+      "rarity": "rare",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B8A05E",
+      "palette": {
+        "base": "#A89052",
+        "highlight": "#E8D6A0",
+        "shadow": "#3A2E14",
+        "accent": "#CDB378",
+        "deep": "#5A4828"
+      }
+    },
+    {
+      "id": "pyrite",
+      "name": "Пирит",
+      "color_category": "золотые",
+      "element": "земля",
+      "energy": [
+        "деньги",
+        "защита",
+        "сила"
+      ],
+      "rarity": "common",
+      "texture": "metallic",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#C8A848",
+      "palette": {
+        "base": "#BD9D3D",
+        "highlight": "#F0DC92",
+        "shadow": "#3E2E08",
+        "accent": "#E0C26E",
+        "deep": "#5E460E"
+      }
+    },
+    {
+      "id": "sunstone",
+      "name": "Солнечный камень",
+      "color_category": "оранжевые",
+      "element": "огонь",
+      "energy": [
+        "энергия",
+        "уверенность",
+        "удача"
+      ],
+      "rarity": "common",
+      "texture": "sparkle",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#D08A48",
+      "palette": {
+        "base": "#C27D3D",
+        "highlight": "#F2C088",
+        "shadow": "#3E1E08",
+        "accent": "#E2A668",
+        "deep": "#5C2E0E"
+      }
+    },
+    {
+      "id": "bronzite",
+      "name": "Бронзит",
+      "color_category": "коричневые",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "сила",
+        "уверенность"
+      ],
+      "rarity": "common",
+      "texture": "metallic",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#6E4A2E",
+      "palette": {
+        "base": "#624026",
+        "highlight": "#A8784E",
+        "shadow": "#1E0C06",
+        "accent": "#86593A",
+        "deep": "#2E1808"
+      }
+    },
+    {
+      "id": "pietersite",
+      "name": "Питерсит",
+      "color_category": "золотые",
+      "element": "огонь",
+      "energy": [
+        "защита",
+        "сила",
+        "вдохновение"
+      ],
+      "rarity": "rare",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7A5026",
+      "palette": {
+        "base": "#6E4622",
+        "highlight": "#C4865E",
+        "shadow": "#1E0C04",
+        "accent": "#A06A40",
+        "deep": "#321608"
+      }
+    },
+    {
+      "id": "topaz",
+      "name": "Топаз",
+      "color_category": "золотые",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "удача"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#D8B45E",
+      "palette": {
+        "base": "#CCA84E",
+        "highlight": "#F2DDA0",
+        "shadow": "#3E2E10",
+        "accent": "#E4C476",
+        "deep": "#5A461C"
+      }
+    },
+    {
+      "id": "grey-agate",
+      "name": "Агат серый",
+      "color_category": "белые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "спокойствие",
+        "защита"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#B0AEA8",
+      "palette": {
+        "base": "#A4A29C",
+        "highlight": "#E0DED8",
+        "shadow": "#4E4C46",
+        "accent": "#C0BEB8",
+        "deep": "#6E6C66"
+      }
+    },
+    {
+      "id": "moss-agate",
+      "name": "Агат моховой",
+      "color_category": "зеленые",
+      "element": "земля",
+      "energy": [
+        "удача",
+        "баланс",
+        "деньги"
+      ],
+      "rarity": "common",
+      "texture": "moss",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7A926A",
+      "palette": {
+        "base": "#6E8460",
+        "highlight": "#B4D0A0",
+        "shadow": "#1F2E1A",
+        "accent": "#94B080",
+        "deep": "#324428"
+      }
+    },
+    {
+      "id": "bamboo-agate",
+      "name": "Агат бамбуковый",
+      "color_category": "коричневые",
+      "element": "земля",
+      "energy": [
+        "баланс",
+        "удача",
+        "сила"
+      ],
+      "rarity": "common",
+      "texture": "banded",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#A88358",
+      "palette": {
+        "base": "#9C764A",
+        "highlight": "#D8B689",
+        "shadow": "#321F0E",
+        "accent": "#BC9A6E",
+        "deep": "#4A2E18"
+      }
+    },
+    {
+      "id": "mexican-agate",
+      "name": "Агат мексиканский",
+      "color_category": "красные",
+      "element": "огонь",
+      "energy": [
+        "энергия",
+        "сила",
+        "удача"
+      ],
+      "rarity": "common",
+      "texture": "swirl",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#A85A36",
+      "palette": {
+        "base": "#9C522E",
+        "highlight": "#DC9070",
+        "shadow": "#2E0E04",
+        "accent": "#BC7048",
+        "deep": "#421808"
+      }
+    },
+    {
+      "id": "labradorite",
+      "name": "Лабрадорит",
+      "color_category": "синие",
+      "element": "вода",
+      "energy": [
+        "интуиция",
+        "защита",
+        "вдохновение"
+      ],
+      "rarity": "common",
+      "texture": "iridescent",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#2A2E38",
+      "palette": {
+        "base": "#353A48",
+        "highlight": "#7DB9D8",
+        "shadow": "#0E1016",
+        "accent": "#58D0B0",
+        "deep": "#08090E"
+      },
+      "flashes": [
+        "#4A9CC8",
+        "#52C8A0",
+        "#D4A84A"
+      ]
+    },
+    {
+      "id": "fluorite",
+      "name": "Флюорит",
+      "color_category": "зеленые",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "баланс",
+        "интуиция"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#7C8FC8",
+      "palette": {
+        "base": "#7283BD",
+        "highlight": "#C0CEE8",
+        "shadow": "#22284C",
+        "accent": "#9CADD2",
+        "deep": "#38406E"
+      }
+    },
+    {
+      "id": "azurmalachite",
+      "name": "Азурмалахит",
+      "color_category": "синие",
+      "element": "земля",
+      "energy": [
+        "защита",
+        "интуиция",
+        "баланс"
+      ],
+      "rarity": "rare",
+      "texture": "concentric",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#214680",
+      "palette": {
+        "base": "#1C3E75",
+        "highlight": "#4C82B8",
+        "shadow": "#0A1538",
+        "accent": "#3A5FA0",
+        "deep": "#10204C"
+      }
+    },
+    {
+      "id": "astrophyllite",
+      "name": "Астрофиллит",
+      "color_category": "черные",
+      "element": "эфир",
+      "energy": [
+        "вдохновение",
+        "защита",
+        "интуиция"
+      ],
+      "rarity": "rare",
+      "texture": "needle",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#2A2620",
+      "palette": {
+        "base": "#33302A",
+        "highlight": "#D8AE60",
+        "shadow": "#0C0A06",
+        "accent": "#C09548",
+        "deep": "#161310"
+      }
+    },
+    {
+      "id": "astrophyllite-quartz",
+      "name": "Кварц с астрофиллитом",
+      "color_category": "прозрачные",
+      "element": "эфир",
+      "energy": [
+        "вдохновение",
+        "интуиция",
+        "спокойствие"
+      ],
+      "rarity": "rare",
+      "texture": "needle",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#C8C2BA",
+      "palette": {
+        "base": "#C8C2BA",
+        "highlight": "#FFFFFF",
+        "shadow": "#3E3C36",
+        "accent": "#E8AE60",
+        "deep": "#1E1C18"
+      }
+    },
+    {
+      "id": "beryl",
+      "name": "Берилл",
+      "color_category": "зеленые",
+      "element": "воздух",
+      "energy": [
+        "вдохновение",
+        "баланс",
+        "удача"
+      ],
+      "rarity": "rare",
+      "texture": "glossy",
+      "sizes": [
+        6,
+        8,
+        10
+      ],
+      "color": "#8AC8B0",
+      "palette": {
+        "base": "#7CBCA0",
+        "highlight": "#D0EEE0",
+        "shadow": "#243E32",
+        "accent": "#A8D8C2",
+        "deep": "#36584A"
+      }
+    }
+  ]
+}

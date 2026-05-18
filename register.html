@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <title>Регистрация · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Регистрация · Jewerly of Soul">
+    <meta property="og:description" content="Создать аккаунт Jewerly of Soul, сохранять и публиковать идеи браслетов.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Регистрация · Jewerly of Soul">
+    <meta name="twitter:description" content="Создать аккаунт Jewerly of Soul, сохранять и публиковать идеи браслетов.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/auth.css">
+</head>
+<body data-page="register">
+
+    <header id="siteHeader"></header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-card" data-reveal>
+                <p class="eyebrow">регистрация</p>
+                <h1 class="h-2">Создайте аккаунт.</h1>
+                <p class="lead">Чтобы сохранять идеи и публиковать их в сообществе.</p>
+
+                <form id="registerForm" class="auth-form" novalidate>
+                    <div>
+                        <label class="field-label" for="displayName">Как вас называть *</label>
+                        <input class="field" id="displayName" name="displayName" required placeholder="например, Сергей">
+                    </div>
+                    <div>
+                        <label class="field-label" for="username">Логин *</label>
+                        <input class="field" id="username" name="username" required autocomplete="username" placeholder="латиницей, без пробелов">
+                        <p class="auth-form__hint">3+ символов, только латиница, цифры, _ . -</p>
+                    </div>
+                    <div>
+                        <label class="field-label" for="password">Пароль *</label>
+                        <input class="field" type="password" id="password" name="password" required autocomplete="new-password" placeholder="не короче 6 символов">
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Создать аккаунт</button>
+                    <p class="auth-form__alt">
+                        Уже есть аккаунт? <a href="login.html" class="accent">Войти.</a>
+                    </p>
+                </form>
+                <p class="auth-form__hint" style="margin-top:24px">
+                    Данные хранятся локально в браузере. При смене браузера или после очистки кэша аккаунт нужно создать заново.
+                    Это намеренно — пока проект работает без серверной базы.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/register.js"></script>
+</body>
+</html>

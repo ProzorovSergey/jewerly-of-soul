@@ -1,0 +1,268 @@
+/* =================================================================
+ * tokens.css — design-system проекта Jewerly of Soul
+ * Единственный источник цветов, шрифтов, отступов, теней,
+ * радиусов и motion. Все остальные стили обращаются ТОЛЬКО к
+ * этим переменным. Хардкод цветов/spacing-ов в pages/* — баг.
+ * ================================================================= */
+
+:root {
+    /* ===== ПАЛИТРА ============================================ */
+    --bg:           #06060A;
+    --bg-elev-1:    #0E0E14;
+    --bg-elev-2:    #14141C;
+    --bg-elev-3:    #1B1B26;
+
+    --border:        rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.12);
+
+    --text:         #E8E4DD;
+    --text-soft:    #B9B3A8;
+    --text-muted:   #8A847A;
+    --text-faint:   #807A72;          /* подняли с #5F5A52 — WCAG AA */
+
+    --accent:       #D9B879;
+    --accent-hover: #E6C58A;
+    --accent-soft:  rgba(217, 184, 121, 0.16);
+    --accent-fg:    #1A1408;
+
+    --el-earth: #B79979;
+    --el-air:   #BCB7C7;
+    --el-water: #7BA8C9;
+    --el-fire:  #C97B6F;
+    --el-ether: #C9B6E0;
+
+    /* ===== ТИПОГРАФИКА ======================================== */
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-ui:      'Manrope', -apple-system, 'Segoe UI', sans-serif;
+
+    /* Fluid размеры (min, fluid, max). Срабатывают между viewport-ами. */
+    --text-xxs:  11px;
+    --text-xs:   12px;
+    --text-sm:   13px;
+    --text-base: 15px;
+    --text-md:   clamp(16px, 1.2vw + 12px, 18px);
+    --text-lg:   clamp(18px, 1.6vw + 12px, 22px);
+    --text-xl:   clamp(22px, 2.5vw + 12px, 30px);
+    --text-2xl:  clamp(28px, 3.5vw + 12px, 44px);
+    --text-3xl:  clamp(36px, 5vw + 14px, 64px);
+    --text-4xl:  clamp(44px, 7vw + 18px, 88px);
+
+    /* ===== СЕТКА И ОТСТУПЫ ==================================== */
+    --container: 1180px;
+    --gutter:    24px;
+
+    /* spacing scale — 4px шагом. Используем var(--space-N), а не 16px-хардкод. */
+    --space-1:   4px;
+    --space-2:   8px;
+    --space-3:   12px;
+    --space-4:   16px;
+    --space-5:   20px;
+    --space-6:   24px;
+    --space-7:   32px;
+    --space-8:   40px;
+    --space-9:   56px;
+    --space-10:  80px;
+    --space-11:  120px;
+    --space-12:  160px;
+
+    /* ===== РАДИУСЫ ============================================ */
+    --radius-xs:  4px;
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  14px;
+    --radius-xl:  20px;
+    --radius-2xl: 28px;
+    --radius-full: 9999px;
+
+    /* ===== ТЕНИ =============================================== */
+    --shadow-xs:    0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.30);
+    --shadow-card:  0 4px 18px rgba(0, 0, 0, 0.35);
+    --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.40);
+    --shadow-soft:  0 8px 32px rgba(0, 0, 0, 0.45);
+    --shadow-lg:    0 20px 60px rgba(0, 0, 0, 0.55);
+    --shadow-accent:0 6px 24px rgba(217, 184, 121, 0.25);
+
+    /* ===== MOTION ============================================= *
+     * Premium easing-tokens. Каждая кривая имеет своё назначение —
+     * не смешиваем их хаотично. Имена согласованы с CSS-utility
+     * классами и js/ui/motion.js.
+     *
+     *   --ease            — нейтральный material-style (системные UI-переходы)
+     *   --ease-out        — мягкое торможение, основной premium easing
+     *   --ease-out-expo   — экспоненциальное приземление, для reveal больших блоков
+     *   --ease-out-quint  — длинный медленный финиш, hero-анимации и page-transitions
+     *   --ease-in-out     — симметричный, для мелких state-переходов кнопок
+     *   --ease-spring     — лёгкий overshoot, только для tactile-feedback (chips, tilt)
+     *
+     * Не используем плоские linear/ease — они дешёвые на ощущение.
+     */
+    --ease:           cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Duration-scale — 8 шагов в логарифмической прогрессии.
+     * Меньше — для микрообратной связи, больше — для cinematic-сцен. */
+    --dur-xs:   90ms;     /* press-feedback, tap-flash */
+    --dur-sm:   160ms;    /* hover, focus, чипы */
+    --dur-md:   240ms;    /* стандартные UI-переходы */
+    --dur-lg:   380ms;    /* раскрытие панелей, smooth state-changes */
+    --dur-xl:   560ms;    /* reveal-on-scroll, page-секции */
+    --dur-2xl:  820ms;    /* hero-orbiting, large entrance */
+    --dur-3xl:  1200ms;   /* breathing, ambient drift */
+
+    /* Legacy-алиасы — все старые ссылки --dur-fast/--dur-mid/--dur-slow
+     * продолжают работать без правок (плавная миграция). */
+    --dur-fast:    var(--dur-xs);
+    --dur-mid:     var(--dur-md);
+    --dur-slow:    var(--dur-lg);
+    --dur-page:    var(--dur-xl);
+
+    /* Stagger-delays для последовательных reveal-эффектов.
+     * Используются как inline style="--stagger:N" → calc(N * var(--stagger-step)). */
+    --stagger-step:  60ms;
+
+    /* ===== A11Y / ИНТЕРАКЦИИ ================================== */
+    --focus-ring:    0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    --tap-target:    44px;   /* минимальный размер кликабельной зоны на mobile */
+}
+
+/* prefers-reduced-motion — если пользователь отключил анимации, выключаем */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --dur-fast: 0.01ms;
+        --dur-mid:  0.01ms;
+        --dur-slow: 0.01ms;
+        --dur-page: 0.01ms;
+    }
+}
+
+/* =================================================================
+ * СВЕТЛАЯ ТЕМА — переопределяет цветовые токены при
+ * [data-theme="light"] на <html>. Включается:
+ *   - вручную через toggle в шапке (theme.js → localStorage);
+ *   - автоматически по prefers-color-scheme: light, если выбор
+ *     не зафиксирован пользователем.
+ * Все остальные токены (типографика, spacing, motion) общие.
+ * ============================================================== */
+
+html[data-theme="light"] {
+    --bg:           #FAF7F0;
+    --bg-elev-1:    #FFFFFF;
+    --bg-elev-2:    #F4EFE5;
+    --bg-elev-3:    #ECE5D7;
+
+    --border:        rgba(20, 18, 14, 0.08);
+    --border-strong: rgba(20, 18, 14, 0.18);
+
+    --text:         #1E1A14;
+    --text-soft:    #4A4439;
+    --text-muted:   #6B6457;
+    --text-faint:   #8A8378;
+
+    --accent:       #B8924A;          /* чуть глубже золота — лучше читается на светлом */
+    --accent-hover: #9A7634;
+    --accent-soft:  rgba(184, 146, 74, 0.14);
+    --accent-fg:    #FAF7F0;
+
+    --shadow-xs:    0 1px 2px rgba(60, 50, 30, 0.08);
+    --shadow-sm:    0 2px 8px rgba(60, 50, 30, 0.10);
+    --shadow-card:  0 4px 18px rgba(60, 50, 30, 0.12);
+    --shadow-md:    0 8px 24px rgba(60, 50, 30, 0.15);
+    --shadow-soft:  0 8px 32px rgba(60, 50, 30, 0.18);
+    --shadow-lg:    0 20px 60px rgba(60, 50, 30, 0.22);
+    --shadow-accent:0 6px 24px rgba(184, 146, 74, 0.30);
+
+    --focus-ring:   0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+/* Базовая «дымка» фона — для светлой темы тёплая, не голубая */
+html[data-theme="light"] body {
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 146, 74, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 30%, rgba(120, 80, 180, 0.04) 0%, transparent 70%);
+}
+
+/* ---- Переопределение «подиумов» под камнями ----
+ * Тёмные radial-gradient внутри карточек/визуалов на светлой теме
+ * выглядят чужеродно. Заменяем на тёплые кремовые с золотым центром,
+ * чтобы белые и прозрачные камни не терялись. */
+html[data-theme="light"] .idea-card__visual,
+html[data-theme="light"] .featured-card__visual,
+html[data-theme="light"] .work-card__visual,
+html[data-theme="light"] .stage,
+html[data-theme="light"] .idea-visual {
+    background:
+        radial-gradient(circle at 50% 50%, #F4EAD0 0%, #ECDFC0 75%) !important;
+}
+
+/* Hero — фон главного браслета тоже теплее */
+html[data-theme="light"] .hero__visual-main canvas {
+    box-shadow:
+        0 20px 60px rgba(120, 90, 30, 0.22),
+        0 0 80px rgba(184, 146, 74, 0.18);
+}
+
+/* Сияние под главным браслетом — теплее и плотнее */
+html[data-theme="light"] .hero__visual-main::before {
+    background: radial-gradient(circle at 50% 50%,
+        rgba(184, 146, 74, 0.18) 0%, transparent 60%);
+}
+
+/* Кнопки primary на светлой теме — белый текст на тёмно-золотом */
+html[data-theme="light"] .btn--primary {
+    color: #FFFFFF;
+}
+
+/* Skeleton-загрузчики — светлее градиент */
+html[data-theme="light"] .skeleton {
+    background: linear-gradient(90deg,
+        var(--bg-elev-2) 0%,
+        var(--bg-elev-3) 50%,
+        var(--bg-elev-2) 100%);
+}
+
+/* Toast — затемнённый фон не подходит, делаем светлую карточку */
+html[data-theme="light"] .toast {
+    background: var(--bg-elev-1);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+/* Sticky-полоса фильтров — тёплая полупрозрачность */
+html[data-theme="light"] .filter-bar {
+    background: rgba(250, 247, 240, 0.85);
+    border-bottom-color: var(--border-strong);
+}
+
+/* Карточки идеи — белый фон карточек на светлой теме читается чище */
+html[data-theme="light"] .stone-card.is-rare {
+    background:
+        linear-gradient(135deg, rgba(184, 146, 74, 0.10) 0%, transparent 70%),
+        var(--bg-elev-1);
+}
+
+/* Mobile-nav и drawer */
+html[data-theme="light"] .bottom-nav {
+    background: rgba(255, 255, 255, 0.92);
+}
+html[data-theme="light"] .site-header {
+    background: rgba(250, 247, 240, 0.85);
+}
+html[data-theme="light"] .site-nav {
+    background: rgba(250, 247, 240, 0.95);
+}
+
+/* Анимированный градиент-фон в hero о хобби — теплее */
+html[data-theme="light"] .about {
+    background:
+        linear-gradient(135deg, rgba(184, 146, 74, 0.06) 0%, transparent 60%),
+        var(--bg-elev-1);
+}
+
+/* prefers-color-scheme намеренно НЕ учитывается. Дефолт — премиум-тёмная,
+ * как в исходных макетах Premium Dark Ecommerce Design. Светлая тема
+ * включается только при явном клике пользователя на theme-toggle. */

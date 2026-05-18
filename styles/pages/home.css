@@ -1,0 +1,397 @@
+/* =================================================================
+ * home.css — стили главной страницы Jewerly of Soul
+ * ================================================================= */
+
+/* --- HERO v2 -------------------------------------------------- */
+
+.hero {
+    padding: var(--space-10) 0 var(--space-11);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: var(--space-9);
+    align-items: center;
+    min-height: 600px;
+}
+
+.hero__copy { max-width: 540px; }
+
+.hero__title {
+    margin-top: var(--space-4);
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.97;
+    letter-spacing: -0.025em;
+}
+.hero__title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+.hero__lead {
+    margin-top: var(--space-5);
+    max-width: 440px;
+    font-size: var(--text-md);
+}
+
+.hero__cta {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+    flex-wrap: wrap;
+}
+
+/* ---- Социальное доказательство ---------------------------- */
+.hero__proof {
+    margin-top: var(--space-8);
+    display: flex;
+    gap: var(--space-7);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-5);
+}
+
+.proof-stat__num {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+    letter-spacing: -0.02em;
+    font-feature-settings: 'tnum' 1;   /* табличные цифры — равной ширины */
+}
+
+.proof-stat__label {
+    font-size: var(--text-xxs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+    display: block;
+}
+
+/* ---- Визуальный блок: главный + триптих снизу ---------------- */
+
+.hero__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    width: 100%;
+}
+
+.hero__visual-main {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 520px;
+    margin-inline: auto;
+    position: relative;
+    isolation: isolate;
+}
+
+.hero__visual-main canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: var(--shadow-lg);
+    animation: hero-bracelet-breath 80s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+/* Лёгкое сияние под главным браслетом — пульсирует с большой амплитудой */
+.hero__visual-main::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    background: radial-gradient(circle at 50% 50%,
+        rgba(217, 184, 121, 0.10) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+    animation: hero-aura-pulse 6s ease-in-out infinite;
+}
+
+@keyframes hero-bracelet-breath {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes hero-aura-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1.0;  transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__visual-main canvas { animation: none; }
+    .hero__visual-main::before { animation: none; opacity: 0.7; }
+}
+
+.hero__visual-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 520px;
+}
+
+.hero-tile {
+    aspect-ratio: 1;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transform-style: preserve-3d;
+    transform:
+        perspective(800px)
+        rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg))
+        translateY(calc(var(--tilt-active, 0) * -3px));
+    transition:
+        transform var(--dur-mid) var(--ease-out),
+        border-color var(--dur-mid) var(--ease),
+        box-shadow var(--dur-mid) var(--ease-out);
+    will-change: transform;
+}
+
+.hero-tile:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+}
+
+.hero-tile canvas { width: 100%; height: 100%; }
+
+.hero-tile__name {
+    position: absolute;
+    left: var(--space-3);
+    bottom: var(--space-3);
+    right: var(--space-3);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    line-height: 1.15;
+    color: var(--text);
+    background: linear-gradient(to top, rgba(6,6,10,0.85), transparent);
+    padding: var(--space-4) 0 0;
+    pointer-events: none;
+}
+
+/* ---- Staggered fade-in анимации первого экрана ----------- */
+
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.hero__copy > * {
+    opacity: 0;
+    animation: hero-fade-up var(--dur-page) var(--ease-out) forwards;
+}
+.hero__copy > *:nth-child(1) { animation-delay: 0ms; }
+.hero__copy > *:nth-child(2) { animation-delay: 80ms; }
+.hero__copy > *:nth-child(3) { animation-delay: 160ms; }
+.hero__copy > *:nth-child(4) { animation-delay: 240ms; }
+.hero__copy > *:nth-child(5) { animation-delay: 320ms; }
+
+.hero__visual {
+    opacity: 0;
+    animation: hero-fade-in calc(var(--dur-page) * 1.5) var(--ease-out) forwards;
+    animation-delay: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__copy > *, .hero__visual {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* --- ОБЩИЕ СЕКЦИИ -------------------------------------------- */
+
+.section { padding-block: 80px; }
+
+.section__head {
+    margin-bottom: 48px;
+}
+.section__head .h-2 { margin-top: 10px; }
+
+.section__head--center {
+    text-align: center;
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+.section__foot {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- ПОРТФОЛИО НА ГЛАВНОЙ ------------------------------------ */
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.featured-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform:
+        perspective(1000px)
+        rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg))
+        translateY(calc(var(--tilt-active, 0) * -4px));
+    transition:
+        transform var(--dur-mid) var(--ease-out),
+        border-color var(--dur-mid) var(--ease),
+        box-shadow var(--dur-mid) var(--ease-out);
+    will-change: transform;
+}
+
+.featured-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md), var(--shadow-accent);
+}
+
+.featured-card__visual {
+    width: 100%;
+    aspect-ratio: 1;
+    background:
+        radial-gradient(circle at 50% 50%, #161219 0%, #06060A 75%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.featured-card__visual canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.featured-card__body { padding: 24px 24px 26px; }
+
+.featured-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    margin-bottom: 4px;
+}
+
+.featured-card__sub {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+
+.featured-card__tags {
+    margin-top: 14px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/* --- ЧЕТЫРЕ ТИХИХ ГОЛОСА ------------------------------------- */
+
+.stone-quartet {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.stone-quartet__item { text-align: center; }
+
+.stone-quartet__visual {
+    width: 100%;
+    max-width: 180px;
+    aspect-ratio: 1;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stone-quartet__visual canvas { width: 100%; height: 100%; }
+
+.stone-quartet__name {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    margin-top: 18px;
+    margin-bottom: 4px;
+}
+
+.stone-quartet__desc {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    max-width: 200px;
+    margin-inline: auto;
+    line-height: 1.5;
+}
+
+/* --- О МАСТЕРСКОЙ -------------------------------------------- */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    padding: 64px;
+    background:
+        linear-gradient(135deg, rgba(217, 184, 121, 0.04) 0%, transparent 60%),
+        var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+}
+
+.about__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about__visual canvas { width: 100%; max-width: 320px; aspect-ratio: 1; }
+
+.about__copy .h-3 { margin: 10px 0 18px; }
+.about__text { margin-bottom: 12px; line-height: 1.6; }
+.about__copy .btn { margin-top: 18px; }
+
+/* --- АДАПТИВ -------------------------------------------------- */
+
+@media (max-width: 980px) {
+    .hero__inner { grid-template-columns: 1fr; gap: var(--space-8); }
+    .hero__visual-main { max-width: 380px; }
+    .hero__visual-trio { max-width: 380px; }
+    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+    .stone-quartet { grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+    .about { grid-template-columns: 1fr; padding: var(--space-8); }
+}
+
+@media (max-width: 600px) {
+    .hero { padding: var(--space-6) 0 var(--space-9); }
+    .hero__proof {
+        gap: var(--space-5);
+        flex-wrap: wrap;
+    }
+    .hero__visual-main { max-width: 100%; }
+    .hero__visual-trio { max-width: 100%; }
+    .hero-tile__name { font-size: var(--text-xs); }
+    .section { padding-block: var(--space-9); }
+    .featured-grid { grid-template-columns: 1fr; }
+    .stone-quartet { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .about { padding: var(--space-6); }
+}

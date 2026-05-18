@@ -1,0 +1,2324 @@
+{
+  "version": 1,
+  "updated": "2026-05-14",
+  "users": [
+    {
+      "id": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "username": "mira_nyx",
+      "displayName": "Мира Никс",
+      "avatar": "МН",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2025-11-12T10:00:00Z",
+      "likes": [
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+        "f795980365283b88-234d78f0-41cc-a657-dc72c64c62de",
+        "9a4fb3d758b9d252-17945e32-48ad-afec-786eb6a87d3e",
+        "4404c73e0bcbeb22-42900ac7-46b1-a22b-f9a2d9853966",
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad",
+        "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1"
+      ],
+      "favorites": [
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13"
+      ],
+      "publishedIdeas": [
+        "8c1e51fe28ca17a9-d46f4abc-4dd6-a65b-df339bbab010",
+        "5d8cd060bfb20e0a-ecd7ba33-4300-ae5e-4d94687507ab",
+        "dd42e72764f584e3-6a210d60-4c52-a89f-d3e2b3f435ca",
+        "4404c73e0bcbeb22-42900ac7-46b1-a22b-f9a2d9853966",
+        "f795980365283b88-234d78f0-41cc-a657-dc72c64c62de"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "f940be7f979cef66-efd44a9d-478f-a206-e5bd34c15a0b",
+      "username": "lena.stone",
+      "displayName": "Лена Камневa",
+      "avatar": "ЛК",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2025-12-03T14:22:00Z",
+      "likes": [
+        "798b034d1438fe0d-e47568c3-4489-ab56-5e4876467e9b",
+        "8c1e51fe28ca17a9-d46f4abc-4dd6-a65b-df339bbab010",
+        "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+        "1c1b9f5833e65883-67e06c3a-40c1-ae47-2e63d425e63e",
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97",
+        "829bdb115544eeae-9e5129ee-4757-ad98-9a11c8120f0f",
+        "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f"
+      ],
+      "favorites": [
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97"
+      ],
+      "publishedIdeas": [
+        "798b034d1438fe0d-e47568c3-4489-ab56-5e4876467e9b",
+        "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f",
+        "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215",
+        "829bdb115544eeae-9e5129ee-4757-ad98-9a11c8120f0f"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "ff1e026149ab7b73-0e3c2303-4649-aaef-19d73c2420c7",
+      "username": "verra",
+      "displayName": "Верра",
+      "avatar": "ВЕ",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-01-08T09:15:00Z",
+      "likes": [
+        "678d1d5df8bacbf2-093d2b00-4d2e-a96c-4f6f3ad5ce40",
+        "92dcb2ab7215723c-d2e6154f-4beb-af95-899a80a3dd12",
+        "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+        "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215",
+        "8c1e51fe28ca17a9-d46f4abc-4dd6-a65b-df339bbab010",
+        "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74"
+      ],
+      "favorites": [
+        "92dcb2ab7215723c-d2e6154f-4beb-af95-899a80a3dd12",
+        "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215"
+      ],
+      "publishedIdeas": [
+        "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+        "9a4fb3d758b9d252-17945e32-48ad-afec-786eb6a87d3e",
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "4710b6167521569c-50c60a06-4c2f-a624-5ce6b4c0a9cf",
+      "username": "akito_run",
+      "displayName": "Акито",
+      "avatar": "АК",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-01-21T18:40:00Z",
+      "likes": [
+        "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+        "9a4fb3d758b9d252-17945e32-48ad-afec-786eb6a87d3e",
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74",
+        "5d8cd060bfb20e0a-ecd7ba33-4300-ae5e-4d94687507ab",
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+        "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+        "dd42e72764f584e3-6a210d60-4c52-a89f-d3e2b3f435ca"
+      ],
+      "favorites": [
+        "9a4fb3d758b9d252-17945e32-48ad-afec-786eb6a87d3e",
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614"
+      ],
+      "publishedIdeas": [
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+        "1c1b9f5833e65883-67e06c3a-40c1-ae47-2e63d425e63e",
+        "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "df3e2b274f6e18c4-7cdc48a9-4e46-a7ef-7c0279f4336e",
+      "username": "flux.dasha",
+      "displayName": "Даша Флукс",
+      "avatar": "ДФ",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-02-02T11:11:00Z",
+      "likes": [
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97",
+        "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+        "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215",
+        "798b034d1438fe0d-e47568c3-4489-ab56-5e4876467e9b",
+        "4404c73e0bcbeb22-42900ac7-46b1-a22b-f9a2d9853966",
+        "678d1d5df8bacbf2-093d2b00-4d2e-a96c-4f6f3ad5ce40",
+        "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f",
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2"
+      ],
+      "favorites": [
+        "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f",
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97"
+      ],
+      "publishedIdeas": [
+        "678d1d5df8bacbf2-093d2b00-4d2e-a96c-4f6f3ad5ce40"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "7924b0a8a38fbe7c-0ed799f6-4dd3-a188-4f170344d343",
+      "username": "rok_studio",
+      "displayName": "РОК studio",
+      "avatar": "РS",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-02-14T20:00:00Z",
+      "likes": [
+        "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1",
+        "7efc9e774e3c0d3f-172eeb7c-4e4d-aaf9-878341efc642",
+        "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97",
+        "3e4e05d52263f410-e67f2f24-4e3a-a83e-3cb7d6c81157",
+        "92dcb2ab7215723c-d2e6154f-4beb-af95-899a80a3dd12",
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "b01ff0aa13f93e25-ba03c110-41d2-ad8f-03c42bdaec6d"
+      ],
+      "favorites": [
+        "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1",
+        "b01ff0aa13f93e25-ba03c110-41d2-ad8f-03c42bdaec6d"
+      ],
+      "publishedIdeas": [
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "7efc9e774e3c0d3f-172eeb7c-4e4d-aaf9-878341efc642",
+        "e2d2f4e1839c68e3-d2238766-4751-a060-b62785740dc7"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "0debe0f59076ecc5-d726ba6a-47d4-adce-81ecd8142880",
+      "username": "orchid_q",
+      "displayName": "Орхидея Q.",
+      "avatar": "ОQ",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-02-27T07:30:00Z",
+      "likes": [
+        "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74",
+        "9346db38ef36d6a7-fa0f53f2-4ed3-ad23-4e99e16c9f24",
+        "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+        "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+        "dd42e72764f584e3-6a210d60-4c52-a89f-d3e2b3f435ca"
+      ],
+      "favorites": [
+        "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13"
+      ],
+      "publishedIdeas": [
+        "d6cf2ffc08075837-a58eb989-406e-a1d9-414497ab2021"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "734c394739788f20-e3b7e0f7-4216-aec5-1df2def06e9e",
+      "username": "north.kai",
+      "displayName": "Кай Норд",
+      "avatar": "КН",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-03-15T13:00:00Z",
+      "likes": [
+        "d6cf2ffc08075837-a58eb989-406e-a1d9-414497ab2021",
+        "3e4e05d52263f410-e67f2f24-4e3a-a83e-3cb7d6c81157",
+        "829bdb115544eeae-9e5129ee-4757-ad98-9a11c8120f0f",
+        "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad",
+        "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+        "b01ff0aa13f93e25-ba03c110-41d2-ad8f-03c42bdaec6d",
+        "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215"
+      ],
+      "favorites": [
+        "3e4e05d52263f410-e67f2f24-4e3a-a83e-3cb7d6c81157",
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad"
+      ],
+      "publishedIdeas": [
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+        "3e4e05d52263f410-e67f2f24-4e3a-a83e-3cb7d6c81157",
+        "6d1994df7418f0c1-d5fd8058-4760-ae65-d758cc9f30da",
+        "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "c622e00979210089-d87ffc1d-43ad-a1ec-0bd597d04ec3",
+      "username": "amber.nia",
+      "displayName": "Ния Янтарная",
+      "avatar": "НЯ",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-04-01T16:45:00Z",
+      "likes": [
+        "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f",
+        "4404c73e0bcbeb22-42900ac7-46b1-a22b-f9a2d9853966",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+        "d6cf2ffc08075837-a58eb989-406e-a1d9-414497ab2021",
+        "678d1d5df8bacbf2-093d2b00-4d2e-a96c-4f6f3ad5ce40"
+      ],
+      "favorites": [
+        "d6cf2ffc08075837-a58eb989-406e-a1d9-414497ab2021",
+        "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13"
+      ],
+      "publishedIdeas": [
+        "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+        "baa67e7786bb6ac2-ab9013bd-4606-a9cb-c0743de32942",
+        "92dcb2ab7215723c-d2e6154f-4beb-af95-899a80a3dd12",
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    },
+    {
+      "id": "0bdc996e5f760479-3d963e7d-4148-a364-a3303d7732bc",
+      "username": "quietfern",
+      "displayName": "тихий папоротник",
+      "avatar": "ТП",
+      "passwordHash": "70fb92dbd2bf8fb9f1bc01328cce8a40e64ade99c08276727c64c9c90ce05816",
+      "salt": "seed",
+      "createdAt": "2026-04-22T08:00:00Z",
+      "likes": [
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad",
+        "5d8cd060bfb20e0a-ecd7ba33-4300-ae5e-4d94687507ab",
+        "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1",
+        "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74",
+        "e2d2f4e1839c68e3-d2238766-4751-a060-b62785740dc7",
+        "798b034d1438fe0d-e47568c3-4489-ab56-5e4876467e9b"
+      ],
+      "favorites": [
+        "5d8cd060bfb20e0a-ecd7ba33-4300-ae5e-4d94687507ab",
+        "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad"
+      ],
+      "publishedIdeas": [
+        "9346db38ef36d6a7-fa0f53f2-4ed3-ad23-4e99e16c9f24",
+        "b01ff0aa13f93e25-ba03c110-41d2-ad8f-03c42bdaec6d"
+      ],
+      "meta": {
+        "isSeed": true
+      }
+    }
+  ],
+  "ideas": [
+    {
+      "id": "8c1e51fe28ca17a9-d46f4abc-4dd6-a65b-df339bbab010",
+      "authorId": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "title": "Для спокойствия",
+      "description": "Композиция, где доминирует холодная палитра. Хорошо подходит, если хочется замедлиться.",
+      "stones": [
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "готовая композиция",
+        "calm"
+      ],
+      "mood": "calm",
+      "isPublic": true,
+      "createdAt": "2026-04-24T17:59:33.985118Z",
+      "updatedAt": "2026-04-24T17:59:33.985156Z",
+      "likesCount": 28,
+      "energyDescription": ""
+    },
+    {
+      "id": "798b034d1438fe0d-e47568c3-4489-ab56-5e4876467e9b",
+      "authorId": "f940be7f979cef66-efd44a9d-478f-a206-e5bd34c15a0b",
+      "title": "Для защиты",
+      "description": "Тёмная плотная композиция: чёрный турмалин, обсидиан, шунгит, гематит. Браслет-броня.",
+      "stones": [
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "shungite",
+          "size": 8
+        },
+        {
+          "id": "hematite",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-agate",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "shungite",
+          "size": 8
+        },
+        {
+          "id": "hematite",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-agate",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "готовая композиция",
+        "protection"
+      ],
+      "mood": "protection",
+      "isPublic": true,
+      "createdAt": "2026-04-19T17:59:33.985166Z",
+      "updatedAt": "2026-04-19T17:59:33.985167Z",
+      "likesCount": 11,
+      "energyDescription": ""
+    },
+    {
+      "id": "807f8991103d0a81-befb9d2f-43fb-a030-037b71ff17f2",
+      "authorId": "ff1e026149ab7b73-0e3c2303-4649-aaef-19d73c2420c7",
+      "title": "Для любви и нежности",
+      "description": "Розовый кварц, кунцит, родохрозит, родонит. Палитра, на которую приятно смотреть.",
+      "stones": [
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        },
+        {
+          "id": "rhodonite",
+          "size": 8
+        },
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        },
+        {
+          "id": "rhodonite",
+          "size": 8
+        },
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "готовая композиция",
+        "love"
+      ],
+      "mood": "love",
+      "isPublic": true,
+      "createdAt": "2026-04-14T17:59:33.985172Z",
+      "updatedAt": "2026-04-14T17:59:33.985173Z",
+      "likesCount": 8,
+      "energyDescription": ""
+    },
+    {
+      "id": "5cd9fe6bf1e71eee-cb5482e8-473e-ac26-6eddfff12eb2",
+      "authorId": "4710b6167521569c-50c60a06-4c2f-a624-5ce6b4c0a9cf",
+      "title": "Для энергии и действия",
+      "description": "Горячая композиция. Подходит, когда нужно заякорить решительность и движение.",
+      "stones": [
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "mexican-agate",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "mexican-agate",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "готовая композиция",
+        "action"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-09T17:59:33.985179Z",
+      "updatedAt": "2026-04-09T17:59:33.985180Z",
+      "likesCount": 31,
+      "energyDescription": ""
+    },
+    {
+      "id": "9a4fb3d758b9d252-17945e32-48ad-afec-786eb6a87d3e",
+      "authorId": "ff1e026149ab7b73-0e3c2303-4649-aaef-19d73c2420c7",
+      "title": "Лунный шёпот",
+      "description": "Перламутр, лунный, белый нефрит. На рассвет.",
+      "stones": [
+        {
+          "id": "mother-of-pearl",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "mother-of-pearl",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "mother-of-pearl",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "тихое",
+        "перламутр",
+        "рассвет"
+      ],
+      "mood": "silence",
+      "isPublic": true,
+      "createdAt": "2026-05-08T17:59:33.985184Z",
+      "updatedAt": "2026-05-08T17:59:33.985185Z",
+      "likesCount": 14,
+      "energyDescription": ""
+    },
+    {
+      "id": "d6cf2ffc08075837-a58eb989-406e-a1d9-414497ab2021",
+      "authorId": "0debe0f59076ecc5-d726ba6a-47d4-adce-81ecd8142880",
+      "title": "Кротость",
+      "description": "Розовый кварц + кунцит + рубиновый турмалин. Очень нежный.",
+      "stones": [
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        },
+        {
+          "id": "rose-quartz",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "rhodochrosite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "розовый",
+        "нежный"
+      ],
+      "mood": "love",
+      "isPublic": true,
+      "createdAt": "2026-05-04T17:59:33.985192Z",
+      "updatedAt": "2026-05-04T17:59:33.985193Z",
+      "likesCount": 21,
+      "energyDescription": ""
+    },
+    {
+      "id": "e230e64d36a01df0-5149fc52-44ec-aa94-4b70c2e03614",
+      "authorId": "7924b0a8a38fbe7c-0ed799f6-4dd3-a188-4f170344d343",
+      "title": "Густой шунгит",
+      "description": "Защита и заземление. Очень тяжёлый по ощущению — браслет-броня.",
+      "stones": [
+        {
+          "id": "shungite",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "hematite",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "shungite",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "hematite",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "shungite",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "hematite",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "чёрный",
+        "защита"
+      ],
+      "mood": "protection",
+      "isPublic": true,
+      "createdAt": "2026-04-30T17:59:33.985198Z",
+      "updatedAt": "2026-04-30T17:59:33.985199Z",
+      "likesCount": 28,
+      "energyDescription": ""
+    },
+    {
+      "id": "8a0dd2278084bafc-329712ce-42fc-a7a4-25f5b43c2f13",
+      "authorId": "734c394739788f20-e3b7e0f7-4216-aec5-1df2def06e9e",
+      "title": "Шёпот океана",
+      "description": "Голубой агат, ларимар, лунный камень. Холодное утро у моря.",
+      "stones": [
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "larimar",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "larimar",
+          "size": 8
+        },
+        {
+          "id": "aquamarine",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "larimar",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "larimar",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "aquamarine",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "голубой",
+        "океан"
+      ],
+      "mood": "deep_water",
+      "isPublic": true,
+      "createdAt": "2026-05-10T17:59:33.985204Z",
+      "updatedAt": "2026-05-10T17:59:33.985205Z",
+      "likesCount": 17,
+      "energyDescription": ""
+    },
+    {
+      "id": "41f02d10731edb3e-51c7d2e0-4639-aaaa-40d8bcbfdb36",
+      "authorId": "c622e00979210089-d87ffc1d-43ad-a1ec-0bd597d04ec3",
+      "title": "Янтарный шаг",
+      "description": "Тигровый глаз + цитриновый блеск пирита. Для долгих переговоров.",
+      "stones": [
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "sunstone",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "золото",
+        "тёплый"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-05-02T17:59:33.985210Z",
+      "updatedAt": "2026-05-02T17:59:33.985211Z",
+      "likesCount": 33,
+      "energyDescription": ""
+    },
+    {
+      "id": "9346db38ef36d6a7-fa0f53f2-4ed3-ad23-4e99e16c9f24",
+      "authorId": "0bdc996e5f760479-3d963e7d-4148-a364-a3303d7732bc",
+      "title": "Лесной мох",
+      "description": "Моховой агат и серпентин. Запах хвои и медленный шаг.",
+      "stones": [
+        {
+          "id": "moss-agate",
+          "size": 8
+        },
+        {
+          "id": "serpentine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "moss-agate",
+          "size": 8
+        },
+        {
+          "id": "serpentine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "moss-agate",
+          "size": 8
+        },
+        {
+          "id": "serpentine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "зелёный",
+        "мох"
+      ],
+      "mood": "growth",
+      "isPublic": true,
+      "createdAt": "2026-04-28T17:59:33.985215Z",
+      "updatedAt": "2026-04-28T17:59:33.985216Z",
+      "likesCount": 19,
+      "energyDescription": ""
+    },
+    {
+      "id": "5d8cd060bfb20e0a-ecd7ba33-4300-ae5e-4d94687507ab",
+      "authorId": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "title": "Чароит и тишина",
+      "description": "Доминирует чароит. Редкая палитра, для одинокого вечера.",
+      "stones": [
+        {
+          "id": "charoite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "lepidolite",
+          "size": 8
+        },
+        {
+          "id": "charoite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "lepidolite",
+          "size": 8
+        },
+        {
+          "id": "charoite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "lepidolite",
+          "size": 8
+        },
+        {
+          "id": "charoite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "lepidolite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "фиолетовый",
+        "редкий"
+      ],
+      "mood": "calm",
+      "isPublic": true,
+      "createdAt": "2026-05-06T17:59:33.985221Z",
+      "updatedAt": "2026-05-06T17:59:33.985222Z",
+      "likesCount": 41,
+      "energyDescription": ""
+    },
+    {
+      "id": "3e4e05d52263f410-e67f2f24-4e3a-a83e-3cb7d6c81157",
+      "authorId": "734c394739788f20-e3b7e0f7-4216-aec5-1df2def06e9e",
+      "title": "Бирюза и небо",
+      "description": "Амазонит и хризоколла. Для долгих разговоров.",
+      "stones": [
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "chrysocolla",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "chrysocolla",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "chrysocolla",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "amazonite",
+          "size": 8
+        },
+        {
+          "id": "chrysocolla",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "голубой",
+        "общение"
+      ],
+      "mood": "speech",
+      "isPublic": true,
+      "createdAt": "2026-04-22T17:59:33.985226Z",
+      "updatedAt": "2026-04-22T17:59:33.985227Z",
+      "likesCount": 12,
+      "energyDescription": ""
+    },
+    {
+      "id": "dd42e72764f584e3-6a210d60-4c52-a89f-d3e2b3f435ca",
+      "authorId": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "title": "Гранатовая ночь",
+      "description": "Альмадиновый гранат + чёрный турмалин — глубокий бордовый.",
+      "stones": [
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        },
+        {
+          "id": "almandine-garnet",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "красный",
+        "ночь"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-14T17:59:33.985232Z",
+      "updatedAt": "2026-04-14T17:59:33.985233Z",
+      "likesCount": 22,
+      "energyDescription": ""
+    },
+    {
+      "id": "6d1994df7418f0c1-d5fd8058-4760-ae65-d758cc9f30da",
+      "authorId": "734c394739788f20-e3b7e0f7-4216-aec5-1df2def06e9e",
+      "title": "Северный ветер",
+      "description": "Кианит + содалит + дюмортьерит. Холодная ясность.",
+      "stones": [
+        {
+          "id": "kyanite",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "dumortierite",
+          "size": 8
+        },
+        {
+          "id": "iolite",
+          "size": 8
+        },
+        {
+          "id": "kyanite",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "dumortierite",
+          "size": 8
+        },
+        {
+          "id": "iolite",
+          "size": 8
+        },
+        {
+          "id": "kyanite",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "dumortierite",
+          "size": 8
+        },
+        {
+          "id": "iolite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "синий",
+        "ясность"
+      ],
+      "mood": "speech",
+      "isPublic": true,
+      "createdAt": "2026-04-26T17:59:33.985237Z",
+      "updatedAt": "2026-04-26T17:59:33.985238Z",
+      "likesCount": 26,
+      "energyDescription": ""
+    },
+    {
+      "id": "678d1d5df8bacbf2-093d2b00-4d2e-a96c-4f6f3ad5ce40",
+      "authorId": "df3e2b274f6e18c4-7cdc48a9-4e46-a7ef-7c0279f4336e",
+      "title": "Лабрадоровый круг",
+      "description": "Шесть лабрадоритов, чередующиеся с лунным. Игра света.",
+      "stones": [
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "labradorite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "переливы",
+        "лабрадорит"
+      ],
+      "mood": "deep_water",
+      "isPublic": true,
+      "createdAt": "2026-05-05T17:59:33.985242Z",
+      "updatedAt": "2026-05-05T17:59:33.985243Z",
+      "likesCount": 47,
+      "energyDescription": ""
+    },
+    {
+      "id": "baa67e7786bb6ac2-ab9013bd-4606-a9cb-c0743de32942",
+      "authorId": "c622e00979210089-d87ffc1d-43ad-a1ec-0bd597d04ec3",
+      "title": "Терракотовое утро",
+      "description": "Сердолик + красная яшма + бычий глаз. Тёплая земная композиция.",
+      "stones": [
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "bull-eye",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "bull-eye",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "bull-eye",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "red-jasper",
+          "size": 8
+        },
+        {
+          "id": "bull-eye",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "красный",
+        "земля"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-05-03T17:59:33.985247Z",
+      "updatedAt": "2026-05-03T17:59:33.985248Z",
+      "likesCount": 18,
+      "energyDescription": ""
+    },
+    {
+      "id": "1c1b9f5833e65883-67e06c3a-40c1-ae47-2e63d425e63e",
+      "authorId": "4710b6167521569c-50c60a06-4c2f-a624-5ce6b4c0a9cf",
+      "title": "Хрустальный лёд",
+      "description": "Горный хрусталь и кварц — чистая прозрачность, без цветовых вкраплений.",
+      "stones": [
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "прозрачный",
+        "хрусталь"
+      ],
+      "mood": "silence",
+      "isPublic": true,
+      "createdAt": "2026-05-07T17:59:33.985257Z",
+      "updatedAt": "2026-05-07T17:59:33.985258Z",
+      "likesCount": 11,
+      "energyDescription": ""
+    },
+    {
+      "id": "3b770caf2775481e-1c9408a0-4927-aa58-f617a53ef30f",
+      "authorId": "f940be7f979cef66-efd44a9d-478f-a206-e5bd34c15a0b",
+      "title": "Минерал и шёлк",
+      "description": "Малахит + хризопраз. Зелёный браслет, который слышишь.",
+      "stones": [
+        {
+          "id": "malachite",
+          "size": 8
+        },
+        {
+          "id": "chrysoprase",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "malachite",
+          "size": 8
+        },
+        {
+          "id": "chrysoprase",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "malachite",
+          "size": 8
+        },
+        {
+          "id": "chrysoprase",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "malachite",
+          "size": 8
+        },
+        {
+          "id": "chrysoprase",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "зелёный",
+        "малахит"
+      ],
+      "mood": "growth",
+      "isPublic": true,
+      "createdAt": "2026-04-19T17:59:33.985263Z",
+      "updatedAt": "2026-04-19T17:59:33.985264Z",
+      "likesCount": 24,
+      "energyDescription": ""
+    },
+    {
+      "id": "92dcb2ab7215723c-d2e6154f-4beb-af95-899a80a3dd12",
+      "authorId": "c622e00979210089-d87ffc1d-43ad-a1ec-0bd597d04ec3",
+      "title": "Спираль рассвета",
+      "description": "Топаз, гессонитовый гранат, сердолик. Тёплое утро.",
+      "stones": [
+        {
+          "id": "topaz",
+          "size": 8
+        },
+        {
+          "id": "hessonite-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "topaz",
+          "size": 8
+        },
+        {
+          "id": "hessonite-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "topaz",
+          "size": 8
+        },
+        {
+          "id": "hessonite-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        },
+        {
+          "id": "topaz",
+          "size": 8
+        },
+        {
+          "id": "hessonite-garnet",
+          "size": 8
+        },
+        {
+          "id": "carnelian",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "золото",
+        "рассвет"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-27T17:59:33.985268Z",
+      "updatedAt": "2026-04-27T17:59:33.985269Z",
+      "likesCount": 38,
+      "energyDescription": ""
+    },
+    {
+      "id": "f4d9c225e5d8a3ae-891745b4-4448-a97e-dbd0b467ec97",
+      "authorId": "ff1e026149ab7b73-0e3c2303-4649-aaef-19d73c2420c7",
+      "title": "Молочный покой",
+      "description": "Опал розовый + кунцит + лунный камень. Очень мягкая палитра.",
+      "stones": [
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        },
+        {
+          "id": "pink-opal",
+          "size": 8
+        },
+        {
+          "id": "kunzite",
+          "size": 8
+        },
+        {
+          "id": "moonstone",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "розовый",
+        "опал",
+        "редкий"
+      ],
+      "mood": "love",
+      "isPublic": true,
+      "createdAt": "2026-05-01T17:59:33.985275Z",
+      "updatedAt": "2026-05-01T17:59:33.985275Z",
+      "likesCount": 32,
+      "energyDescription": ""
+    },
+    {
+      "id": "7efc9e774e3c0d3f-172eeb7c-4e4d-aaf9-878341efc642",
+      "authorId": "7924b0a8a38fbe7c-0ed799f6-4dd3-a188-4f170344d343",
+      "title": "Глубокий обсидиан",
+      "description": "Тяжёлый чёрный с молочным контрастом — обсидиан и оникс.",
+      "stones": [
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        },
+        {
+          "id": "obsidian",
+          "size": 8
+        },
+        {
+          "id": "onyx",
+          "size": 8
+        },
+        {
+          "id": "black-tourmaline",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "чёрный",
+        "обсидиан"
+      ],
+      "mood": "protection",
+      "isPublic": true,
+      "createdAt": "2026-04-25T17:59:33.985281Z",
+      "updatedAt": "2026-04-25T17:59:33.985282Z",
+      "likesCount": 15,
+      "energyDescription": ""
+    },
+    {
+      "id": "596c460c57ea2935-e8a9b4ca-46ab-a500-aa5cad1c1dad",
+      "authorId": "c622e00979210089-d87ffc1d-43ad-a1ec-0bd597d04ec3",
+      "title": "Песок и янтарь",
+      "description": "Тигровый глаз, авантюрин, цитриновый пирит. Тёплая комбинация.",
+      "stones": [
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "pyrite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "тёплый",
+        "песок"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-23T17:59:33.985286Z",
+      "updatedAt": "2026-04-23T17:59:33.985287Z",
+      "likesCount": 9,
+      "energyDescription": ""
+    },
+    {
+      "id": "b01ff0aa13f93e25-ba03c110-41d2-ad8f-03c42bdaec6d",
+      "authorId": "0bdc996e5f760479-3d963e7d-4148-a364-a3303d7732bc",
+      "title": "Тропа авантюрина",
+      "description": "Зелёный, переливающийся искрами. Для дороги.",
+      "stones": [
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "green-apatite",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "green-apatite",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "green-apatite",
+          "size": 8
+        },
+        {
+          "id": "aventurine",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "green-apatite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "зелёный",
+        "дорога"
+      ],
+      "mood": "growth",
+      "isPublic": true,
+      "createdAt": "2026-04-16T17:59:33.985291Z",
+      "updatedAt": "2026-04-16T17:59:33.985292Z",
+      "likesCount": 21,
+      "energyDescription": ""
+    },
+    {
+      "id": "4404c73e0bcbeb22-42900ac7-46b1-a22b-f9a2d9853966",
+      "authorId": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "title": "Тонкая флюоритовая лента",
+      "description": "Радужный флюорит + аметист. Светлая мистика.",
+      "stones": [
+        {
+          "id": "fluorite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "fluorite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "fluorite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        },
+        {
+          "id": "fluorite",
+          "size": 8
+        },
+        {
+          "id": "amethyst",
+          "size": 8
+        },
+        {
+          "id": "rock-crystal",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "флюорит",
+        "радуга",
+        "редкий"
+      ],
+      "mood": "calm",
+      "isPublic": true,
+      "createdAt": "2026-04-21T17:59:33.985297Z",
+      "updatedAt": "2026-04-21T17:59:33.985298Z",
+      "likesCount": 34,
+      "energyDescription": ""
+    },
+    {
+      "id": "420b854640fb75b3-f6ace3ee-4e54-a08b-61327d492b74",
+      "authorId": "734c394739788f20-e3b7e0f7-4216-aec5-1df2def06e9e",
+      "title": "Маяк ангелита",
+      "description": "Ангелит — палевый голубой. Тихий, как первое утро.",
+      "stones": [
+        {
+          "id": "angelite",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "angelite",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "angelite",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        },
+        {
+          "id": "angelite",
+          "size": 8
+        },
+        {
+          "id": "blue-agate",
+          "size": 8
+        },
+        {
+          "id": "clear-quartz",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "голубой",
+        "рассвет",
+        "редкий"
+      ],
+      "mood": "silence",
+      "isPublic": true,
+      "createdAt": "2026-04-13T17:59:33.985303Z",
+      "updatedAt": "2026-04-13T17:59:33.985304Z",
+      "likesCount": 16,
+      "energyDescription": ""
+    },
+    {
+      "id": "4a3cf755a80fe845-ffe73619-4990-ae16-474b2bdb2215",
+      "authorId": "f940be7f979cef66-efd44a9d-478f-a206-e5bd34c15a0b",
+      "title": "Жадеитовое сердце",
+      "description": "Имперский жадеит — насыщенный зелёный, редкий.",
+      "stones": [
+        {
+          "id": "jadeite",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "prehnite",
+          "size": 8
+        },
+        {
+          "id": "jadeite",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "prehnite",
+          "size": 8
+        },
+        {
+          "id": "jadeite",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "prehnite",
+          "size": 8
+        },
+        {
+          "id": "jadeite",
+          "size": 8
+        },
+        {
+          "id": "green-jade",
+          "size": 8
+        },
+        {
+          "id": "prehnite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "зелёный",
+        "жадеит",
+        "редкий"
+      ],
+      "mood": "growth",
+      "isPublic": true,
+      "createdAt": "2026-04-18T17:59:33.985311Z",
+      "updatedAt": "2026-04-18T17:59:33.985312Z",
+      "likesCount": 29,
+      "energyDescription": ""
+    },
+    {
+      "id": "df007cc6ff124fd1-81e03249-43e4-a4ab-847b67de15e1",
+      "authorId": "4710b6167521569c-50c60a06-4c2f-a624-5ce6b4c0a9cf",
+      "title": "Бронза и кошачий глаз",
+      "description": "Бронзит и кошачий глаз. Графитово-золотая палитра.",
+      "stones": [
+        {
+          "id": "bronzite",
+          "size": 8
+        },
+        {
+          "id": "cat-eye",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "bronzite",
+          "size": 8
+        },
+        {
+          "id": "cat-eye",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "bronzite",
+          "size": 8
+        },
+        {
+          "id": "cat-eye",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "bronzite",
+          "size": 8
+        },
+        {
+          "id": "cat-eye",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "золото",
+        "кошачий глаз"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-11T17:59:33.985318Z",
+      "updatedAt": "2026-04-11T17:59:33.985318Z",
+      "likesCount": 13,
+      "energyDescription": ""
+    },
+    {
+      "id": "e2d2f4e1839c68e3-d2238766-4751-a060-b62785740dc7",
+      "authorId": "7924b0a8a38fbe7c-0ed799f6-4dd3-a188-4f170344d343",
+      "title": "Соколиный обет",
+      "description": "Соколиный глаз + лазурит. Синяя плотность.",
+      "stones": [
+        {
+          "id": "hawk-eye",
+          "size": 8
+        },
+        {
+          "id": "lapis",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "hawk-eye",
+          "size": 8
+        },
+        {
+          "id": "lapis",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "hawk-eye",
+          "size": 8
+        },
+        {
+          "id": "lapis",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        },
+        {
+          "id": "hawk-eye",
+          "size": 8
+        },
+        {
+          "id": "lapis",
+          "size": 8
+        },
+        {
+          "id": "sodalite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "синий",
+        "лазурит"
+      ],
+      "mood": "speech",
+      "isPublic": true,
+      "createdAt": "2026-04-06T17:59:33.985323Z",
+      "updatedAt": "2026-04-06T17:59:33.985324Z",
+      "likesCount": 19,
+      "energyDescription": ""
+    },
+    {
+      "id": "829bdb115544eeae-9e5129ee-4757-ad98-9a11c8120f0f",
+      "authorId": "f940be7f979cef66-efd44a9d-478f-a206-e5bd34c15a0b",
+      "title": "Бамбук и шёлк",
+      "description": "Бамбуковый агат — тёплая бежевая лента.",
+      "stones": [
+        {
+          "id": "bamboo-agate",
+          "size": 8
+        },
+        {
+          "id": "grey-agate",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "bamboo-agate",
+          "size": 8
+        },
+        {
+          "id": "grey-agate",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "bamboo-agate",
+          "size": 8
+        },
+        {
+          "id": "grey-agate",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        },
+        {
+          "id": "bamboo-agate",
+          "size": 8
+        },
+        {
+          "id": "grey-agate",
+          "size": 8
+        },
+        {
+          "id": "white-jade",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "бежевый",
+        "агат"
+      ],
+      "mood": "calm",
+      "isPublic": true,
+      "createdAt": "2026-04-03T17:59:33.985328Z",
+      "updatedAt": "2026-04-03T17:59:33.985329Z",
+      "likesCount": 7,
+      "energyDescription": ""
+    },
+    {
+      "id": "f795980365283b88-234d78f0-41cc-a657-dc72c64c62de",
+      "authorId": "0a2dff60e92287ad-4bb9180a-4d9a-a543-ecd28c9808ad",
+      "title": "Питерсит и буря",
+      "description": "Редкий питерсит, шатоянский золотой блеск.",
+      "stones": [
+        {
+          "id": "pietersite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "astrophyllite",
+          "size": 8
+        },
+        {
+          "id": "pietersite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "astrophyllite",
+          "size": 8
+        },
+        {
+          "id": "pietersite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "astrophyllite",
+          "size": 8
+        },
+        {
+          "id": "pietersite",
+          "size": 8
+        },
+        {
+          "id": "tiger-eye",
+          "size": 8
+        },
+        {
+          "id": "astrophyllite",
+          "size": 8
+        }
+      ],
+      "length": 180,
+      "tags": [
+        "золото",
+        "редкий",
+        "питерсит"
+      ],
+      "mood": "action",
+      "isPublic": true,
+      "createdAt": "2026-04-08T17:59:33.985333Z",
+      "updatedAt": "2026-04-08T17:59:33.985334Z",
+      "likesCount": 44,
+      "energyDescription": ""
+    }
+  ]
+}

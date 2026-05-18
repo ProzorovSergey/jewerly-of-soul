@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <title>Новая идея · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Новая идея · Jewerly of Soul">
+    <meta property="og:description" content="Новая идея браслета — соберите композицию в конструкторе.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Новая идея · Jewerly of Soul">
+    <meta name="twitter:description" content="Новая идея браслета — соберите композицию в конструкторе.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/auth.css">
+</head>
+<body data-page="create-idea">
+
+    <header id="siteHeader"></header>
+
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-card" data-reveal>
+                <p class="eyebrow">новая идея</p>
+                <h1 class="h-2">Соберите композицию.</h1>
+                <p class="lead">Идея создаётся в конструкторе. После сборки нажмите «Сохранить идею» и заполните метаданные.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:24px">
+                    <a href="constructor.html" class="btn btn--primary">
+                        <span>Открыть конструктор</span>
+                        <span class="btn__arrow">→</span>
+                    </a>
+                    <a href="profile.html" class="btn btn--ghost">К моим идеям</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+</body>
+</html>

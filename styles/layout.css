@@ -1,0 +1,391 @@
+/* =================================================================
+ * layout.css — site-header, site-footer
+ * ================================================================= */
+
+/* --- Шапка ---------------------------------------------------- */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(6, 6, 10, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.site-header__brand {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.site-header__brand::after {
+    content: '·';
+    color: var(--accent);
+    margin-left: 4px;
+}
+
+.site-nav {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+}
+
+.site-nav__link {
+    font-size: var(--text-xs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 500;
+    padding-block: 6px;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-mid) var(--ease), border-color var(--dur-mid) var(--ease);
+}
+
+.site-nav__link:hover { color: var(--text); }
+
+.site-nav__link.is-active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Legacy: гамбургер и крестик больше не рендерятся в layout.js,
+   но стили оставлены скрытыми на случай сторонних use-case'ов. */
+.site-nav__toggle,
+.site-nav__close { display: none; }
+
+/* --- Theme toggle (sun/moon в шапке) ------------------------ */
+
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+    transition:
+        background var(--dur-mid) var(--ease),
+        color var(--dur-mid) var(--ease),
+        border-color var(--dur-mid) var(--ease);
+}
+.theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+.theme-toggle__icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: opacity var(--dur-mid) var(--ease), transform var(--dur-slow) var(--ease-out);
+}
+
+/* Когда сейчас тёмная — показываем солнце (значит «переключи в светлую»);
+   когда светлая — показываем луну. data-theme на самой кнопке выставляет layout.js */
+.theme-toggle[data-theme="dark"] .theme-toggle__icon--sun  { opacity: 1; transform: rotate(0deg);  }
+.theme-toggle[data-theme="dark"] .theme-toggle__icon--moon { opacity: 0; transform: rotate(-90deg); }
+.theme-toggle[data-theme="light"] .theme-toggle__icon--moon { opacity: 1; transform: rotate(0deg);  }
+.theme-toggle[data-theme="light"] .theme-toggle__icon--sun  { opacity: 0; transform: rotate(90deg); }
+
+/* --- Actions-блок справа: theme + user (всегда виден) ------- */
+
+.site-header__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* --- User slot: кнопка профиля / входа ----------------------- */
+
+.user-slot {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 14px 4px 4px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text);
+    transition:
+        border-color var(--dur-mid) var(--ease),
+        background var(--dur-mid) var(--ease),
+        color var(--dur-mid) var(--ease);
+}
+.user-slot:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+}
+.user-slot.is-active {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.user-slot .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+}
+
+.user-slot__name {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Гостевой режим: иконка-стрелка-вход + слово «Вход» */
+.user-slot--guest {
+    padding: 8px 16px;
+    gap: 8px;
+}
+.user-slot__icon {
+    width: 16px;
+    height: 16px;
+}
+.user-slot__label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* --- Legacy: оставляем для совместимости ------------------- */
+
+.site-nav__user {
+    display: inline-flex;
+    align-items: center;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px 4px 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    transition: border-color var(--dur-mid) var(--ease), background var(--dur-mid) var(--ease);
+}
+
+.user-menu__btn:hover { border-color: var(--border-strong); background: var(--bg-elev-1); }
+
+.user-menu__btn .avatar { width: 28px; height: 28px; font-size: 11px; }
+
+.user-menu__name {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-menu__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    z-index: 60;
+}
+
+.user-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 16px;
+    color: var(--text-soft);
+    font-size: var(--text-sm);
+    text-align: left;
+    transition: background var(--dur-mid) var(--ease), color var(--dur-mid) var(--ease);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.user-menu__item:hover { background: var(--bg-elev-2); color: var(--text); }
+.user-menu__item--danger { color: var(--text-muted); border-top: 1px solid var(--border); }
+.user-menu__item--danger:hover { color: var(--el-fire); }
+.user-menu__item .icon { width: 16px; height: 16px; }
+
+/* --- Подвал --------------------------------------------------- */
+
+.site-footer {
+    margin-top: 120px;
+    border-top: 1px solid var(--border);
+    padding-block: 56px 32px;
+}
+
+.site-footer__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.site-footer__brand {
+    font-family: var(--font-display);
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.site-footer__brand::after { content: '·'; color: var(--accent); margin-left: 4px; }
+
+.site-footer__tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-soft);
+    max-width: 420px;
+    line-height: 1.5;
+}
+
+.site-footer__nav {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.site-footer__nav .site-nav__link { color: var(--text-muted); }
+.site-footer__nav .site-nav__link:hover { color: var(--text); }
+
+.site-footer__bottom {
+    width: 100%;
+    max-width: var(--container);
+    margin: 48px auto 0;
+    padding: 24px var(--gutter) 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* --- Mobile / Adaptive --------------------------------------- */
+
+@media (max-width: 880px) {
+    .site-nav { gap: 24px; }
+    .site-nav__link { font-size: 11px; letter-spacing: 0.18em; }
+}
+
+/* На mobile (≤720px): центральная навигация уходит — заменяет
+   её постоянная bottom-nav снизу. В шапке остаются только
+   бренд + theme-toggle + user-slot (вход/профиль). */
+@media (max-width: 720px) {
+    .site-header__inner { height: 60px; }
+    .site-header__brand { font-size: 18px; color: var(--text); }
+
+    /* Скрываем центральную навигацию полностью — она дублируется
+       в bottom-nav, который теперь всегда виден */
+    .site-nav { display: none; }
+
+    .site-header__actions { gap: 8px; }
+    .user-slot__name { max-width: 100px; }
+
+    .site-footer__inner { grid-template-columns: 1fr; }
+    .site-footer__bottom { flex-direction: column; gap: var(--space-3); }
+
+    /* Поднимаем подвал чуть выше bottom-bar */
+    .site-footer { padding-bottom: calc(72px + var(--space-7)); }
+}
+
+/* =========================================================
+ * Bottom navigation для мобильных — постоянная панель из
+ * 5 главных разделов на расстоянии большого пальца.
+ * ========================================================= */
+
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .bottom-nav {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 60;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);   /* 5 пунктов */
+        background: var(--bg);                   /* сплошной фон */
+        border-top: 1px solid var(--border);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .bottom-nav__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        min-height: 64px;
+        padding: var(--space-2) 4px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        transition:
+            color var(--dur-mid) var(--ease),
+            background var(--dur-mid) var(--ease);
+    }
+    .bottom-nav__link.is-active {
+        color: var(--accent);
+        background: linear-gradient(to bottom, rgba(217, 184, 121, 0.08), transparent);
+    }
+    .bottom-nav__link:active { background: var(--bg-elev-2); }
+    .bottom-nav__icon {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+}
+
+/* На очень узких — Связь/Лента остаются читаемыми */
+@media (max-width: 380px) {
+    .bottom-nav__link { font-size: 9px; padding: var(--space-2) 2px; }
+    .bottom-nav__icon { width: 20px; height: 20px; }
+}

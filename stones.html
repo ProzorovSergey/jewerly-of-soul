@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <meta name="description" content="Каталог камней Jewerly of Soul — 66 натуральных минералов с описанием стихии, энергии и редкости.">
+    <title>Камни · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jewerly of Soul">
+    <meta property="og:image" content="assets/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Каталог 66 камней · Jewerly of Soul">
+    <meta property="og:description" content="66 натуральных полудрагоценных камней с фотореалистичным WebGL-рендером. Фильтры: стихия, цвет, энергия, редкость.">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:title" content="Каталог 66 камней · Jewerly of Soul">
+    <meta name="twitter:description" content="66 натуральных полудрагоценных камней с фотореалистичным WebGL-рендером. Фильтры: стихия, цвет, энергия, редкость.">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages/stones.css">
+</head>
+<body data-page="stones">
+
+    <header id="siteHeader"></header>
+
+    <main class="stones-page">
+        <div class="container">
+
+            <header class="page-hero" data-reveal>
+                <p class="eyebrow">каталог</p>
+                <h1 class="h-1"><span id="stoneCount">…</span> тихих <em>словарей</em>.</h1>
+                <p class="lead">Каждый камень — отдельный голос. У каждого своя стихия, цвет и энергия. Редкие коллекционные — отмечены особо.</p>
+            </header>
+
+            <!-- Sticky-полоса: поиск + кнопка фильтров + счётчик активных -->
+            <div class="filter-bar" id="filterBar">
+                <input type="search" id="stoneSearch" class="field filter-bar__search" placeholder="Поиск по названию, стихии или энергии…">
+                <button type="button" class="btn btn--ghost btn--sm filter-bar__toggle" id="filterToggle"
+                        aria-expanded="false" aria-controls="filterPanel">
+                    <svg class="icon" viewBox="0 0 24 24" width="14" height="14"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+                    <span>Фильтры</span>
+                    <span class="filter-bar__count" id="filterCount" hidden>0</span>
+                </button>
+                <button type="button" class="filter-bar__clear" id="filterClear" hidden>Очистить</button>
+            </div>
+
+            <!-- Раскрываемая панель: 4 группы фильтров -->
+            <div class="filter-panel" id="filterPanel" hidden>
+                <div class="filter-row">
+                    <span class="filter-row__label">стихия</span>
+                    <div class="filter-chips" id="elementFilters" role="group" aria-label="фильтр по стихиям">
+                        <button class="chip is-active" data-element="all">Все</button>
+                        <button class="chip" data-el="земля"  data-element="земля"><span class="chip__icon"></span>земля</button>
+                        <button class="chip" data-el="вода"   data-element="вода"><span class="chip__icon"></span>вода</button>
+                        <button class="chip" data-el="огонь"  data-element="огонь"><span class="chip__icon"></span>огонь</button>
+                        <button class="chip" data-el="воздух" data-element="воздух"><span class="chip__icon"></span>воздух</button>
+                        <button class="chip" data-el="эфир"   data-element="эфир"><span class="chip__icon"></span>эфир</button>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="filter-row__label">цвет</span>
+                    <div class="filter-chips" id="colorFilters" role="group" aria-label="фильтр по цветам">
+                        <button class="chip is-active" data-color="all">Все</button>
+                        <button class="chip color-chip" data-color="черные"     style="--swatch:#15151A">чёрные</button>
+                        <button class="chip color-chip" data-color="белые"      style="--swatch:#E8E4DD">белые</button>
+                        <button class="chip color-chip" data-color="прозрачные" style="--swatch:#C0CDE0">прозрачные</button>
+                        <button class="chip color-chip" data-color="зеленые"    style="--swatch:#4D9B73">зелёные</button>
+                        <button class="chip color-chip" data-color="синие"      style="--swatch:#1F3A8A">синие</button>
+                        <button class="chip color-chip" data-color="голубые"    style="--swatch:#7BA8C9">голубые</button>
+                        <button class="chip color-chip" data-color="красные"    style="--swatch:#B14924">красные</button>
+                        <button class="chip color-chip" data-color="оранжевые"  style="--swatch:#D08A48">оранжевые</button>
+                        <button class="chip color-chip" data-color="розовые"    style="--swatch:#E5AEC2">розовые</button>
+                        <button class="chip color-chip" data-color="фиолетовые" style="--swatch:#7B5BA0">фиолетовые</button>
+                        <button class="chip color-chip" data-color="золотые"    style="--swatch:#D9B879">золотые</button>
+                        <button class="chip color-chip" data-color="коричневые" style="--swatch:#6E4A2E">коричневые</button>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="filter-row__label">энергия</span>
+                    <div class="filter-chips" id="energyFilters" role="group" aria-label="фильтр по энергии">
+                        <button class="chip is-active" data-energy="all">Все</button>
+                        <button class="chip" data-energy="любовь">любовь</button>
+                        <button class="chip" data-energy="защита">защита</button>
+                        <button class="chip" data-energy="деньги">деньги</button>
+                        <button class="chip" data-energy="уверенность">уверенность</button>
+                        <button class="chip" data-energy="спокойствие">спокойствие</button>
+                        <button class="chip" data-energy="интуиция">интуиция</button>
+                        <button class="chip" data-energy="удача">удача</button>
+                        <button class="chip" data-energy="сила">сила</button>
+                        <button class="chip" data-energy="баланс">баланс</button>
+                        <button class="chip" data-energy="энергия">энергия</button>
+                        <button class="chip" data-energy="вдохновение">вдохновение</button>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <span class="filter-row__label">редкость</span>
+                    <div class="filter-chips" id="rarityFilters" role="group" aria-label="фильтр по редкости">
+                        <button class="chip is-active" data-rarity="all">Все</button>
+                        <button class="chip" data-rarity="common">обычные</button>
+                        <button class="chip" data-rarity="rare">редкие</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тулбар: сортировка + «только избранные» -->
+            <div class="stones-toolbar">
+                <button type="button" class="favs-toggle" id="favsOnlyToggle"
+                        aria-pressed="false" aria-label="показать только избранные">
+                    <svg class="favs-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <span>Избранные</span>
+                    <span class="favs-toggle__count" id="favsCount" hidden>0</span>
+                </button>
+
+                <div class="sort-bar">
+                    <label class="sort-bar__label" for="stoneSort">Сортировка:</label>
+                    <select id="stoneSort" class="sort-bar__select">
+                        <option value="default">по умолчанию</option>
+                        <option value="name-asc">А → Я</option>
+                        <option value="name-desc">Я → А</option>
+                        <option value="rarity">сначала редкие</option>
+                        <option value="element">по стихии</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Сетка камней -->
+            <div id="stoneGrid" class="stone-grid" data-reveal></div>
+
+            <!-- Пустой результат -->
+            <p class="empty-note is-hidden" id="emptyNote">
+                По текущим фильтрам ничего не нашлось. Попробуйте сбросить или поменять параметры.
+            </p>
+
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/stones.js"></script>
+</body>
+</html>
