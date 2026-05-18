@@ -1,22 +1,38 @@
 /**
- * reveal.js
+ * reveal.js — декларативный scroll-reveal через CSS-классы
  * ----------------------------------------------------------------
- * Премиум scroll-reveal через IntersectionObserver.
  * Любой элемент с атрибутом `data-reveal` плавно проявляется,
  * когда впервые попадает в viewport. После проявления наблюдение
- * снимается — нет затрат на скроллинг.
+ * снимается — нулевая стоимость на дальнейший скроллинг.
  *
- *     <section data-reveal>...</section>
+ * Подход — на CSS-классах (не inline-style), чтобы:
+ *   • не вмешиваться в каскад пользовательских стилей;
+ *   • было легко переопределить вариант на странице;
+ *   • не плодить будущие GC-узлы с inline transition strings.
+ *
+ * Декларация:
+ *     <section data-reveal>...</section>                   default: fade-up
+ *     <section data-reveal="blur-in">...</section>         именованный вариант
+ *     <div data-reveal-stagger="80">                       staggered дети по 80мс
  *
  * Опциональные атрибуты:
- *   data-reveal-delay="200"   — задержка в мс перед анимацией
- *   data-reveal-stagger="80"  — для контейнера: дети получают
- *                                  staggered-delay 80мс между друг другом
+ *   data-reveal-delay="200"        задержка в мс перед стартом
+ *   data-reveal-once="false"       по умолчанию true: больше не наблюдать
+ *
+ * Доступные варианты (см. base.css → .reveal--*):
+ *   fade-up (default), fade-down, fade-left, fade-right,
+ *   blur-in, scale-in, rise
  *
  * На prefers-reduced-motion — мгновенный показ, без transform.
  */
 
 const REVEAL_SELECTOR = '[data-reveal]';
+const VARIANT_CLASS_PREFIX = 'reveal--';
+const VALID_VARIANTS = new Set([
+    'fade-up', 'fade-down', 'fade-left', 'fade-right',
+    'blur-in', 'scale-in', 'rise',
+]);
+
 let io = null;
 
 function isReducedMotion() {
@@ -28,10 +44,13 @@ function reveal(el) {
     if (delay > 0) {
         setTimeout(() => el.classList.add('is-revealed'), delay);
     } else {
-        el.classList.add('is-revealed');
+        // requestAnimationFrame гарантирует, что класс is-revealed
+        // применяется ПОСЛЕ установки initial-стилей — иначе transition
+        // не сработает (нет «from-состояния» для браузера).
+        requestAnimationFrame(() => el.classList.add('is-revealed'));
     }
 
-    // Stagger для прямых детей
+    // Stagger для прямых детей (по данным data-reveal-stagger)
     const stagger = parseInt(el.dataset.revealStagger, 10);
     if (stagger > 0) {
         [...el.children].forEach((child, i) => {
@@ -45,16 +64,22 @@ function attach(el) {
     if (el.__revealAttached) return;
     el.__revealAttached = true;
 
+    // Применяем класс-вариант — base.css знает, как анимировать каждый
+    const variant = el.dataset.reveal;
+    if (variant && VALID_VARIANTS.has(variant)) {
+        el.classList.add(VARIANT_CLASS_PREFIX + variant);
+    }
+
     if (isReducedMotion()) {
         el.classList.add('is-revealed');
         return;
     }
 
-    // Если элемент уже в viewport ИЛИ выше его (страница загружена с
-    // сохранённой позицией) — показать мгновенно, без ожидания scroll.
+    // Если элемент уже в viewport (страница загружена с
+    // сохранённой позицией / hero на первом экране) — показать сразу.
     const r = el.getBoundingClientRect();
     const viewportH = window.innerHeight || document.documentElement.clientHeight;
-    const alreadyVisible = r.top < viewportH;
+    const alreadyVisible = r.top < viewportH && r.bottom > 0;
     if (alreadyVisible) {
         reveal(el);
         return;
@@ -62,12 +87,18 @@ function attach(el) {
 
     if (!io) {
         io = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    reveal(entry.target);
-                    io.unobserve(entry.target);
-                }
-            });
+            // Если несколько элементов вошли одновременно — стартуют
+            // со стартовой задержкой, создавая мини-каскад
+            entries
+                .filter(e => e.isIntersecting)
+                .forEach((entry, i) => {
+                    const el = entry.target;
+                    // Микро-стаггер: 60мс между соседними
+                    const baseDelay = parseInt(el.dataset.revealDelay, 10) || 0;
+                    el.dataset.revealDelay = String(baseDelay + i * 60);
+                    reveal(el);
+                    io.unobserve(el);
+                });
         }, {
             threshold: 0.08,
             rootMargin: '0px 0px -80px 0px',
@@ -80,14 +111,14 @@ export function mountReveal(root = document) {
     root.querySelectorAll(REVEAL_SELECTOR).forEach(attach);
 }
 
-// Авто-запуск + повторный обход при появлении новых узлов
+// Авто-запуск + повторный обход при появлении новых узлов (layout.js,
+// динамически вставленные карточки и т.д.)
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => mountReveal());
 } else {
     mountReveal();
 }
 
-// MutationObserver для динамически добавленных секций (например, из layout.js)
 const mo = new MutationObserver(records => {
     for (const r of records) {
         r.addedNodes.forEach(n => {

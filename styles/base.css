@@ -245,30 +245,52 @@ a:hover { color: var(--accent); }
 }
 
 /* =================================================================
- * SCROLL-REVEAL — общая анимация появления секций
- * Все блоки с [data-reveal] стартуют opacity:0 + translateY,
- * после .is-revealed мягко въезжают.
+ * SCROLL-REVEAL — premium motion system v2
+ *
+ * Декларация: <section data-reveal="VARIANT">...
+ * Варианты   : fade-up (default), fade-down, fade-left, fade-right,
+ *              blur-in, scale-in, rise
+ *
+ * Каждый вариант имеет своё "from-состояние", а ".is-revealed"
+ * возвращает в нейтраль. Используем --ease-out-quint и --dur-xl
+ * для cinematic-ощущения (длинный мягкий финиш).
  * ============================================================== */
 
 [data-reveal] {
     opacity: 0;
-    transform: translateY(28px);
     transition:
-        opacity calc(var(--dur-page) * 0.9) var(--ease-out),
-        transform calc(var(--dur-page) * 0.9) var(--ease-out);
+        opacity var(--dur-xl) var(--ease-out-quint),
+        transform var(--dur-xl) var(--ease-out-quint),
+        filter var(--dur-xl) var(--ease-out-quint);
     will-change: opacity, transform;
 }
 
+/* Default (без вариант-класса) — мягкое fade-up */
+[data-reveal]:not(.reveal--fade-down):not(.reveal--fade-left):not(.reveal--fade-right):not(.reveal--blur-in):not(.reveal--scale-in):not(.reveal--rise) {
+    transform: translateY(28px);
+}
+
+/* Варианты */
+.reveal--fade-up      { transform: translateY(28px); }
+.reveal--fade-down    { transform: translateY(-28px); }
+.reveal--fade-left    { transform: translateX(-36px); }
+.reveal--fade-right   { transform: translateX(36px); }
+.reveal--blur-in      { filter: blur(14px); }
+.reveal--scale-in     { transform: scale(0.96); }
+.reveal--rise         { transform: translateY(44px) scale(0.98); }
+
+/* Финал — всё в нейтраль */
 [data-reveal].is-revealed {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateX(0) scale(1);
+    filter: blur(0);
 }
 
 /* Stagger для прямых детей — задержка через CSS-переменную */
 .reveal-stagger-child {
     opacity: 0;
     transform: translateY(20px);
-    animation: reveal-fade-up var(--dur-page) var(--ease-out) forwards;
+    animation: reveal-fade-up var(--dur-xl) var(--ease-out-quint) forwards;
     animation-delay: var(--reveal-delay, 0ms);
 }
 
@@ -277,13 +299,103 @@ a:hover { color: var(--accent); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Универсальный stagger без data-reveal: задаётся
+   inline-стилем --stagger:N — задержка считается автоматически.
+       <li class="stagger-item" style="--stagger:0">...
+       <li class="stagger-item" style="--stagger:1">...
+   ----- */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal-fade-up var(--dur-lg) var(--ease-out-quint) forwards;
+    animation-delay: calc(var(--stagger, 0) * var(--stagger-step));
+}
+
 @media (prefers-reduced-motion: reduce) {
     [data-reveal], [data-reveal].is-revealed,
-    .reveal-stagger-child {
+    .reveal-stagger-child, .stagger-item {
         opacity: 1 !important;
         transform: none !important;
+        filter: none !important;
         animation: none !important;
         transition: none !important;
+    }
+}
+
+/* =================================================================
+ * PREMIUM HOVER UTILITIES — единый язык интерактивности
+ *
+ *   .hover-lift     — приподнимается на 4px + усиливается тень
+ *   .hover-glow     — мягкое золотое свечение по контуру
+ *   .hover-fade     — opacity 0.6→1.0 на hover (для muted-ссылок)
+ *   .hover-zoom     — лёгкий scale(1.02) на hover (только для media)
+ *   .hover-soft     — комбо lift+glow для карточек-объектов
+ *   .press-feedback — scale(0.98) на :active для кликабельных
+ *
+ * Принцип: компоненты декларативно подмешивают эти классы,
+ * а не повторяют hover-CSS на каждой странице.
+ * ============================================================== */
+
+.hover-lift {
+    transition:
+        transform var(--dur-md) var(--ease-out-quint),
+        box-shadow var(--dur-lg) var(--ease-out-quint);
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.hover-glow {
+    transition: box-shadow var(--dur-lg) var(--ease-out-quint),
+                border-color var(--dur-md) var(--ease-out);
+}
+.hover-glow:hover {
+    box-shadow: var(--shadow-accent);
+    border-color: var(--accent);
+}
+
+.hover-fade {
+    opacity: 0.62;
+    transition: opacity var(--dur-md) var(--ease-out);
+}
+.hover-fade:hover { opacity: 1; }
+
+.hover-zoom {
+    overflow: hidden;
+}
+.hover-zoom > * {
+    transition: transform calc(var(--dur-xl) * 1.5) var(--ease-out-quint);
+}
+.hover-zoom:hover > * { transform: scale(1.04); }
+
+/* Soft — комбинация lift + glow для люксовых карточек */
+.hover-soft {
+    transition:
+        transform var(--dur-md) var(--ease-out-quint),
+        box-shadow var(--dur-lg) var(--ease-out-quint),
+        border-color var(--dur-md) var(--ease-out);
+}
+.hover-soft:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.32),
+        var(--shadow-accent);
+    border-color: rgba(217, 184, 121, 0.32);
+}
+
+.press-feedback {
+    transition: transform var(--dur-xs) var(--ease-out);
+}
+.press-feedback:active { transform: scale(0.97); }
+
+@media (prefers-reduced-motion: reduce) {
+    .hover-lift, .hover-glow, .hover-fade, .hover-zoom, .hover-soft, .press-feedback {
+        transition: none !important;
+    }
+    .hover-lift:hover, .hover-soft:hover, .press-feedback:active,
+    .hover-zoom:hover > * {
+        transform: none !important;
     }
 }
 
@@ -298,8 +410,9 @@ a:hover { color: var(--accent); }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation-duration: 320ms;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-duration: var(--dur-lg);
+    animation-timing-function: var(--ease-out-quint);
+    animation-fill-mode: both;
 }
 
 ::view-transition-old(root) {
@@ -307,15 +420,16 @@ a:hover { color: var(--accent); }
 }
 ::view-transition-new(root) {
     animation-name: vt-fade-in;
+    animation-duration: var(--dur-xl);
 }
 
 @keyframes vt-fade-out {
-    from { opacity: 1; }
-    to   { opacity: 0; }
+    from { opacity: 1; transform: scale(1); filter: blur(0); }
+    to   { opacity: 0; transform: scale(1.02); filter: blur(6px); }
 }
 @keyframes vt-fade-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(14px) scale(0.99); filter: blur(8px); }
+    to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

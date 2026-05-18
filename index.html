@@ -65,9 +65,10 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/atmosphere.css">
     <link rel="stylesheet" href="styles/pages/home.css">
 </head>
-<body data-page="home">
+<body data-page="home" data-atmosphere>
 
     <header id="siteHeader"></header>
 
@@ -75,30 +76,44 @@
 
         <!-- ========== HERO ========== -->
         <section class="hero">
+            <!-- Атмосферный backdrop под heroом — тёплое свечение, не требует JS -->
+            <div class="hero__backdrop" aria-hidden="true">
+                <span class="hero__backdrop-orb hero__backdrop-orb--gold"></span>
+                <span class="hero__backdrop-orb hero__backdrop-orb--violet"></span>
+            </div>
+
             <div class="container hero__inner">
                 <div class="hero__copy">
-                    <p class="eyebrow">личная мастерская · с 2025 · Ижевск</p>
-                    <h1 class="font-display hero__title">
-                        Браслеты из<br>
-                        <em>натуральных</em><br>
-                        камней.
+                    <p class="eyebrow hero__eyebrow" data-reveal="fade-down">
+                        <span class="hero__eyebrow-dot"></span>
+                        личная мастерская · с 2025 · Ижевск
+                    </p>
+                    <h1 class="font-display hero__title" data-reveal="rise">
+                        <span class="hero__title-line">Браслеты из</span>
+                        <span class="hero__title-line hero__title-line--accent"><em>натуральных</em></span>
+                        <span class="hero__title-line">камней<span class="hero__title-stop">.</span></span>
                     </h1>
-                    <p class="lead hero__lead">
+                    <p class="lead hero__lead" data-reveal="fade-up" data-reveal-delay="120">
                         Собери свой браслет — я соберу его для тебя.
                     </p>
-                    <div class="hero__cta">
-                        <a href="constructor.html" class="btn btn--primary">
+                    <div class="hero__cta" data-reveal="fade-up" data-reveal-delay="200">
+                        <a href="constructor.html" class="btn btn--primary hero__cta-primary" data-magnetic>
                             <span>Открыть конструктор</span>
                             <span class="btn__arrow">→</span>
                         </a>
-                        <a href="inspiration.html" class="btn btn--ghost">Сообщество</a>
+                        <a href="inspiration.html" class="hero__cta-secondary">
+                            <span>Сообщество</span>
+                            <span class="hero__cta-secondary-line"></span>
+                        </a>
                     </div>
-                    <div class="hero__proof" id="heroProof">
+                    <div class="hero__proof" id="heroProof" data-reveal="fade-up" data-reveal-delay="320">
                         <!-- цифры подставляются из home.js -->
                     </div>
                 </div>
-                <div class="hero__visual">
+                <div class="hero__visual" data-reveal="scale-in" data-reveal-delay="80">
                     <div class="hero__visual-main" aria-hidden="true">
+                        <!-- Дополнительный декоративный круг-подиум под браслет -->
+                        <span class="hero__visual-podium"></span>
                         <canvas
                             id="heroCanvas"
                             data-mini-bracelet
@@ -112,9 +127,17 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Scroll-indicator: тонкая линия с дыханием, исчезает при скролле -->
+            <a href="#featuredAnchor" class="hero__scroll-hint" id="heroScrollHint" aria-label="Прокрутить ниже">
+                <span class="hero__scroll-hint-track">
+                    <span class="hero__scroll-hint-dot"></span>
+                </span>
+                <span class="hero__scroll-hint-label">далее</span>
+            </a>
         </section>
 
-        <hr class="divider-thin" aria-hidden="true">
+        <hr class="divider-thin" aria-hidden="true" id="featuredAnchor">
 
         <!-- ========== ЧТО УЖЕ СОБРАНО ========== -->
         <section class="section section--portfolio" data-reveal>

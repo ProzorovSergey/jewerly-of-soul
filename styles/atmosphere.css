@@ -1,0 +1,155 @@
+/* =================================================================
+ * atmosphere.css — ambient motion + atmospheric layering
+ *
+ * Цель: создать ощущение «живого» пространства, не вторгаясь в
+ * читаемость контента. Эффекты:
+ *   • orb — медленно дрейфующее золотое световое пятно
+ *   • drift-gradient — лёгкий сдвиг градиентов фона
+ *   • aura — multi-layer hero-сияние
+ *
+ * Все движения очень медленные (40–120s) и низко-амплитудные.
+ * Все эффекты выключаются на prefers-reduced-motion.
+ *
+ * Подключение: <link rel="stylesheet" href="styles/atmosphere.css">
+ * после base.css в каждом HTML.
+ * ================================================================= */
+
+/* =================================================================
+ * 1. AMBIENT ORB — медленно дрейфующее золотое сияние в фоне
+ * Используется на главной странице и крупных разделах.
+ * Создаётся через ::before на body[data-atmosphere].
+ * ============================================================== */
+
+body[data-atmosphere]::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 50% 40% at 20% 30%,
+        rgba(217, 184, 121, 0.08) 0%,
+        rgba(217, 184, 121, 0.03) 30%,
+        transparent 65%
+    );
+    animation: orb-drift 60s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+}
+
+body[data-atmosphere]::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 40% 30% at 80% 70%,
+        rgba(124, 79, 191, 0.06) 0%,
+        rgba(124, 79, 191, 0.02) 35%,
+        transparent 70%
+    );
+    animation: orb-drift-alt 90s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+}
+
+@keyframes orb-drift {
+    0%   { transform: translate3d(0, 0, 0) scale(1);    opacity: 0.7; }
+    50%  { transform: translate3d(8vw, -4vh, 0) scale(1.15); opacity: 1.0; }
+    100% { transform: translate3d(-6vw, 6vh, 0) scale(0.95); opacity: 0.6; }
+}
+
+@keyframes orb-drift-alt {
+    0%   { transform: translate3d(0, 0, 0) scale(1);     opacity: 0.5; }
+    50%  { transform: translate3d(-10vw, 5vh, 0) scale(1.2);  opacity: 0.9; }
+    100% { transform: translate3d(5vw, -8vh, 0) scale(0.9); opacity: 0.4; }
+}
+
+/* На светлой теме — orb становится тёплее, чтобы не «холодить» фон */
+html[data-theme="light"] body[data-atmosphere]::before {
+    background: radial-gradient(
+        ellipse 50% 40% at 20% 30%,
+        rgba(184, 146, 74, 0.06) 0%,
+        rgba(184, 146, 74, 0.02) 30%,
+        transparent 65%
+    );
+}
+html[data-theme="light"] body[data-atmosphere]::after {
+    background: radial-gradient(
+        ellipse 40% 30% at 80% 70%,
+        rgba(150, 100, 50, 0.04) 0%,
+        transparent 70%
+    );
+}
+
+/* =================================================================
+ * 2. HERO AURA v2 — три слоя сияния под главным браслетом
+ * Используется на index.html в .hero__visual-main.
+ * Каждый слой пульсирует со своим периодом — создаётся эффект
+ * «дыхания», как у живого камня.
+ * ============================================================== */
+
+.hero__visual-main {
+    /* Создаём stacking-context для слоёв */
+    isolation: isolate;
+}
+
+/* Базовая аура (тёплая, центральная) — уже есть в home.css через ::before.
+   Здесь добавляем второй слой через .hero__visual-main::after.
+   Третий слой — отдельный div .hero__aura-deep, его добавляет JS если нужно. */
+
+.hero__visual-main::after {
+    content: '';
+    position: absolute;
+    inset: -24%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(124, 79, 191, 0.08) 0%,
+        rgba(217, 184, 121, 0.04) 35%,
+        transparent 70%
+    );
+    z-index: -1;
+    pointer-events: none;
+    animation: hero-aura-deep 12s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes hero-aura-deep {
+    0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+    50%      { opacity: 0.75; transform: scale(1.08) rotate(15deg); }
+}
+
+/* =================================================================
+ * 3. SOFT SCROLL-AMBIENT — лёгкий blur на больших фоновых слоях
+ * При прокрутке атмосферные слои чуть смещаются. Эффект тонкий,
+ * но даёт ощущение глубины (parallax-lite без JS-привязки).
+ * ============================================================== */
+
+body[data-atmosphere] {
+    background-attachment: fixed;
+}
+
+/* =================================================================
+ * 4. GRAIN — едва заметное зерно на фоне (опционально)
+ * Включается на body[data-atmosphere="grain"]. Не использует
+ * image-файл — генерация через SVG noise inline.
+ * ============================================================== */
+
+body[data-atmosphere="grain"]::before {
+    background-image:
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(217, 184, 121, 0.08), transparent 65%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+}
+
+/* =================================================================
+ * Reduced motion — все атмосферные движения off, оставляем только
+ * статические градиенты для атмосферы без движения.
+ * ============================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    body[data-atmosphere]::before,
+    body[data-atmosphere]::after,
+    .hero__visual-main::after {
+        animation: none !important;
+    }
+}

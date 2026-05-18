@@ -12,6 +12,34 @@ import { autoMountMinis, renderMini } from '../ui/miniBracelet.js';
 import { generateStoneTexture, preloadAlbedos, onAlbedoReady } from '../core/stoneGenerator.js';
 import * as ideas from '../services/ideaService.js';
 import * as users from '../services/userService.js';
+import { magneticHover } from '../ui/motion.js';
+
+// =================================================================
+// HERO микровзаимодействия (V2):
+//   • magnetic-hover на primary CTA;
+//   • плавное скрытие scroll-hint при первой прокрутке.
+// Запускается параллельно с основной init() — не блокирует камни.
+// =================================================================
+function setupHeroInteractions() {
+    // Magnetic-hover на всех элементах с [data-magnetic]
+    document.querySelectorAll('[data-magnetic]').forEach(el => {
+        magneticHover(el, { strength: 0.20, radius: 140 });
+    });
+
+    // Скрываем scroll-hint при любой прокрутке > 60px
+    const hint = document.getElementById('heroScrollHint');
+    if (hint) {
+        const hide = () => {
+            if (window.scrollY > 60) {
+                hint.classList.add('is-hidden');
+                window.removeEventListener('scroll', hide);
+            }
+        };
+        window.addEventListener('scroll', hide, { passive: true });
+    }
+}
+
+setupHeroInteractions();
 
 const FEATURED = [
     {

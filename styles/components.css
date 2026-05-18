@@ -3,7 +3,13 @@
  * кнопки, чипы, карточки, поля ввода
  * ================================================================= */
 
-/* ---------- Кнопки -------------------------------------------- */
+/* ---------- Кнопки v2 — premium hover system ---------------- *
+ * Принципы:
+ *   • transition разнесён по свойствам — каждое со своей duration/easing,
+ *     чтобы движение было «слойным» (тень опаздывает за лифтом).
+ *   • Active-state на 60мс с лёгким scale(0.98) — tactile-feedback.
+ *   • Без `all`-transition (она перерасходует CPU на лишних свойствах).
+ */
 
 .btn {
     display: inline-flex;
@@ -18,8 +24,15 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     border: 1px solid transparent;
-    transition: all var(--dur-mid) var(--ease);
     white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+    transition:
+        background var(--dur-md) var(--ease-out),
+        color var(--dur-md) var(--ease-out),
+        border-color var(--dur-md) var(--ease-out),
+        box-shadow var(--dur-lg) var(--ease-out-quint),
+        transform var(--dur-md) var(--ease-out-quint);
 }
 
 .btn:disabled {
@@ -27,15 +40,28 @@
     cursor: not-allowed;
 }
 
+/* Tactile press-feedback для всех кнопок */
+.btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+    transition:
+        transform var(--dur-xs) var(--ease-out),
+        box-shadow var(--dur-xs) var(--ease-out);
+}
+
 .btn--primary {
     background: var(--accent);
     color: var(--accent-fg);
-    box-shadow: 0 6px 20px rgba(217, 184, 121, 0.25);
+    box-shadow:
+        0 6px 20px rgba(217, 184, 121, 0.22),
+        0 1px 0 rgba(255, 255, 255, 0.10) inset;
 }
 .btn--primary:hover:not(:disabled) {
     background: var(--accent-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 26px rgba(217, 184, 121, 0.35);
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 36px rgba(217, 184, 121, 0.36),
+        0 4px 12px rgba(217, 184, 121, 0.20),
+        0 1px 0 rgba(255, 255, 255, 0.14) inset;
 }
 
 .btn--ghost {
@@ -46,6 +72,8 @@
 .btn--ghost:hover:not(:disabled) {
     border-color: var(--accent);
     color: var(--accent);
+    background: rgba(217, 184, 121, 0.04);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
 }
 
 .btn--sm {
@@ -56,8 +84,12 @@
 
 .btn--block { width: 100%; }
 
-.btn__arrow { font-size: 1.1em; line-height: 1; transition: transform var(--dur-mid) var(--ease); }
-.btn:hover .btn__arrow { transform: translateX(3px); }
+.btn__arrow {
+    font-size: 1.1em;
+    line-height: 1;
+    transition: transform var(--dur-md) var(--ease-out-quint);
+}
+.btn:hover:not(:disabled) .btn__arrow { transform: translateX(4px); }
 
 /* ---------- Чипы --------------------------------------------- */
 
@@ -286,15 +318,15 @@ textarea.field {
     position: fixed;
     inset: 0;
     z-index: 900;
-    background: rgba(6, 6, 10, 0.78);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(6, 6, 10, 0.72);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
     opacity: 0;
-    transition: opacity var(--dur-mid) var(--ease);
+    transition: opacity var(--dur-lg) var(--ease-out-quint);
 }
 .modal-backdrop.is-in  { opacity: 1; }
 .modal-backdrop.is-out { opacity: 0; }
@@ -305,13 +337,22 @@ textarea.field {
     max-height: calc(100vh - 48px);
     overflow-y: auto;
     background: var(--bg-elev-1);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    transform: scale(0.96);
-    transition: transform var(--dur-mid) var(--ease);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(217, 184, 121, 0.08) inset;
+    /* Soft entrance: opacity-fade + slight scale + slight lift */
+    transform: scale(0.94) translateY(12px);
+    opacity: 0;
+    transition:
+        transform var(--dur-lg) var(--ease-out-quint),
+        opacity var(--dur-md) var(--ease-out);
 }
-.modal-backdrop.is-in .modal { transform: scale(1); }
+.modal-backdrop.is-in .modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
 
 .modal__head {
     display: flex;

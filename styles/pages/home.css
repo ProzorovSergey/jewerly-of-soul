@@ -1,45 +1,168 @@
 /* =================================================================
- * home.css — стили главной страницы Jewerly of Soul
+ * home.css — стили главной страницы Jewerly of Soul (v2)
+ * Hero — editorial-композиция с layered lighting.
  * ================================================================= */
 
-/* --- HERO v2 -------------------------------------------------- */
+/* --- HERO v2 (premium polish) -------------------------------- */
 
 .hero {
-    padding: var(--space-10) 0 var(--space-11);
+    padding: var(--space-11) 0 var(--space-11);
     position: relative;
     overflow: hidden;
+    min-height: min(720px, 96svh);
+}
+
+/* --- Backdrop с двумя дрейфующими орбами (без JS) ---------- */
+.hero__backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+.hero__backdrop-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    will-change: transform, opacity;
+}
+.hero__backdrop-orb--gold {
+    width: 60vw; height: 60vw;
+    top: -10vw; left: -15vw;
+    background: radial-gradient(circle at 50% 50%, rgba(217, 184, 121, 0.32), transparent 65%);
+    animation: hero-orb-drift-a 28s ease-in-out infinite alternate;
+}
+.hero__backdrop-orb--violet {
+    width: 50vw; height: 50vw;
+    bottom: -10vw; right: -10vw;
+    background: radial-gradient(circle at 50% 50%, rgba(124, 79, 191, 0.20), transparent 65%);
+    animation: hero-orb-drift-b 36s ease-in-out infinite alternate;
+}
+
+@keyframes hero-orb-drift-a {
+    0%   { transform: translate3d(0,0,0) scale(1);   opacity: 0.55; }
+    100% { transform: translate3d(8vw,5vh,0) scale(1.15); opacity: 0.75; }
+}
+@keyframes hero-orb-drift-b {
+    0%   { transform: translate3d(0,0,0) scale(1);   opacity: 0.45; }
+    100% { transform: translate3d(-6vw,-8vh,0) scale(1.2); opacity: 0.65; }
 }
 
 .hero__inner {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: var(--space-9);
     align-items: center;
     min-height: 600px;
+    position: relative;
+    z-index: 1;
 }
 
-.hero__copy { max-width: 540px; }
+.hero__copy { max-width: 560px; }
 
+/* --- Eyebrow с акцентной точкой ----------------------------- */
+.hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-soft);
+}
+.hero__eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: hero-dot-breath 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+@keyframes hero-dot-breath {
+    0%, 100% { opacity: 0.5; transform: scale(0.8); }
+    50%      { opacity: 1;   transform: scale(1.1); }
+}
+
+/* --- Editorial-заголовок -------------------------------------- */
 .hero__title {
-    margin-top: var(--space-4);
-    font-size: clamp(48px, 7vw, 96px);
-    line-height: 0.97;
-    letter-spacing: -0.025em;
+    margin-top: var(--space-5);
+    font-size: clamp(52px, 8.2vw, 116px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-weight: 400;
 }
-.hero__title em { font-style: italic; color: var(--accent); font-weight: 400; }
+.hero__title-line {
+    display: block;
+    overflow: visible;
+}
+.hero__title-line em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+    /* optical-correction — italic visually shifts left, компенсируем */
+    margin-left: -0.04em;
+}
+.hero__title-stop {
+    color: var(--accent);
+    font-style: normal;
+}
 
 .hero__lead {
-    margin-top: var(--space-5);
-    max-width: 440px;
-    font-size: var(--text-md);
+    margin-top: var(--space-6);
+    max-width: 420px;
+    font-size: var(--text-lg);
+    color: var(--text-soft);
+    line-height: 1.45;
 }
 
 .hero__cta {
     display: flex;
-    gap: var(--space-3);
-    margin-top: var(--space-7);
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+    align-items: center;
     flex-wrap: wrap;
 }
+
+/* --- Primary CTA — золотая капсула с пульсацией --------------- */
+.hero__cta-primary {
+    /* magnetic-эффект подключает motion.js по [data-magnetic] */
+    position: relative;
+    isolation: isolate;
+}
+.hero__cta-primary::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(217, 184, 121, 0.4), transparent 70%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity var(--dur-lg) var(--ease-out-quint);
+    filter: blur(20px);
+}
+.hero__cta-primary:hover::before { opacity: 1; }
+
+/* --- Secondary CTA — минималист, текст с animated underline ---- */
+.hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: var(--text-soft);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    transition: color var(--dur-md) var(--ease-out);
+}
+.hero__cta-secondary:hover { color: var(--accent); }
+
+.hero__cta-secondary-line {
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--dur-lg) var(--ease-out-quint);
+}
+.hero__cta-secondary:hover .hero__cta-secondary-line { width: 44px; }
 
 /* ---- Социальное доказательство ---------------------------- */
 .hero__proof {
@@ -83,7 +206,7 @@
 .hero__visual-main {
     width: 100%;
     aspect-ratio: 1;
-    max-width: 520px;
+    max-width: 540px;
     margin-inline: auto;
     position: relative;
     isolation: isolate;
@@ -93,21 +216,69 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.65),
+        0 0 60px rgba(217, 184, 121, 0.15),
+        0 0 0 1px rgba(217, 184, 121, 0.10) inset;
     animation: hero-bracelet-breath 80s linear infinite;
     transform-origin: 50% 50%;
+    position: relative;
+    z-index: 2;
 }
 
-/* Лёгкое сияние под главным браслетом — пульсирует с большой амплитудой */
+/* --- Слой 1 (за canvas): декоративный круг-подиум ----------- *
+ * Тёмный диск под браслетом, как ювелирная подложка. */
+.hero__visual-podium {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 50% 40%,
+        rgba(28, 22, 18, 0.4) 0%,
+        rgba(8, 8, 12, 0.7) 60%,
+        transparent 100%
+    );
+    border: 1px solid rgba(217, 184, 121, 0.06);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Слой 2 (under-glow): тёплое центральное сияние --------- */
 .hero__visual-main::before {
     content: '';
     position: absolute;
-    inset: -12%;
-    background: radial-gradient(circle at 50% 50%,
-        rgba(217, 184, 121, 0.10) 0%, transparent 60%);
-    z-index: -1;
+    inset: -8%;
+    background: radial-gradient(
+        circle at 50% 55%,
+        rgba(217, 184, 121, 0.22) 0%,
+        rgba(217, 184, 121, 0.06) 35%,
+        transparent 65%
+    );
+    z-index: 0;
     pointer-events: none;
     animation: hero-aura-pulse 6s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+/* --- Слой 3 (outer-orbit): второе кольцо света ------------- */
+.hero__visual-main::after {
+    content: '';
+    position: absolute;
+    inset: -22%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        rgba(217, 184, 121, 0.06) 18%,
+        transparent 35%,
+        rgba(124, 79, 191, 0.04) 60%,
+        transparent 85%
+    );
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    animation: hero-orbit-rotate 28s linear infinite;
+    will-change: transform;
+    filter: blur(24px);
 }
 
 @keyframes hero-bracelet-breath {
@@ -120,9 +291,80 @@
     50%      { opacity: 1.0;  transform: scale(1.04); }
 }
 
+@keyframes hero-orbit-rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .hero__visual-main canvas { animation: none; }
+    .hero__visual-main canvas,
+    .hero__visual-main::after { animation: none; }
     .hero__visual-main::before { animation: none; opacity: 0.7; }
+}
+
+/* --- Scroll-indicator: тонкая золотая линия с дыхающей точкой - */
+.hero__scroll-hint {
+    position: absolute;
+    bottom: var(--space-7);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--text-xxs);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    transition: opacity var(--dur-lg) var(--ease-out), transform var(--dur-lg) var(--ease-out-quint);
+    z-index: 2;
+}
+.hero__scroll-hint:hover { opacity: 1; color: var(--accent); }
+
+/* Когда страница прокручена (JS добавляет класс) — индикатор уезжает вниз и исчезает */
+.hero__scroll-hint.is-hidden {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+    pointer-events: none;
+}
+
+.hero__scroll-hint-track {
+    position: relative;
+    width: 1px;
+    height: 44px;
+    background: linear-gradient(to bottom, transparent, currentColor, transparent);
+    overflow: hidden;
+}
+.hero__scroll-hint-dot {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: hero-scroll-dot 2.4s ease-in-out infinite;
+}
+@keyframes hero-scroll-dot {
+    0%   { top: 0;    opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { top: 39px; opacity: 0; }
+}
+
+.hero__scroll-hint-label {
+    font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__eyebrow-dot,
+    .hero__scroll-hint-dot { animation: none; }
+}
+
+@media (max-width: 720px) {
+    .hero__scroll-hint { display: none; }
 }
 
 .hero__visual-trio {
@@ -374,15 +616,19 @@
 
 @media (max-width: 980px) {
     .hero__inner { grid-template-columns: 1fr; gap: var(--space-8); }
-    .hero__visual-main { max-width: 380px; }
-    .hero__visual-trio { max-width: 380px; }
+    .hero__visual-main { max-width: 420px; }
+    .hero__visual-trio { max-width: 420px; }
+    .hero__title { font-size: clamp(48px, 9vw, 84px); }
     .featured-grid { grid-template-columns: repeat(2, 1fr); }
     .stone-quartet { grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
     .about { grid-template-columns: 1fr; padding: var(--space-8); }
 }
 
 @media (max-width: 600px) {
-    .hero { padding: var(--space-6) 0 var(--space-9); }
+    .hero { padding: var(--space-7) 0 var(--space-9); min-height: auto; }
+    .hero__title { font-size: clamp(40px, 11vw, 64px); letter-spacing: -0.035em; }
+    .hero__lead { font-size: var(--text-md); }
+    .hero__cta { gap: var(--space-5); margin-top: var(--space-6); }
     .hero__proof {
         gap: var(--space-5);
         flex-wrap: wrap;
