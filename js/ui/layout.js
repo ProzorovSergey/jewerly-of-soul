@@ -154,10 +154,48 @@ function renderBottomNav(active) {
     }
     nav.innerHTML = BOTTOM_NAV.map(n => `
         <a href="${n.href}" class="bottom-nav__link${n.id === active ? ' is-active' : ''}" aria-label="${n.label}">
+            <span class="bottom-nav__indicator" aria-hidden="true"></span>
             <svg class="bottom-nav__icon" viewBox="0 0 24 24" aria-hidden="true">${n.icon}</svg>
-            <span>${n.label}</span>
+            <span class="bottom-nav__label">${n.label}</span>
         </a>
     `).join('');
+
+    setupBottomNavScroll(nav);
+}
+
+/**
+ * Bottom-nav прячется при скролле вниз и возвращается при скролле
+ * вверх — native-app паттерн, освобождает экран при чтении.
+ * Возле верха страницы панель всегда видна.
+ */
+let _bottomNavScrollBound = false;
+function setupBottomNavScroll(nav) {
+    if (_bottomNavScrollBound) return;
+    _bottomNavScrollBound = true;
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let lastY = window.scrollY;
+    let rafId = 0;
+
+    function onScroll() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+            const y = window.scrollY;
+            const dy = y - lastY;
+            // У верха страницы — всегда видна
+            if (y < 80) {
+                nav.classList.remove('is-tucked');
+            } else if (dy > 6) {
+                nav.classList.add('is-tucked');     // скролл вниз — прячем
+            } else if (dy < -6) {
+                nav.classList.remove('is-tucked');  // скролл вверх — показываем
+            }
+            lastY = y;
+            rafId = 0;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
 }
 
 function renderFooter(active) {

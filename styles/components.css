@@ -390,6 +390,67 @@ textarea.field {
 }
 
 /* =================================================================
+ * MOBILE: модалка → bottom-sheet (native luxury app feeling)
+ *
+ * На узких экранах модалка перестаёт быть «коробкой по центру» и
+ * становится листом, выезжающим снизу: скруглён только верх,
+ * есть drag-handle, действия в thumb-зоне, slide-up анимация.
+ * ============================================================== */
+
+@media (max-width: 600px) {
+    .modal-backdrop {
+        align-items: flex-end;        /* лист прижат к низу */
+        padding: 0;
+    }
+
+    .modal {
+        max-width: 100%;
+        max-height: 90svh;
+        border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.6);
+        /* Bottom-sheet entrance: выезд снизу, без scale */
+        transform: translateY(100%);
+        transition:
+            transform var(--dur-lg) var(--ease-out-quint),
+            opacity var(--dur-sm) var(--ease-out);
+        /* safe-area для устройств с домашней полоской */
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .modal-backdrop.is-in .modal {
+        transform: translateY(0);
+    }
+
+    /* Drag-handle сверху листа — визуальный affordance «потяни/закрой» */
+    .modal::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--border-strong);
+        margin: 10px auto 0;
+        flex-shrink: 0;
+    }
+
+    /* На мобильном действия — крупнее, в строку, в thumb-зоне */
+    .modal__actions {
+        padding: var(--space-4) var(--space-5) var(--space-5);
+        gap: var(--space-3);
+    }
+    .modal__actions .btn {
+        flex: 1;
+        min-width: 0;
+        height: 52px;
+    }
+
+    .modal__head { padding: var(--space-3) var(--space-5) var(--space-3); }
+    .modal__body { padding: var(--space-5); }
+}
+
+/* =================================================================
  * SKELETONS
  * ============================================================== */
 

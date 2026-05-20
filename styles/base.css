@@ -9,6 +9,18 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
 
+/* Touch: убираем серо-синюю вспышку при тапе на всех элементах —
+   у нас собственный :active-feedback, системный flash выглядит дёшево. */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* Интерактивные элементы — touch-action: manipulation убирает
+   300ms-задержку double-tap-zoom, тап срабатывает мгновенно. */
+button, a, label, summary,
+.chip, .btn, [role="button"],
+input[type="checkbox"], input[type="radio"], select {
+    touch-action: manipulation;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -396,6 +408,22 @@ a:hover { color: var(--accent); }
     .hover-lift:hover, .hover-soft:hover, .press-feedback:active,
     .hover-zoom:hover > * {
         transform: none !important;
+    }
+}
+
+/* На touch-устройствах (hover недоступен) :hover «залипает» после
+   тапа до следующего касания в другом месте — выглядит как баг.
+   Нейтрализуем самые заметные hover-трансформы: lift и зум визуала.
+   Тень/цвет оставляем — они не создают ощущения «застрявшего». */
+@media (hover: none) {
+    .hover-lift:hover,
+    .hover-soft:hover {
+        transform: none;
+    }
+    .hover-zoom:hover > * { transform: none; }
+    .idea-card:hover .idea-card__visual canvas,
+    .featured-card:hover .featured-card__visual canvas {
+        transform: none;
     }
 }
 
