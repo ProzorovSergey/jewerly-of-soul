@@ -12,7 +12,7 @@
  * Версионирование: при изменении CACHE_VERSION старые caches удаляются.
  */
 
-const CACHE_VERSION = 'jos-v2-3-cards';
+const CACHE_VERSION = 'jos-v2-4-feed';
 const STATIC_CACHE  = `${CACHE_VERSION}-static`;
 const STONES_CACHE  = `${CACHE_VERSION}-stones`;
 const DATA_CACHE    = `${CACHE_VERSION}-data`;

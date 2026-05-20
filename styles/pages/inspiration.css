@@ -1,16 +1,16 @@
 /* =================================================================
- * inspiration.css — лента сообщества
+ * inspiration.css — лента сообщества (v2 — editorial)
  * ================================================================= */
 
-.inspiration-page { padding-block: 40px 60px; }
+.inspiration-page { padding-block: var(--space-9) var(--space-10); }
 
 .page-hero {
-    max-width: 820px;
-    margin-bottom: 32px;
+    max-width: 840px;
+    margin-bottom: var(--space-9);
 }
-.page-hero .h-1 { margin-top: 12px; }
-.page-hero .lead { margin-top: 18px; max-width: 640px; }
-.page-hero__cta { margin-top: 28px; }
+.page-hero .h-1 { margin-top: var(--space-3); }
+.page-hero .lead { margin-top: var(--space-5); max-width: 640px; }
+.page-hero__cta { margin-top: var(--space-7); }
 
 /* --- Контролы поиска и сортировки -------------------------- */
 
@@ -18,7 +18,7 @@
     display: flex;
     gap: 14px;
     align-items: center;
-    margin-bottom: 18px;
+    margin-bottom: var(--space-5);
 }
 
 .feed-controls .field { flex: 1; max-width: 460px; }
@@ -27,7 +27,7 @@
     display: flex;
     gap: 6px;
 }
-.feed-controls__sort .chip { font-size: 11px; height: 30px; padding: 0 14px; }
+.feed-controls__sort .chip { font-size: 11px; height: 32px; padding: 0 16px; }
 
 /* --- Фильтры по настроению --------------------------------- */
 
@@ -71,11 +71,41 @@
 .feed-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: var(--space-6);
 }
 
+/* Editorial-акцент: первая карточка ленты крупнее (span 2 колонки,
+   с горизонтальной раскладкой). Создаёт визуальную иерархию —
+   как featured-материал в журнале. */
 .feed-card {
     position: relative;
+    transition: opacity var(--dur-lg) var(--ease-out);
+}
+
+/* Плавная смена ленты при фильтрации: контейнер гасит старое */
+.feed-grid.is-swapping { opacity: 0.3; }
+
+/* --- Editorial-акцент: первая карточка крупнее на широких --- *
+ * Класс feed-card--featured навешивается на тот же <article>,
+ * что и idea-card/feed-card — поэтому селекторы без вложенности. */
+@media (min-width: 1100px) {
+    .feed-card--featured {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        align-items: stretch;
+    }
+    .feed-card--featured .feed-card__visual-link { height: 100%; }
+    .feed-card--featured .idea-card__visual {
+        height: 100%;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+    }
+    .feed-card--featured .idea-card__body {
+        justify-content: center;
+        padding: var(--space-7);
+    }
+    .feed-card--featured .idea-card__title { font-size: var(--text-xl); }
 }
 
 .feed-card__visual-link { display: block; }
@@ -115,6 +145,166 @@
     font-size: var(--text-md);
 }
 
+/* =================================================================
+ * IMMERSIVE PREVIEW MODAL — quick-look идеи прямо из ленты
+ * ============================================================== */
+
+.modal.modal--idea-preview {
+    max-width: 780px;
+}
+
+.idea-preview {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: var(--space-7);
+    align-items: start;
+    width: 100%;
+}
+
+.idea-preview__visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background:
+        radial-gradient(circle at 50% 42%, rgba(217, 184, 121, 0.08) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, #181318 0%, #07070B 78%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.idea-preview__visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+.idea-preview__visual canvas {
+    width: 92%;
+    height: 92%;
+    position: relative;
+    z-index: 1;
+}
+
+.idea-preview__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.idea-preview__eyebrow {
+    font-size: var(--text-xxs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.idea-preview__title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0;
+}
+
+.idea-preview__author {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.idea-preview__author .avatar { width: 28px; height: 28px; font-size: 11px; }
+.idea-preview__author-name {
+    font-size: var(--text-sm);
+    color: var(--text-soft);
+}
+
+.idea-preview__desc {
+    color: var(--text-soft);
+    font-size: var(--text-base);
+    line-height: 1.55;
+}
+
+.idea-preview__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-1);
+}
+.idea-preview__meta-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.idea-preview__stones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.idea-preview__stone {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px 4px 4px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    color: var(--text-soft);
+}
+.idea-preview__stone canvas {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+}
+
+.idea-preview__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.idea-preview__tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: var(--bg-elev-2);
+    border-radius: 999px;
+}
+
+.idea-preview__like {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: var(--space-2);
+    padding: 9px 18px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-soft);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition:
+        color var(--dur-md) var(--ease-out),
+        border-color var(--dur-md) var(--ease-out),
+        background var(--dur-md) var(--ease-out),
+        transform var(--dur-xs) var(--ease-out);
+}
+.idea-preview__like:hover { color: var(--accent); border-color: var(--accent); }
+.idea-preview__like:active { transform: scale(0.96); }
+.idea-preview__like.is-active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
 /* --- Адаптив ------------------------------------------------ */
 
 @media (max-width: 980px) {
@@ -122,6 +312,11 @@
     .filter-row { flex-direction: column; gap: 8px; }
     .filter-row__label { width: auto; padding-top: 0; }
     .feed-controls { flex-direction: column; align-items: stretch; }
+    .idea-preview {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+    }
+    .idea-preview__visual { max-width: 320px; margin: 0 auto; }
 }
 
 @media (max-width: 540px) {
