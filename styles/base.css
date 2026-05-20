@@ -83,13 +83,19 @@ a:hover { color: var(--accent); }
     }
 }
 
-/* --- Типографические утилиты ----------------------------------- */
+/* --- Типографические утилиты v2 -------------------------------- *
+ * Гармонизированный type-scale. Заголовки используют text-wrap:
+ * balance — браузер сам распределяет слова по строкам без «сирот»
+ * (одиноких слов на последней строке). Параграфы — text-wrap:
+ * pretty для аккуратного финального ряда.
+ * --------------------------------------------------------------- */
 
 .font-display {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.1;
+    text-wrap: balance;
 }
 
 .font-display em,
@@ -112,10 +118,35 @@ a:hover { color: var(--accent); }
 .soft  { color: var(--text-soft); }
 .accent{ color: var(--accent); }
 
-.h-1 { font-family: var(--font-display); font-size: clamp(40px, 6vw, var(--text-3xl)); line-height: 1.05; letter-spacing: -0.015em; }
-.h-2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, var(--text-2xl)); line-height: 1.1; letter-spacing: -0.01em; }
-.h-3 { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.2; }
-.h-4 { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.3; }
+/* Заголовки — fluid clamp() со сбалансированным переносом.
+ * Оптическая коррекция трекинга: чем крупнее кегль, тем плотнее. */
+.h-1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, var(--text-3xl));
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+.h-2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, var(--text-2xl));
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+}
+.h-3 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+.h-4 {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    line-height: 1.3;
+    text-wrap: balance;
+}
 
 .lead {
     font-family: var(--font-display);
@@ -123,7 +154,12 @@ a:hover { color: var(--accent); }
     font-size: var(--text-md);
     color: var(--text-soft);
     line-height: 1.55;
+    text-wrap: pretty;
+    max-width: 62ch;          /* оптимальная мера строки для читаемости */
 }
+
+/* Длинный body-текст — аккуратный перенос, без «сирот» */
+p { text-wrap: pretty; }
 
 /* --- Контейнер ------------------------------------------------- */
 
