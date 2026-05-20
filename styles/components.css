@@ -449,40 +449,54 @@ textarea.field {
 .avatar--xl { width: 120px; height: 120px; font-size: 32px; }
 
 /* =================================================================
- * IDEA-КАРТОЧКА (общий компонент для profile/inspiration)
+ * IDEA-КАРТОЧКА v2 — luxury collectible object
+ *
+ * Карточка ощущается как ювелирный артефакт: глубокая слоистая
+ * тень, мягкое внутреннее освещение визуала, premium hover-lift
+ * с приподнятием и золотым подсветом. Tilt сохранён (data-tilt).
  * ============================================================== */
 
 .idea-card {
     display: block;
     position: relative;
-    background: var(--bg-elev-1);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.015) 0%, transparent 40%),
+        var(--bg-elev-1);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     color: inherit;
     text-decoration: none;
+    /* Базовая тень — лёгкая, для отрыва от фона */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
     transform-style: preserve-3d;
     transform:
         perspective(1000px)
         rotateX(var(--tilt-x, 0deg))
         rotateY(var(--tilt-y, 0deg))
-        translateY(calc(var(--tilt-active, 0) * -4px));
+        translateY(calc(var(--tilt-active, 0) * -6px));
     transition:
-        transform var(--dur-mid) var(--ease-out),
-        border-color var(--dur-mid) var(--ease),
-        box-shadow var(--dur-mid) var(--ease-out);
+        transform var(--dur-md) var(--ease-out-quint),
+        border-color var(--dur-md) var(--ease-out),
+        box-shadow var(--dur-lg) var(--ease-out-quint);
     will-change: transform;
 }
 .idea-card:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md), var(--shadow-accent);
+    border-color: rgba(217, 184, 121, 0.32);
+    box-shadow:
+        0 24px 56px rgba(0, 0, 0, 0.42),
+        0 8px 20px rgba(0, 0, 0, 0.28),
+        0 0 32px rgba(217, 184, 121, 0.10);
     color: inherit;
 }
 
 .idea-card__visual {
     width: 100%;
     aspect-ratio: 1;
-    background: radial-gradient(circle at 50% 50%, #161219 0%, #06060A 75%);
+    /* Многослойный фон: тёплое центральное свечение + глубокий винётинг */
+    background:
+        radial-gradient(circle at 50% 42%, rgba(217, 184, 121, 0.07) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, #181318 0%, #07070B 78%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -490,35 +504,56 @@ textarea.field {
     position: relative;
     overflow: hidden;
 }
-.idea-card__visual canvas { width: 100%; height: 100%; }
+.idea-card__visual canvas {
+    width: 100%; height: 100%;
+    position: relative;
+    z-index: 1;
+    transition: transform var(--dur-xl) var(--ease-out-quint);
+}
+/* При hover браслет внутри карточки чуть приближается */
+.idea-card:hover .idea-card__visual canvas { transform: scale(1.045); }
+
+/* Винётка по краям визуала — собирает взгляд к центру */
+.idea-card__visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
 
 /* Glare-блик при tilt — лёгкий, не «дешёвый» */
 .idea-card__visual::after {
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 3;
     background: radial-gradient(circle at
         calc(50% + var(--tilt-shift-x, 0px) * 4)
         calc(50% + var(--tilt-shift-y, 0px) * 4),
-        rgba(255,255,255,0.06) 0%,
-        transparent 35%);
+        rgba(255,255,255,0.08) 0%,
+        transparent 38%);
     opacity: var(--tilt-active, 0);
     pointer-events: none;
-    transition: opacity var(--dur-mid) var(--ease);
+    transition: opacity var(--dur-md) var(--ease);
 }
 
 .idea-card__body {
-    padding: var(--space-4) var(--space-5) var(--space-5);
+    padding: var(--space-5) var(--space-5) var(--space-5);
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
 }
 
 .idea-card__title {
     font-family: var(--font-display);
-    font-size: var(--text-md);
-    line-height: 1.25;
+    font-size: var(--text-lg);
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    transition: color var(--dur-md) var(--ease-out);
 }
+.idea-card:hover .idea-card__title { color: var(--accent); }
 
 /* Sub-строка скрыта по умолчанию — у нас минимализм */
 .idea-card__sub {
@@ -530,10 +565,12 @@ textarea.field {
     color: var(--text-muted);
     font-size: var(--text-xs);
 }
-.idea-card__author .avatar { width: 22px; height: 22px; font-size: 9px; }
+.idea-card__author .avatar { width: 24px; height: 24px; font-size: 9px; }
 
 .idea-card__badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -542,11 +579,27 @@ textarea.field {
 .idea-card__badge--draft { color: var(--text-faint); font-style: italic; }
 
 .idea-card__like {
-    display: inline-flex; align-items: center; gap: 4px;
+    display: inline-flex; align-items: center; gap: 5px;
     font-size: var(--text-xs);
     color: var(--text-soft);
+    padding: 6px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    transition:
+        color var(--dur-md) var(--ease-out),
+        border-color var(--dur-md) var(--ease-out),
+        background var(--dur-md) var(--ease-out),
+        transform var(--dur-xs) var(--ease-out);
 }
-.idea-card__like.is-active { color: var(--accent); }
+.idea-card__like:hover {
+    color: var(--accent);
+    border-color: var(--border-strong);
+}
+.idea-card__like:active { transform: scale(0.92); }
+.idea-card__like.is-active {
+    color: var(--accent);
+    background: var(--accent-soft);
+}
 
 /* =================================================================
  * PREMIUM CURSOR — золотая точка + кольцо с инерцией
@@ -641,8 +694,8 @@ body.cursor-on [data-tilt] {
     opacity: 0;
     pointer-events: none;
     transition:
-        transform var(--dur-mid) var(--ease-out),
-        opacity var(--dur-mid) var(--ease-out);
+        transform var(--dur-lg) var(--ease-out-quint),
+        opacity var(--dur-md) var(--ease-out);
 }
 .idea-card:hover .idea-card__overlay {
     transform: translateY(0);
@@ -651,9 +704,11 @@ body.cursor-on [data-tilt] {
 
 .idea-card__overlay-info {
     display: flex;
-    gap: var(--space-3);
+    align-items: center;
+    gap: var(--space-2);
     font-size: 11px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-soft);
 }
 

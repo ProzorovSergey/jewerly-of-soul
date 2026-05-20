@@ -166,47 +166,57 @@
 
 .stone-card {
     position: relative;
-    background: var(--bg-elev-1);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.015) 0%, transparent 40%),
+        var(--bg-elev-1);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     padding: var(--space-7);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
     cursor: default;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.20);
     transform-style: preserve-3d;
     transform:
         perspective(900px)
         rotateX(var(--tilt-x, 0deg))
         rotateY(var(--tilt-y, 0deg))
-        translateY(calc(var(--tilt-active, 0) * -4px));
+        translateY(calc(var(--tilt-active, 0) * -6px));
     transition:
-        transform var(--dur-mid) var(--ease-out),
-        border-color var(--dur-mid) var(--ease),
-        box-shadow var(--dur-mid) var(--ease-out);
+        transform var(--dur-md) var(--ease-out-quint),
+        border-color var(--dur-md) var(--ease-out),
+        box-shadow var(--dur-lg) var(--ease-out-quint);
     will-change: transform;
 }
 
 .stone-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-md);
+    border-color: rgba(217, 184, 121, 0.28);
+    box-shadow:
+        0 22px 52px rgba(0, 0, 0, 0.40),
+        0 6px 18px rgba(0, 0, 0, 0.26),
+        0 0 28px rgba(217, 184, 121, 0.08);
 }
 
 /* Рамка и свечение для редких камней */
 .stone-card.is-rare {
     background:
-        linear-gradient(135deg, rgba(217, 184, 121, 0.07) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(217, 184, 121, 0.09) 0%, transparent 65%),
         var(--bg-elev-1);
     border-color: rgba(217, 184, 121, 0.35);
-    box-shadow: 0 0 0 1px rgba(217, 184, 121, 0.1) inset,
-                0 12px 40px rgba(217, 184, 121, 0.06);
+    box-shadow:
+        0 0 0 1px rgba(217, 184, 121, 0.12) inset,
+        0 12px 40px rgba(217, 184, 121, 0.07),
+        0 2px 12px rgba(0, 0, 0, 0.20);
 }
 
 .stone-card.is-rare:hover {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px rgba(217, 184, 121, 0.18) inset,
-                0 20px 60px rgba(217, 184, 121, 0.12);
+    box-shadow:
+        0 0 0 1px rgba(217, 184, 121, 0.22) inset,
+        0 24px 60px rgba(217, 184, 121, 0.16),
+        0 8px 20px rgba(0, 0, 0, 0.30);
 }
 
 /* "rare" значок в углу */

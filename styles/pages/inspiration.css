@@ -89,23 +89,21 @@
     flex-wrap: wrap;
 }
 
-.idea-card__like {
-    padding: 6px 12px 6px 10px;
-    background: var(--bg-elev-2);
-    border-radius: 999px;
-    border: 1px solid transparent;
-    transition: border-color var(--dur-mid) var(--ease), color var(--dur-mid) var(--ease);
-}
-.idea-card__like:hover { border-color: var(--border-strong); }
-.idea-card__like.is-active { color: var(--accent); border-color: rgba(217, 184, 121, 0.4); }
+/* .idea-card__like — стили полностью в components.css (idea-card v2) */
 
 .feed-card__tag {
     font-size: 11px;
     color: var(--text-muted);
-    padding: 3px 9px;
+    padding: 4px 10px;
     background: var(--bg-elev-2);
+    border: 1px solid var(--border);
     border-radius: 999px;
     letter-spacing: 0.04em;
+    transition: border-color var(--dur-md) var(--ease-out), color var(--dur-md) var(--ease-out);
+}
+.idea-card:hover .feed-card__tag {
+    border-color: var(--border-strong);
+    color: var(--text-soft);
 }
 
 .empty-note {
