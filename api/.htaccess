@@ -1,0 +1,7 @@
+# Защита служебных файлов backend от прямого скачивания.
+# PHP-файлы выполняются сервером и наружу не отдаются — а вот
+# .sql и .md лучше закрыть явно.
+<FilesMatch "\.(sql|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

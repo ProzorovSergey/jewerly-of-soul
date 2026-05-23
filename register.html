@@ -19,10 +19,10 @@
     <meta property="og:image" content="assets/og-image.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:title" content="Регистрация · Jewerly of Soul">
-    <meta property="og:description" content="Создать аккаунт Jewerly of Soul, сохранять и публиковать идеи браслетов.">
+    <meta property="og:description" content="Создать аккаунт Jewerly of Soul, сохранять идеи браслетов и отслеживать заявки.">
     <meta property="og:locale" content="ru_RU">
     <meta name="twitter:title" content="Регистрация · Jewerly of Soul">
-    <meta name="twitter:description" content="Создать аккаунт Jewerly of Soul, сохранять и публиковать идеи браслетов.">
+    <meta name="twitter:description" content="Создать аккаунт Jewerly of Soul, сохранять идеи браслетов и отслеживать заявки.">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/components.css">
@@ -38,7 +38,7 @@
             <div class="auth-card" data-reveal>
                 <p class="eyebrow">регистрация</p>
                 <h1 class="h-2">Создайте аккаунт.</h1>
-                <p class="lead">Чтобы сохранять идеи и публиковать их в сообществе.</p>
+                <p class="lead">Чтобы сохранять идеи, оформлять заявки и следить за их статусом.</p>
 
                 <form id="registerForm" class="auth-form" novalidate>
                     <div>
@@ -46,23 +46,22 @@
                         <input class="field" id="displayName" name="displayName" required placeholder="например, Сергей">
                     </div>
                     <div>
-                        <label class="field-label" for="username">Логин *</label>
-                        <input class="field" id="username" name="username" required autocomplete="username" placeholder="латиницей, без пробелов">
-                        <p class="auth-form__hint">3+ символов, только латиница, цифры, _ . -</p>
+                        <label class="field-label" for="email">E-mail *</label>
+                        <input class="field" type="email" id="email" name="email" required autocomplete="email" placeholder="вы@почта.ру">
                     </div>
                     <div>
                         <label class="field-label" for="password">Пароль *</label>
                         <input class="field" type="password" id="password" name="password" required autocomplete="new-password" placeholder="не короче 6 символов">
                     </div>
+                    <label class="auth-consent">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <span>Я соглашаюсь на обработку моих персональных данных в соответствии с <a href="privacy.html" class="accent" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
+                    </label>
                     <button type="submit" class="btn btn--primary btn--block">Создать аккаунт</button>
                     <p class="auth-form__alt">
                         Уже есть аккаунт? <a href="login.html" class="accent">Войти.</a>
                     </p>
                 </form>
-                <p class="auth-form__hint" style="margin-top:24px">
-                    Данные хранятся локально в браузере. При смене браузера или после очистки кэша аккаунт нужно создать заново.
-                    Это намеренно — пока проект работает без серверной базы.
-                </p>
             </div>
         </div>
     </main>

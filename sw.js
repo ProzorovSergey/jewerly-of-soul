@@ -12,7 +12,7 @@
  * Версионирование: при изменении CACHE_VERSION старые caches удаляются.
  */
 
-const CACHE_VERSION = 'jos-v2-6-polish';
+const CACHE_VERSION = 'jos-v3-1-feed';
 const STATIC_CACHE  = `${CACHE_VERSION}-static`;
 const STONES_CACHE  = `${CACHE_VERSION}-stones`;
 const DATA_CACHE    = `${CACHE_VERSION}-data`;
@@ -31,6 +31,7 @@ const PRECACHE_URLS = [
     './profile.html',
     './idea.html',
     './create-idea.html',
+    './privacy.html',
     './manifest.webmanifest',
     './assets/favicon.svg',
     './assets/og-image.svg',
@@ -79,6 +80,10 @@ self.addEventListener('fetch', event => {
 
     // Игнорируем cross-origin (POST, чужие домены и т.д.)
     if (url.origin !== self.location.origin) return;
+
+    // Запросы к backend (/api/...) — всегда напрямую в сеть, без кэша.
+    // Иначе ответы login/orders могли бы отдаваться устаревшими.
+    if (url.pathname.includes('/api/')) return;
 
     // assets/stones/*.png — cache-first, долго живут
     if (url.pathname.startsWith('/') && url.pathname.includes('/assets/stones/') && url.pathname.endsWith('.png')) {

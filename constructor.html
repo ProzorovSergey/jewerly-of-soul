@@ -162,6 +162,9 @@
                         <button class="btn btn--ghost btn--sm" id="clearBtn">Очистить</button>
                         <button class="btn btn--ghost btn--sm" id="randomBtn">Случайно</button>
                     </div>
+                    <p class="panel__hint" style="text-align:center; margin-top:10px">
+                        Камень на браслете можно перетащить — порядок в композиции изменится.
+                    </p>
                 </section>
 
                 <!-- ---------- ПРАВАЯ: состав ---------- -->
@@ -188,21 +191,21 @@
                     </section>
 
                     <section class="panel__section panel__section--actions">
-                        <button id="saveBtn" class="btn btn--primary btn--block" disabled>
+                        <button id="sendBtn" class="btn btn--primary btn--block" disabled>
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            Оформить заявку
+                        </button>
+                        <button id="saveBtn" class="btn btn--ghost btn--block" style="margin-top:10px" disabled>
                             <svg class="icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
                             Сохранить идею
-                        </button>
-                        <button id="sendBtn" class="btn btn--ghost btn--block" style="margin-top:10px" disabled>
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                            Отправить мастеру
                         </button>
                         <button id="downloadBtn" class="btn btn--ghost btn--block" style="margin-top:10px" disabled>
                             <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
                             Скачать изображение
                         </button>
                         <p class="panel__hint" style="margin-top:14px">
-                            «Скачать» сохранит PNG-превью. «Отправить» откроет почту с готовым письмом —
-                            не забудьте приложить картинку.
+                            «Оформить заявку» отправит вашу композицию мастеру — с вами свяжутся по
+                            указанному контакту. «Скачать» сохранит PNG-превью браслета.
                         </p>
                     </section>
 

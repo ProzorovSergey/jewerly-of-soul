@@ -9,13 +9,14 @@ import { loadStones, findStone } from '../core/database.js';
 import { generateStoneTexture, preloadAlbedos, onAlbedoReady } from '../core/stoneGenerator.js';
 import {
     renderBracelet,
+    computeBraceletLayout,
     canAddStone,
     totalStoneLength,
-    serializeBracelet,
 } from '../core/bracelet.js';
-import { exportPNG, exportCard, buildMailto } from '../core/exporter.js';
+import { exportPNG, exportCard } from '../core/exporter.js';
 import * as auth from '../services/authService.js';
 import * as ideas from '../services/ideaService.js';
+import * as orderService from '../services/orderService.js';
 import * as ai from '../services/aiService.js';
 import { toast } from '../ui/toast.js';
 import { openModal } from '../ui/modal.js';
@@ -37,6 +38,8 @@ const state = {
         stones: [],
     },
     history: [],
+    selectedIndex: null,        // выделенная бусина на браслете
+    drag: null,                 // { stone, x, y, moved } во время перетаскивания
 };
 
 const HISTORY_LIMIT = 40;
@@ -53,6 +56,7 @@ function undo() {
     const snap = state.history.pop();
     if (!snap) return;
     state.bracelet = snap;
+    state.selectedIndex = null;
     syncLengthUI();
     renderSequence();
     renderEnergy();
@@ -117,6 +121,7 @@ async function init() {
     setupSearch();
     setupActions();
     setupShortcuts();
+    setupCanvasInteraction();
 
     syncLengthUI();
     renderPalette();
@@ -168,7 +173,13 @@ function resizeCanvasForRetina() {
 }
 
 function redraw() {
-    renderBracelet(els.canvas, state.bracelet, { showGuide: true });
+    const opts = { showGuide: true };
+    if (state.selectedIndex != null) opts.selectedIndex = state.selectedIndex;
+    if (state.drag) {
+        const di = state.bracelet.stones.indexOf(state.drag.stone);
+        if (di >= 0) opts.drag = { index: di, x: state.drag.x, y: state.drag.y };
+    }
+    renderBracelet(els.canvas, state.bracelet, opts);
     updateMeta();
     updateButtons();
 }
@@ -349,6 +360,7 @@ function removeStone(index) {
     if (index < 0 || index >= state.bracelet.stones.length) return;
     pushHistory();
     state.bracelet.stones.splice(index, 1);
+    state.selectedIndex = null;
     renderSequence();
     renderEnergy();
     redraw();
@@ -358,6 +370,7 @@ function clearAll() {
     if (!state.bracelet.stones.length) return;
     pushHistory();
     state.bracelet.stones = [];
+    state.selectedIndex = null;
     renderSequence();
     renderEnergy();
     redraw();
@@ -366,6 +379,7 @@ function clearAll() {
 function randomFill() {
     pushHistory();
     state.bracelet.stones = [];
+    state.selectedIndex = null;
     const max = maxStonesAtCurrentSize();
     const pool = state.catalogue;
     for (let i = 0; i < max; i++) {
@@ -472,12 +486,7 @@ function setupActions() {
         toast.success('Карточка сохранена в загрузки');
     });
 
-    els.sendBtn.addEventListener('click', async () => {
-        if (!state.bracelet.stones.length) return;
-        const data = serializeBracelet(state.bracelet);
-        await exportCard(state.bracelet, { prefix: 'jewerly-of-soul' });
-        setTimeout(() => { window.location.href = buildMailto(data); }, 300);
-    });
+    els.sendBtn.addEventListener('click', onSendOrder);
 
     // Сохранить как идею (требует авторизации)
     if (els.saveBtn) {
@@ -488,6 +497,94 @@ function setupActions() {
     if (els.aiBtn) {
         els.aiBtn.addEventListener('click', onAiDescribe);
     }
+}
+
+/** Оформление заявки на сборку браслета. */
+async function onSendOrder() {
+    if (!state.bracelet.stones.length) return;
+    const me = await auth.getCurrentUser();
+
+    const composition = state.bracelet.stones.map(s => ({
+        id: s.stoneId,
+        name: s.stone.name,
+        size: s.size,
+    }));
+    const beads = composition.length;
+    const lengthCm = state.bracelet.length / 10;
+
+    openModal({
+        title: 'Оформление заявки',
+        body: `
+            <div style="display:flex; flex-direction:column; gap:14px">
+                <p class="muted" style="font-size:13px; margin:-4px 0 2px; line-height:1.5">
+                    Композиция: ${beads} ${plural(beads, 'бусина', 'бусины', 'бусин')}, длина ${lengthCm} см.
+                    Мастер свяжется с вами, чтобы уточнить детали и цену.
+                </p>
+                <div>
+                    <label class="field-label" for="ordName">Как к вам обращаться *</label>
+                    <input class="field" id="ordName" placeholder="Имя" value="${escapeAttr(me ? me.displayName : '')}">
+                </div>
+                <div>
+                    <label class="field-label" for="ordMethod">Способ связи</label>
+                    <select class="field" id="ordMethod">
+                        <option value="telegram">Telegram</option>
+                        <option value="phone">Телефон</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="vk">ВКонтакте</option>
+                        <option value="email">E-mail</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="field-label" for="ordContact">Контакт для связи *</label>
+                    <input class="field" id="ordContact" placeholder="@ник, телефон или почта" value="${escapeAttr(me && me.email ? me.email : '')}">
+                </div>
+                <div>
+                    <label class="field-label" for="ordComment">Комментарий к заказу</label>
+                    <textarea class="field" id="ordComment" placeholder="Пожелания по цвету, поводу, срокам…"></textarea>
+                </div>
+                <label style="display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--text-soft); line-height:1.5">
+                    <input type="checkbox" id="ordConsent" style="margin-top:2px; width:18px; height:18px; accent-color:var(--accent); flex-shrink:0">
+                    <span>Я согласен на обработку персональных данных в соответствии с
+                        <a href="privacy.html" target="_blank" rel="noopener" class="accent">политикой конфиденциальности</a>.</span>
+                </label>
+            </div>
+        `,
+        buttons: [
+            { label: 'Отмена', kind: 'ghost', onClick: ({ close }) => close() },
+            { label: 'Отправить заявку', kind: 'primary', onClick: async ({ root, close }) => {
+                const contactName   = root.querySelector('#ordName').value.trim();
+                const contactMethod = root.querySelector('#ordMethod').value;
+                const contactValue  = root.querySelector('#ordContact').value.trim();
+                const comment       = root.querySelector('#ordComment').value.trim();
+                const consent       = root.querySelector('#ordConsent').checked;
+
+                if (!contactName)  { toast.error('Укажите, как к вам обращаться'); return; }
+                if (!contactValue) { toast.error('Укажите контакт для связи'); return; }
+                if (!consent)      { toast.error('Подтвердите согласие на обработку данных'); return; }
+
+                try {
+                    const order = await orderService.create({
+                        contactName, contactMethod, contactValue, comment, consent,
+                        composition,
+                        braceletLength: state.bracelet.length,
+                    });
+                    close();
+                    toast.success(`Заявка ${order.publicCode} принята! Мастер свяжется с вами.`);
+                } catch (e) {
+                    toast.error(e.message || 'Не получилось отправить заявку');
+                }
+            } },
+        ],
+    });
+}
+
+/** Русская форма множественного числа: plural(n,'бусина','бусины','бусин'). */
+function plural(n, one, few, many) {
+    const m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+    return many;
 }
 
 async function onSaveIdea() {
@@ -598,6 +695,110 @@ function escapeHtml(s) {
 }
 function escapeAttr(s) { return escapeHtml(s).replace(/`/g, '&#96;'); }
 
+// =================================================================
+// ВЫБОР И ПЕРЕТАСКИВАНИЕ КАМНЕЙ НА БРАСЛЕТЕ
+// =================================================================
+
+function setupCanvasInteraction() {
+    const canvas = els.canvas;
+    canvas.style.touchAction = 'none';   // не скроллить страницу при перетаскивании
+    canvas.style.cursor = 'grab';
+
+    let rafPending = false;
+    const scheduleRedraw = () => {
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => { rafPending = false; redraw(); });
+    };
+
+    function pointerPos(e) {
+        const r = canvas.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    function beadAt(pos) {
+        const layout = computeBraceletLayout(canvas, state.bracelet);
+        // ищем с конца — позже нарисованные бусины «выше»
+        for (let i = layout.beads.length - 1; i >= 0; i--) {
+            const b = layout.beads[i];
+            const dx = pos.x - b.x, dy = pos.y - b.y;
+            const r = b.radius + 3;
+            if (dx * dx + dy * dy <= r * r) return b;
+        }
+        return null;
+    }
+
+    canvas.addEventListener('pointerdown', e => {
+        const pos = pointerPos(e);
+        const bead = beadAt(pos);
+        if (!bead) {
+            if (state.selectedIndex != null) { state.selectedIndex = null; redraw(); }
+            return;
+        }
+        state.selectedIndex = bead.index;
+        state.drag = { stone: state.bracelet.stones[bead.index], x: pos.x, y: pos.y, moved: false };
+        canvas.style.cursor = 'grabbing';
+        try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
+        redraw();
+    });
+
+    canvas.addEventListener('pointermove', e => {
+        const pos = pointerPos(e);
+        if (!state.drag) {
+            canvas.style.cursor = beadAt(pos) ? 'grab' : 'default';
+            return;
+        }
+        if (!state.drag.moved) { pushHistory(); state.drag.moved = true; }
+        state.drag.x = pos.x;
+        state.drag.y = pos.y;
+        reorderByPointer(pos);
+        scheduleRedraw();
+    });
+
+    function endDrag(e) {
+        if (!state.drag) return;
+        const moved = state.drag.moved;
+        state.drag = null;
+        canvas.style.cursor = 'grab';
+        try { canvas.releasePointerCapture(e.pointerId); } catch (_) { /* noop */ }
+        redraw();
+        if (moved) renderSequence();
+    }
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+}
+
+/** Переставить перетаскиваемую бусину к ближайшему по углу слоту. */
+function reorderByPointer(pos) {
+    const stones = state.bracelet.stones;
+    if (stones.length < 2 || !state.drag) return;
+
+    const layout = computeBraceletLayout(els.canvas, state.bracelet);
+    const ptrAngle = Math.atan2(pos.y - layout.cy, pos.x - layout.cx);
+
+    let target = -1, best = Infinity;
+    for (const b of layout.beads) {
+        const d = angDist(ptrAngle, b.centerAngle);
+        if (d < best) { best = d; target = b.index; }
+    }
+
+    const from = stones.indexOf(state.drag.stone);
+    if (from < 0 || target < 0 || from === target) {
+        if (from >= 0) state.selectedIndex = from;
+        return;
+    }
+    stones.splice(from, 1);
+    stones.splice(target, 0, state.drag.stone);
+    state.selectedIndex = stones.indexOf(state.drag.stone);
+}
+
+/** Кратчайшее угловое расстояние между двумя углами (рад). */
+function angDist(a, b) {
+    let d = Math.abs(a - b) % (Math.PI * 2);
+    if (d > Math.PI) d = Math.PI * 2 - d;
+    return d;
+}
+
 function setupShortcuts() {
     document.addEventListener('keydown', e => {
         const inField = e.target.closest('input, textarea');
@@ -608,7 +809,12 @@ function setupShortcuts() {
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
             if (state.bracelet.stones.length) {
                 pushHistory();
-                state.bracelet.stones.pop();
+                if (state.selectedIndex != null && state.selectedIndex < state.bracelet.stones.length) {
+                    state.bracelet.stones.splice(state.selectedIndex, 1);
+                } else {
+                    state.bracelet.stones.pop();
+                }
+                state.selectedIndex = null;
                 renderSequence();
                 renderEnergy();
                 redraw();

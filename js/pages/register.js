@@ -9,15 +9,21 @@ const form = document.getElementById('registerForm');
 form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = new FormData(form);
-    const username    = (data.get('username') || '').toString().trim();
+    const email       = (data.get('email') || '').toString().trim();
     const password    = (data.get('password') || '').toString();
     const displayName = (data.get('displayName') || '').toString().trim();
+    const consent     = !!data.get('consent');
+
+    if (!consent) {
+        toast.error('Подтвердите согласие на обработку персональных данных');
+        return;
+    }
 
     const btn = form.querySelector('button[type=submit]');
     btn.disabled = true;
     btn.textContent = 'Создаю…';
     try {
-        await auth.register({ username, password, displayName });
+        await auth.register({ email, password, displayName, consent });
         toast.success('Аккаунт создан');
         setTimeout(() => location.href = 'profile.html', 300);
     } catch (err) {

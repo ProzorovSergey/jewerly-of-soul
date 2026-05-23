@@ -43,6 +43,29 @@
 
 .auth-form__alt a { border-bottom: 1px solid currentColor; }
 
+/* --- Согласие на обработку персональных данных --------------- */
+
+.auth-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.auth-consent input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.auth-consent a { border-bottom: 1px solid currentColor; }
+
 @media (max-width: 540px) {
     .auth-card { padding: 32px 24px; }
 }

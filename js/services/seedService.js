@@ -9,11 +9,15 @@
 import * as storage from '../core/userStorage.js';
 import * as authApiLocal from '../api/local/authApi.js';
 import * as ideaApiLocal from '../api/local/ideaApi.js';
+import { USE_BACKEND } from '../api/index.js';
 
 const SEED_URL = './data/community.seed.json';
 
 /** Засеять локальную базу seed-данными (если ещё не засеяна). */
 export async function ensureSeed() {
+    // На боевом домене лента сообщества наполняется из базы данных —
+    // локальный засев в localStorage не нужен.
+    if (USE_BACKEND) return;
     if (storage.isSeedLoaded()) return;
     try {
         const res = await fetch(SEED_URL, { cache: 'no-cache' });

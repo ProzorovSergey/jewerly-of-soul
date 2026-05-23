@@ -41,7 +41,7 @@ const BOTTOM_NAV = [
       label: 'Связь' },
 ];
 
-const PROTECTED_PAGES = new Set(['profile', 'create-idea']);
+const PROTECTED_PAGES = new Set(['profile', 'create-idea', 'admin']);
 
 /** Заполнить шапку и подвал. */
 export async function mountLayout() {

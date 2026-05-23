@@ -9,11 +9,11 @@ const form = document.getElementById('loginForm');
 form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = new FormData(form);
-    const username = (data.get('username') || '').toString().trim();
+    const email    = (data.get('email') || '').toString().trim();
     const password = (data.get('password') || '').toString();
 
-    if (!username || !password) {
-        toast.error('Заполните логин и пароль');
+    if (!email || !password) {
+        toast.error('Заполните почту и пароль');
         return;
     }
 
@@ -21,7 +21,7 @@ form.addEventListener('submit', async e => {
     btn.disabled = true;
     btn.textContent = 'Вхожу…';
     try {
-        await auth.login({ username, password });
+        await auth.login({ email, password });
         toast.success('С возвращением!');
         const params = new URLSearchParams(location.search);
         const ret = params.get('return') || 'profile.html';

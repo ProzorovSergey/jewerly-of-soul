@@ -1,8 +1,12 @@
 /**
- * authApi.js
+ * local/authApi.js
  * ----------------------------------------------------------------
- * Реализация AuthAPI поверх localStorage.
- * Хранит пользователей в ключе 'users' и текущую сессию в 'session'.
+ * Реализация AuthAPI поверх localStorage — для предпросмотра без
+ * backend (localhost / GitHub Pages). Вход по e-mail, как и в
+ * remote-версии: контракты local и remote совпадают.
+ *
+ * `username` — производный логин (из e-mail), нужен для
+ * совместимости с лентой сообщества и seed-данными.
  *
  * См. AuthAPI в js/api/interfaces.js
  */
@@ -25,19 +29,33 @@ function generateAvatar(displayName) {
     return (parts[0][0] + parts[1][0]).toUpperCase();
 }
 
-/** Зарегистрировать нового пользователя. */
-export async function register({ username, password, displayName }) {
-    username = (username || '').trim().toLowerCase();
-    displayName = (displayName || '').trim();
+/** Подобрать свободный username на основе e-mail. */
+function deriveUsername(users, email) {
+    let base = (email.split('@')[0] || '').toLowerCase().replace(/[^a-z0-9_.-]/g, '');
+    if (base.length < 3) base = 'user' + base;
+    base = base.slice(0, 50);
+    let candidate = base;
+    let n = 1;
+    while (users.some(u => u.username === candidate)) {
+        n++;
+        candidate = base + n;
+    }
+    return candidate;
+}
 
-    if (username.length < 3) throw new Error('Логин должен быть не короче 3 символов');
-    if (!/^[a-z0-9_.-]+$/.test(username)) throw new Error('Логин может содержать только латиницу, цифры, _ . -');
+/** Зарегистрировать нового пользователя. */
+export async function register({ email, password, displayName }) {
+    email = (email || '').trim().toLowerCase();
+    displayName = (displayName || '').trim();
+    password = password || '';
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Введите корректный e-mail');
     if (password.length < 6) throw new Error('Пароль должен быть не короче 6 символов');
-    if (displayName.length < 1) throw new Error('Укажите имя пользователя');
+    if (displayName.length < 1) throw new Error('Укажите имя');
 
     const users = readUsers();
-    if (users.some(u => u.username === username)) {
-        throw new Error('Логин уже занят');
+    if (users.some(u => (u.email || '').toLowerCase() === email)) {
+        throw new Error('Пользователь с такой почтой уже зарегистрирован');
     }
 
     const salt = storage.makeSalt();
@@ -45,9 +63,11 @@ export async function register({ username, password, displayName }) {
 
     const user = {
         id: storage.uid(),
-        username,
+        email,
+        username: deriveUsername(users, email),
         displayName,
         avatar: generateAvatar(displayName),
+        role: 'user',
         passwordHash,
         salt,
         createdAt: new Date().toISOString(),
@@ -65,14 +85,15 @@ export async function register({ username, password, displayName }) {
 }
 
 /** Войти. */
-export async function login({ username, password }) {
-    username = (username || '').trim().toLowerCase();
+export async function login({ email, password }) {
+    email = (email || '').trim().toLowerCase();
     const users = readUsers();
-    const user = users.find(u => u.username === username);
-    if (!user) throw new Error('Пользователь не найден');
+    const user = users.find(u => (u.email || '').toLowerCase() === email);
+    // Один и тот же текст ошибки — чтобы не подсказывать, что именно неверно.
+    if (!user) throw new Error('Неверная почта или пароль');
 
-    const ok = await storage.verifyPassword(password, user.salt, user.passwordHash);
-    if (!ok) throw new Error('Неверный пароль');
+    const ok = await storage.verifyPassword(password || '', user.salt, user.passwordHash);
+    if (!ok) throw new Error('Неверная почта или пароль');
 
     const session = await openSession(user);
     return { user, session };

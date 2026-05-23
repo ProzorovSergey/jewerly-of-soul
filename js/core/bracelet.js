@@ -15,10 +15,14 @@
  *   }
  *
  * Размещение:
- *   - каждый камень занимает дугу длиной = его диаметр,
- *   - сумма диаметров не должна превышать длины браслета,
- *   - визуально оставшееся расстояние распределяется как
- *     "нитка" между камнями.
+ *   - камни ложатся вплотную друг к другу по часовой стрелке
+ *     от верхней точки браслета (12 часов);
+ *   - каждый камень занимает дугу длиной = его диаметр;
+ *   - незаполненный остаток длины — пустая дуга «нити» в конце.
+ *
+ * Геометрия раскладки вынесена в computeBraceletLayout() — её
+ * использует и отрисовка, и конструктор (попадание курсора при
+ * выделении и перетаскивании камней).
  */
 
 import { generateStoneTexture } from './stoneGenerator.js';
@@ -44,49 +48,132 @@ export function remainingLength(stones, braceletLength) {
     return Math.max(0, braceletLength - totalStoneLength(stones));
 }
 
+/**
+ * Рассчитать раскладку браслета — положение каждой бусины на кольце.
+ * Все координаты — в CSS-пикселях canvas (та же система, что у
+ * pointer-событий после вычитания getBoundingClientRect).
+ *
+ * @returns {{ beads: Array, cx: number, cy: number, ringRadius: number }}
+ *   bead = { index, stone, x, y, displaySize, radius,
+ *            startAngle, centerAngle, endAngle }
+ */
+export function computeBraceletLayout(canvas, state) {
+    const W = canvas.clientWidth || canvas.width;
+    const H = canvas.clientHeight || canvas.height;
+    const cx = W / 2;
+    const cy = H / 2;
+
+    if (!state.stones.length) {
+        return { beads: [], cx, cy, ringRadius: 0 };
+    }
+
+    const circumference = state.length; // мм
+    const radiusMm = circumference / (2 * Math.PI);
+    const maxStoneMm = Math.max(...state.stones.map(s => s.size));
+    const padding = 24;
+    const availablePx = Math.min(W, H) / 2 - padding;
+    const pxPerMm = availablePx / (radiusMm + maxStoneMm / 2 + 2);
+    const ringRadius = radiusMm * pxPerMm;
+
+    let currentAngle = -Math.PI / 2; // верхняя точка (12 часов)
+    const beads = state.stones.map((stone, idx) => {
+        const stoneAngle = (stone.size / circumference) * Math.PI * 2;
+        const startAngle = currentAngle;
+        const centerAngle = currentAngle + stoneAngle / 2;
+        const endAngle = currentAngle + stoneAngle;
+        currentAngle = endAngle;
+
+        const displaySize = Math.max(10, stone.size * pxPerMm);
+        return {
+            index: idx,
+            stone,
+            x: cx + Math.cos(centerAngle) * ringRadius,
+            y: cy + Math.sin(centerAngle) * ringRadius,
+            displaySize,
+            radius: displaySize / 2,
+            startAngle,
+            centerAngle,
+            endAngle,
+        };
+    });
+
+    return { beads, cx, cy, ringRadius };
+}
+
 // =================================================================
 // ОТРИСОВКА БРАСЛЕТА
 // =================================================================
+
+/** Акцентный (золотой) цвет из CSS-переменной — для подсветки выбора. */
+function readAccent() {
+    try {
+        const v = getComputedStyle(document.documentElement)
+            .getPropertyValue('--accent').trim();
+        return v || '#D9B879';
+    } catch (_) {
+        return '#D9B879';
+    }
+}
+
+/** Нарисовать одну бусину (тень + текстура). */
+function drawBead(ctx, bead, x, y, displaySize, lifted) {
+    ctx.save();
+    ctx.shadowColor = lifted ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.55)';
+    ctx.shadowBlur = lifted ? Math.max(14, displaySize * 0.5) : Math.max(6, displaySize * 0.28);
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = lifted ? Math.max(6, displaySize * 0.18) : Math.max(2, displaySize * 0.08);
+    ctx.fillStyle = 'rgba(0,0,0,0.001)';
+    ctx.beginPath();
+    ctx.arc(x, y, displaySize / 2 - 1, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    const texture = generateStoneTexture(bead.stone.stone, displaySize, bead.index);
+    ctx.drawImage(
+        texture,
+        x - displaySize / 2,
+        y - displaySize / 2,
+        displaySize,
+        displaySize,
+    );
+}
+
+/** Нарисовать золотое кольцо-подсветку вокруг выделенной бусины. */
+function drawSelection(ctx, x, y, displaySize, accent) {
+    ctx.save();
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = accent;
+    ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.arc(x, y, displaySize / 2 + 5, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+}
 
 /**
  * Нарисовать браслет на canvas.
  *
  * @param {HTMLCanvasElement} canvas
- * @param {Object}   state            состояние браслета
- * @param {Number}   state.length     длина в мм
- * @param {Array}    state.stones     массив камней
+ * @param {Object}   state              состояние браслета
  * @param {Object}   [opts]
- * @param {Boolean}  [opts.showGuide] рисовать ли направляющую окружность
+ * @param {Boolean}  [opts.showGuide]   рисовать ли направляющую окружность
+ * @param {Number}   [opts.selectedIndex] индекс выделенной бусины
+ * @param {Object}   [opts.drag]        { index, x, y } — бусина рисуется у курсора
  */
 export function renderBracelet(canvas, state, opts = {}) {
     const ctx = canvas.getContext('2d');
 
-    // Работаем в CSS-пикселях. Если canvas увеличен под retina
-    // (canvas.width > clientWidth), применяем соответствующий масштаб.
-    // clientWidth == 0 означает, что canvas не в DOM (напр., рендерим
-    // на оффскрин-canvas в Node для тестов) — тогда используем
-    // canvas.width/height напрямую.
+    // Работаем в CSS-пикселях с учётом retina-масштаба canvas.
     const cssW = canvas.clientWidth || canvas.width;
     const cssH = canvas.clientHeight || canvas.height;
-    const scaleX = canvas.width / cssW;
-    const scaleY = canvas.height / cssH;
-    ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+    ctx.setTransform(canvas.width / cssW, 0, 0, canvas.height / cssH, 0, 0);
 
     const W = cssW;
     const H = cssH;
 
-    // Фон — глубокий тёмный с радиальным «свечением» в центре,
-    // как на референсных макетах Jewerly of Soul.
+    // --- Фон: радиальное свечение, цвет зависит от темы ---
     ctx.clearRect(0, 0, W, H);
-    // Цвета фона зависят от текущей темы — берём из CSS-переменной
-    // --bg-elev-1, чтобы холст браслета сливался с подиумом карточки
-    // в обеих темах. Падение — захардкоженный тёмный.
-    const cssBg = (() => {
-        try {
-            const v = getComputedStyle(document.documentElement).getPropertyValue('--bg-elev-1').trim();
-            return v || '#0E0E14';
-        } catch { return '#0E0E14'; }
-    })();
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     const bg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
     if (isLight) {
@@ -101,7 +188,7 @@ export function renderBracelet(canvas, state, opts = {}) {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    // Если нет камней — подсказка
+    // --- Пустой браслет — подсказка ---
     if (!state.stones.length) {
         ctx.fillStyle = 'rgba(217, 184, 121, 0.55)';
         ctx.font = 'italic 18px "Fraunces", serif';
@@ -111,21 +198,9 @@ export function renderBracelet(canvas, state, opts = {}) {
         return;
     }
 
-    // --- Геометрия ---
-    const circumference = state.length; // мм
-    const radiusMm = circumference / (2 * Math.PI);
-    const maxStoneMm = Math.max(...state.stones.map(s => s.size));
-    // Нужно вместить круг + шарики по краям.
-    // Доступный радиус в пикселях — половина меньшей стороны минус поля.
-    const padding = 24;
-    const availablePx = Math.min(W, H) / 2 - padding;
-    const pxPerMm = availablePx / (radiusMm + maxStoneMm / 2 + 2);
+    const layout = computeBraceletLayout(canvas, state);
 
-    const cx = W / 2;
-    const cy = H / 2;
-    const ringRadius = radiusMm * pxPerMm;
-
-    // --- Направляющая "нитка" — тонкая пунктирная окружность ---
+    // --- Направляющая "нитка" — пунктирная окружность ---
     if (opts.showGuide !== false) {
         ctx.save();
         ctx.strokeStyle = isLight
@@ -134,56 +209,36 @@ export function renderBracelet(canvas, state, opts = {}) {
         ctx.lineWidth = 1;
         ctx.setLineDash([2, 5]);
         ctx.beginPath();
-        ctx.arc(cx, cy, ringRadius, 0, Math.PI * 2);
+        ctx.arc(layout.cx, layout.cy, layout.ringRadius, 0, Math.PI * 2);
         ctx.stroke();
         ctx.restore();
     }
 
-    // --- Размещение камней ---
-    // Каждый камень получает угловую долю = size / circumference * 2π.
-    // Промежутки (если есть) уходят равномерно между камнями, чтобы
-    // реальный диаметр шарика визуально совпадал с занимаемой дугой.
-    const totalStonesMm = totalStoneLength(state.stones);
-    const gapMm = Math.max(0, circumference - totalStonesMm);
-    const gapPerStone = gapMm / state.stones.length; // размазываем поровну
+    const accent = readAccent();
+    const dragIndex = (opts.drag && typeof opts.drag.index === 'number') ? opts.drag.index : -1;
+    const selectedIndex = (typeof opts.selectedIndex === 'number') ? opts.selectedIndex : -1;
 
-    let currentAngle = -Math.PI / 2; // начинаем сверху
+    // --- Обычные бусины на своих местах ---
+    for (const bead of layout.beads) {
+        if (bead.index === dragIndex) continue; // её рисуем у курсора
+        drawBead(ctx, bead, bead.x, bead.y, bead.displaySize, false);
+    }
 
-    state.stones.forEach((stone, idx) => {
-        const arcMm = stone.size + gapPerStone;
-        const stoneAngle = (arcMm / circumference) * Math.PI * 2;
-        const center = currentAngle + stoneAngle / 2;
+    // --- Подсветка выделенной (но не перетаскиваемой) бусины ---
+    if (selectedIndex >= 0 && selectedIndex !== dragIndex) {
+        const b = layout.beads[selectedIndex];
+        if (b) drawSelection(ctx, b.x, b.y, b.displaySize, accent);
+    }
 
-        const x = cx + Math.cos(center) * ringRadius;
-        const y = cy + Math.sin(center) * ringRadius;
-
-        const displaySize = Math.max(10, stone.size * pxPerMm);
-
-        // Мягкая тень под шариком (на тёмном фоне делаем глубже)
-        ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
-        ctx.shadowBlur = Math.max(6, displaySize * 0.28);
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = Math.max(2, displaySize * 0.08);
-        ctx.fillStyle = 'rgba(0,0,0,0.001)';
-        ctx.beginPath();
-        ctx.arc(x, y, displaySize / 2 - 1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        // Текстура камня — используем idx как variant, чтобы одинаковые
-        // камни в разных позициях немного отличались.
-        const texture = generateStoneTexture(stone.stone, displaySize, idx);
-        ctx.drawImage(
-            texture,
-            x - displaySize / 2,
-            y - displaySize / 2,
-            displaySize,
-            displaySize,
-        );
-
-        currentAngle += stoneAngle;
-    });
+    // --- Перетаскиваемая бусина — поверх всех, у курсора, приподнята ---
+    if (dragIndex >= 0) {
+        const b = layout.beads[dragIndex];
+        if (b) {
+            const lifted = b.displaySize * 1.12;
+            drawBead(ctx, b, opts.drag.x, opts.drag.y, lifted, true);
+            drawSelection(ctx, opts.drag.x, opts.drag.y, lifted, accent);
+        }
+    }
 }
 
 // =================================================================

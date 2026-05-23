@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>(function(){try{var t=localStorage.getItem("auraline:v1:theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+    <meta name="robots" content="noindex">
+    <title>Заявки · Jewerly of Soul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#06060A">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/atmosphere.css">
+    <link rel="stylesheet" href="styles/pages/admin.css">
+</head>
+<body data-page="admin" data-atmosphere>
+
+    <header id="siteHeader"></header>
+
+    <main class="admin-page">
+        <div class="container">
+            <header class="admin-hero">
+                <p class="eyebrow">панель мастера</p>
+                <h1 class="h-2">Заявки</h1>
+                <p class="lead" id="adminSummary">Загрузка…</p>
+            </header>
+
+            <div class="admin-filters filter-chips" id="adminFilters" role="group" aria-label="фильтр по статусу">
+                <button class="chip is-active" data-status="">Все</button>
+                <button class="chip" data-status="new">Новые</button>
+                <button class="chip" data-status="accepted">Принятые</button>
+                <button class="chip" data-status="in_progress">В работе</button>
+                <button class="chip" data-status="done">Готовые</button>
+                <button class="chip" data-status="cancelled">Отменённые</button>
+            </div>
+
+            <div class="admin-list" id="adminList"></div>
+        </div>
+    </main>
+
+    <footer id="siteFooter"></footer>
+
+    <script type="module" src="js/ui/layout.js"></script>
+    <script type="module" src="js/pages/admin.js"></script>
+</body>
+</html>

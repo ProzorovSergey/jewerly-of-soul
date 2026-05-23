@@ -1,0 +1,141 @@
+/* =================================================================
+ * admin.css — панель управления заявками
+ * ================================================================= */
+
+.admin-page {
+    padding-block: 56px 100px;
+}
+
+.admin-hero { margin-bottom: 32px; }
+.admin-hero .h-2 { margin-top: 8px; }
+.admin-hero .lead { margin-top: 10px; }
+
+.admin-filters { margin-bottom: 28px; }
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 720px;
+}
+
+.admin-empty {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    padding: 36px 0;
+}
+
+/* --- Карточка заявки ----------------------------------------- */
+
+.order-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-card);
+}
+
+.order-card__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.order-card__code {
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.order-card__date {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    margin-left: auto;
+}
+
+.order-card__badge {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--text-soft);
+    white-space: nowrap;
+}
+.order-card__badge--new         { color: #E8C06A; border-color: rgba(232, 192, 106, 0.5); }
+.order-card__badge--accepted    { color: #7BA8C9; border-color: rgba(123, 168, 201, 0.5); }
+.order-card__badge--in_progress { color: #C99BE0; border-color: rgba(201, 155, 224, 0.5); }
+.order-card__badge--done        { color: #6FBF8E; border-color: rgba(111, 191, 142, 0.5); }
+.order-card__badge--cancelled   { color: var(--text-muted); }
+
+.order-card__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: var(--text-sm);
+    color: var(--text-soft);
+    margin-bottom: 8px;
+}
+.order-card__contact strong { color: var(--text); }
+
+.order-card__len {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.order-card__composition {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 12px;
+    padding: 0;
+}
+.order-card__composition li {
+    font-size: var(--text-xs);
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    color: var(--text-soft);
+}
+.order-card__mult { color: var(--accent); font-weight: 600; }
+
+.order-card__comment {
+    font-size: var(--text-sm);
+    color: var(--text-soft);
+    font-style: italic;
+    border-left: 2px solid var(--border-strong);
+    padding-left: 12px;
+    margin: 0 0 14px;
+}
+
+.order-card__admin {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+}
+.order-card__admin select { max-width: 170px; }
+.order-card__admin textarea {
+    flex: 1;
+    min-width: 200px;
+    min-height: 42px;
+    resize: vertical;
+}
+
+@media (max-width: 560px) {
+    .order-card__admin select,
+    .order-card__admin textarea {
+        flex-basis: 100%;
+        max-width: none;
+        width: 100%;
+    }
+}
