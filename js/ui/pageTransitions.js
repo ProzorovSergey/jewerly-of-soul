@@ -53,6 +53,9 @@ function init() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     document.addEventListener('click', e => {
+        // Если клик уже обработан (например, карточка ленты открыла
+        // превью-модалку и вызвала preventDefault) — не перехватываем.
+        if (e.defaultPrevented) return;
         const link = e.target.closest && e.target.closest('a[href]');
         if (!shouldIntercept(link, e)) return;
         e.preventDefault();

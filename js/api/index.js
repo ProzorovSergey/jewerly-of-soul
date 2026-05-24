@@ -9,7 +9,9 @@
  *  • На localhost и GitHub Pages, где backend нет, подключается
  *    локальная имитация на localStorage — папка ./local/*.
  *
- *  AI-ассистент пока всегда работает локально (mock на правилах).
+ *  AI-описание энергетики: на боевом домене его генерирует настоящая
+ *  нейросеть (backend → OpenAI) с откатом на правила; в предпросмотре —
+ *  локальный mock на правилах.
  *
  * Все остальные модули импортируют API только отсюда:
  *   import { authApi, orderApi, ideaApi, userApi, aiApi } from '../api/index.js';
@@ -20,12 +22,13 @@ import * as orderLocal  from './local/orderApi.js';
 import * as ideaLocal   from './local/ideaApi.js';
 import * as userLocal   from './local/userApi.js';
 
+import * as aiLocal    from './local/aiApi.js';
+
 import * as authRemote  from './remote/authApi.js';
 import * as orderRemote from './remote/orderApi.js';
 import * as ideaRemote  from './remote/ideaApi.js';
 import * as userRemote  from './remote/userApi.js';
-
-import * as aiApi from './local/aiApi.js';
+import * as aiRemote    from './remote/aiApi.js';
 
 /**
  * Есть ли у текущего домена backend.
@@ -45,5 +48,6 @@ const authApi  = USE_BACKEND ? authRemote  : authLocal;
 const orderApi = USE_BACKEND ? orderRemote : orderLocal;
 const ideaApi  = USE_BACKEND ? ideaRemote  : ideaLocal;
 const userApi  = USE_BACKEND ? userRemote  : userLocal;
+const aiApi    = USE_BACKEND ? aiRemote    : aiLocal;
 
 export { authApi, orderApi, ideaApi, userApi, aiApi };

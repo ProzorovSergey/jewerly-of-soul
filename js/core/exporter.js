@@ -8,7 +8,7 @@
  *   - JSON-сборка.
  */
 
-import { renderBracelet } from './bracelet.js';
+import { renderBracelet, groupStones } from './bracelet.js';
 import { generateStoneTexture } from './stoneGenerator.js';
 
 /** Сгенерировать имя файла с датой. */
@@ -109,7 +109,7 @@ export async function exportCard(bracelet, options = {}) {
     const tmpCanvas = document.createElement('canvas');
     tmpCanvas.width = BR_SIZE;
     tmpCanvas.height = BR_SIZE;
-    renderBracelet(tmpCanvas, bracelet, { showGuide: false });
+    renderBracelet(tmpCanvas, bracelet, { showGuide: false, layout: 'ring' });
     ctx.drawImage(tmpCanvas, brX, brY);
 
     // ---- Разделитель ----
@@ -119,6 +119,8 @@ export async function exportCard(bracelet, options = {}) {
 
     // ---- Заголовок «СОСТАВ» ----
     const stones = bracelet.stones || [];
+    // Группируем — «название × количество» вместо строки на каждую бусину.
+    const groups = groupStones(stones);
     ctx.fillStyle = '#8A847A';
     ctx.font = '500 13px "Manrope", system-ui, sans-serif';
     ctx.textAlign = 'left';
@@ -130,27 +132,37 @@ export async function exportCard(bracelet, options = {}) {
     const rowH = 48;
     const iconSize = 32;
 
-    // Для каждого камня рисуем строку: иконка | название | мета
-    stones.forEach((s, i) => {
+    // Для каждой группы камней рисуем строку: иконка | название ×N | мета
+    groups.forEach((g, i) => {
         const col = i % 2;
         const row = Math.floor(i / 2);
         const x = 60 + col * (colW + 30);
         const y = listTop + row * rowH;
 
         // Иконка камня (procedural; если PNG уже в кэше — drawImage возьмёт его)
-        const tex = generateStoneTexture(s.stone, iconSize, i);
+        const tex = generateStoneTexture(g.stone, iconSize, i);
         ctx.drawImage(tex, x, y, iconSize, iconSize);
 
         // Название
+        const nameX = x + iconSize + 14;
+        const nameText = truncate(g.name, 20);
         ctx.fillStyle = '#E8E4DD';
         ctx.font = '500 16px "Fraunces", "Times New Roman", serif';
         ctx.textAlign = 'left';
-        ctx.fillText(truncate(s.stone.name, 22), x + iconSize + 14, y + 20);
+        ctx.fillText(nameText, nameX, y + 20);
+
+        // Количество — золотом, сразу после названия
+        if (g.count > 1) {
+            const nameW = ctx.measureText(nameText).width;
+            ctx.fillStyle = '#D9B879';
+            ctx.font = '600 14px "Manrope", system-ui, sans-serif';
+            ctx.fillText(`×${g.count}`, nameX + nameW + 8, y + 20);
+        }
 
         // Мета (размер · стихия)
         ctx.fillStyle = '#8A847A';
         ctx.font = '400 12px "Manrope", system-ui, sans-serif';
-        ctx.fillText(`${s.size} мм · ${s.stone.element || ''}`, x + iconSize + 14, y + 38);
+        ctx.fillText(`${g.size} мм · ${g.element || ''}`, nameX, y + 38);
     });
 
     // ---- Подвал ----

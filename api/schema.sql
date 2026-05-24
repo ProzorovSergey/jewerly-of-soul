@@ -61,6 +61,25 @@ CREATE TABLE IF NOT EXISTS orders (
     KEY idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --- Токены восстановления пароля ------------------------------------
+CREATE TABLE IF NOT EXISTS password_resets (
+    token       CHAR(64)  NOT NULL,
+    user_id     CHAR(36)  NOT NULL,
+    created_at  DATETIME  NOT NULL,
+    expires_at  DATETIME  NOT NULL,
+    PRIMARY KEY (token),
+    KEY idx_user (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --- Анти-спам: журнал обращений для ограничения частоты -------------
+CREATE TABLE IF NOT EXISTS rate_limits (
+    id          BIGINT       NOT NULL AUTO_INCREMENT,
+    bucket      VARCHAR(120) NOT NULL,
+    created_at  DATETIME     NOT NULL,
+    PRIMARY KEY (id),
+    KEY idx_bucket (bucket, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- --- Идеи сообщества -------------------------------------------------
 CREATE TABLE IF NOT EXISTS ideas (
     id                 CHAR(36)     NOT NULL,

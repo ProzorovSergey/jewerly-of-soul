@@ -6,8 +6,10 @@ import * as auth from '../services/authService.js';
 import * as ideas from '../services/ideaService.js';
 import * as users from '../services/userService.js';
 import { loadStones } from '../core/database.js';
+import { groupStones } from '../core/bracelet.js';
 import { renderMini } from '../ui/miniBracelet.js';
 import { generateStoneTexture, preloadAlbedos, onAlbedoReady } from '../core/stoneGenerator.js';
+import { exportCard } from '../core/exporter.js';
 import { toast } from '../ui/toast.js';
 import { openModal } from '../ui/modal.js';
 
@@ -147,6 +149,7 @@ function render({ idea, author, me, catalogue }) {
                 ` : `
                     <a href="login.html" class="btn btn--ghost btn--sm">♥ Войдите, чтобы лайкнуть</a>
                 `}
+                <button class="btn btn--ghost btn--sm" id="downloadIdeaBtn">⬇ Скачать фото</button>
                 ${isMine ? `
                     <button class="btn btn--ghost btn--sm" id="deleteBtn" style="margin-left:auto">Удалить</button>
                 ` : ''}
@@ -180,14 +183,16 @@ function render({ idea, author, me, catalogue }) {
     resize(canvas);
     renderMini(canvas, catalogue, { stoneIds, size, length: len });
 
-    // Камни с миниатюрами
+    // Камни с миниатюрами — сгруппированы «название × количество»
     const stoneList = document.getElementById('stoneList');
-    stoneList.innerHTML = idea.stones.map((s, i) => `
+    const stoneGroups = groupStones(idea.stones, catalogue);
+    stoneList.innerHTML = stoneGroups.map((g, gi) => `
         <div class="idea-stone">
-            <canvas data-stone="${s.id}" data-var="${i}" width="32" height="32"></canvas>
+            <canvas data-stone="${escapeHtml(g.id)}" data-var="${gi}" width="32" height="32"></canvas>
             <div>
-                <div class="idea-stone__name">${escapeHtml(s.stone?.name || s.id)}</div>
-                <div class="idea-stone__meta">${s.size} мм · ${escapeHtml(s.stone?.element || '')}</div>
+                <div class="idea-stone__name">${escapeHtml(g.name)}${g.count > 1
+                    ? ` <span style="color:var(--accent);font-weight:600">×${g.count}</span>` : ''}</div>
+                <div class="idea-stone__meta">${g.size} мм · ${escapeHtml(g.element)}</div>
             </div>
         </div>
     `).join('');
@@ -229,6 +234,32 @@ function render({ idea, author, me, catalogue }) {
             } catch (e) { toast.error(e.message); }
         });
     }
+    // Скачать фото браслета (карточка с составом) — доступно всем
+    const dlBtn = document.getElementById('downloadIdeaBtn');
+    if (dlBtn) {
+        dlBtn.addEventListener('click', async () => {
+            dlBtn.disabled = true;
+            const orig = dlBtn.textContent;
+            dlBtn.textContent = 'Готовим фото…';
+            try {
+                await exportCard({
+                    length: len,
+                    stones: idea.stones.map(s => ({
+                        stoneId: s.id,
+                        size: s.size,
+                        stone: s.stone || catalogue.find(x => x.id === s.id),
+                    })),
+                }, { prefix: 'jewerly-of-soul', title: idea.title || '' });
+                toast.success('Фото браслета сохранено в загрузки');
+            } catch (e) {
+                toast.error('Не удалось сохранить фото');
+            } finally {
+                dlBtn.disabled = false;
+                dlBtn.textContent = orig;
+            }
+        });
+    }
+
     if (isMine) {
         document.getElementById('deleteBtn').addEventListener('click', () => {
             openModal({

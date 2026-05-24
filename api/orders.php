@@ -10,7 +10,9 @@ function order_statuses() {
 
 /** POST orders/create — создать заявку (можно без входа). */
 function handle_order_create($pdo) {
+    rate_limit($pdo, 'orders/create', 12, 3600);
     $b  = body();
+    check_honeypot($b);
     $me = current_user($pdo); // может быть null — заявки принимаются и от гостей
 
     $contactName   = s($b['contactName'] ?? '');

@@ -41,7 +41,9 @@ export function renderMini(canvas, catalogue, composition) {
 
     const draw = () => {
         resizeForRetina(canvas);
-        renderBracelet(canvas, { length, stones }, { showGuide: false });
+        // 'ring' — готовое замкнутое изделие: бусины равномерно по всей
+        // окружности, а не частичной дугой (как было бы в режиме 'fill').
+        renderBracelet(canvas, { length, stones }, { showGuide: false, layout: 'ring' });
     };
     draw();
 

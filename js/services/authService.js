@@ -82,3 +82,13 @@ export async function isAuthenticated() {
     const u = await getCurrentUser();
     return !!u;
 }
+
+/** Запросить письмо для восстановления пароля. */
+export async function requestPasswordReset(email, hp) {
+    return authApi.requestPasswordReset(email, hp);
+}
+
+/** Установить новый пароль по токену из письма. */
+export async function resetPassword(token, password) {
+    return authApi.resetPassword(token, password);
+}

@@ -12,7 +12,9 @@
 
 import { openModal } from './modal.js';
 import { renderMini } from './miniBracelet.js';
+import { toast } from './toast.js';
 import { onAlbedoReady, generateStoneTexture } from '../core/stoneGenerator.js';
+import { exportCard } from '../core/exporter.js';
 
 function escapeHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => (
@@ -39,7 +41,9 @@ export function openIdeaPreview(idea, opts = {}) {
     const len  = idea.length || 180;
     const liked = currentUser && (currentUser.likes || []).includes(idea.id);
 
-    // Уникальные камни состава — компактные иконки
+    // Уникальные камни состава — компактные иконки с количеством
+    const counts = {};
+    for (const s of idea.stones) counts[s.id] = (counts[s.id] || 0) + 1;
     const uniqueStones = [];
     const seen = new Set();
     for (const s of idea.stones) {
@@ -52,7 +56,8 @@ export function openIdeaPreview(idea, opts = {}) {
     const stonesChipsHtml = uniqueStones.map((st, i) => `
         <span class="idea-preview__stone">
             <canvas data-preview-stone="${st.id}" data-var="${i}" width="26" height="26"></canvas>
-            <span>${escapeHtml(st.name)}</span>
+            <span>${escapeHtml(st.name)}${counts[st.id] > 1
+                ? ` <span style="color:var(--accent);font-weight:600">×${counts[st.id]}</span>` : ''}</span>
         </span>
     `).join('');
 
@@ -102,7 +107,22 @@ export function openIdeaPreview(idea, opts = {}) {
         body,
         className: 'modal--idea-preview',
         buttons: [
-            { label: 'Закрыть',           kind: 'ghost',   onClick: ({ close }) => close() },
+            { label: 'Закрыть',      kind: 'ghost', onClick: ({ close }) => close() },
+            { label: 'Скачать фото', kind: 'ghost', onClick: async () => {
+                try {
+                    await exportCard({
+                        length: len,
+                        stones: idea.stones.map(s => ({
+                            stoneId: s.id,
+                            size: s.size,
+                            stone: catalogue.find(x => x.id === s.id),
+                        })),
+                    }, { prefix: 'jewerly-of-soul', title: idea.title || '' });
+                    toast.success('Фото браслета сохранено в загрузки');
+                } catch (_) {
+                    toast.error('Не удалось сохранить фото');
+                }
+            }},
             { label: 'Открыть полностью', kind: 'primary', onClick: ({ close }) => {
                 close();
                 location.href = `idea.html?id=${encodeURIComponent(idea.id)}`;

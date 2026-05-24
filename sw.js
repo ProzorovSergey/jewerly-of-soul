@@ -12,7 +12,7 @@
  * Версионирование: при изменении CACHE_VERSION старые caches удаляются.
  */
 
-const CACHE_VERSION = 'jos-v3-1-feed';
+const CACHE_VERSION = 'jos-v4-batch8';
 const STATIC_CACHE  = `${CACHE_VERSION}-static`;
 const STONES_CACHE  = `${CACHE_VERSION}-stones`;
 const DATA_CACHE    = `${CACHE_VERSION}-data`;
@@ -28,6 +28,8 @@ const PRECACHE_URLS = [
     './contact.html',
     './login.html',
     './register.html',
+    './forgot-password.html',
+    './reset-password.html',
     './profile.html',
     './idea.html',
     './create-idea.html',

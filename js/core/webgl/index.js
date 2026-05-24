@@ -35,7 +35,9 @@ import {
 // =================================================================
 
 const cache = new Map();      // key → HTMLCanvasElement
-const CACHE_LIMIT = 600;
+// Текстуры теперь рендерятся «с запасом» по разрешению (до 512²),
+// поэтому каждая запись тяжелее — лимит снижен, чтобы не раздувать память.
+const CACHE_LIMIT = 400;
 
 function cacheKey(stone, pixelSize, variant) {
     return `${stone.id}_${Math.round(pixelSize)}_${variant}`;
@@ -69,7 +71,14 @@ export function generateStoneTexture(stone, pixelSize, variant = 0) {
     const key = cacheKey(stone, pixelSize, variant);
     if (cache.has(key)) return cache.get(key);
 
-    const size = Math.max(8, Math.round(pixelSize));
+    // Камень рендерится «с запасом» по разрешению, чтобы не выглядеть
+    // пиксельным. На retina-экранах одна CSS-точка — это 2-3 реальных
+    // пикселя; вдобавок берём 2× supersample под аккуратный даунскейл.
+    // Потолок 512 — ровно размер исходных PNG-альбедо, выше нет смысла.
+    // Кэш-ключ остаётся по запрошенному размеру, физический — крупнее.
+    const requested = Math.max(8, Math.round(pixelSize));
+    const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+    const size = Math.min(512, Math.max(requested, Math.round(requested * dpr * 2)));
 
     if (!init()) {
         return renderFallback(stone, size, variant);

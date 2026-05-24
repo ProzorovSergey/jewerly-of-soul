@@ -13,6 +13,7 @@ form.addEventListener('submit', async e => {
     const password    = (data.get('password') || '').toString();
     const displayName = (data.get('displayName') || '').toString().trim();
     const consent     = !!data.get('consent');
+    const hp          = (data.get('hp') || '').toString();
 
     if (!consent) {
         toast.error('Подтвердите согласие на обработку персональных данных');
@@ -23,7 +24,7 @@ form.addEventListener('submit', async e => {
     btn.disabled = true;
     btn.textContent = 'Создаю…';
     try {
-        await auth.register({ email, password, displayName, consent });
+        await auth.register({ email, password, displayName, consent, hp });
         toast.success('Аккаунт создан');
         setTimeout(() => location.href = 'profile.html', 300);
     } catch (err) {

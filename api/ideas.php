@@ -81,6 +81,7 @@ function user_list_toggle($pdo, $userId, $column, $value) {
 
 /** POST ideas/create — создать идею (автор = текущий пользователь). */
 function handle_idea_create($pdo) {
+    rate_limit($pdo, 'ideas/create', 30, 3600);
     $me = require_user($pdo);
     $b = body();
 

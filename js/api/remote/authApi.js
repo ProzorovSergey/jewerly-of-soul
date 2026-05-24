@@ -10,14 +10,29 @@
 
 import { api, setToken, clearToken, getToken } from './client.js';
 
-/** Регистрация. creds: { email, password, displayName, consent }. */
-export async function register({ email, password, displayName, consent }) {
+/** Регистрация. creds: { email, password, displayName, consent, hp }. */
+export async function register({ email, password, displayName, consent, hp }) {
     const data = await api('auth/register', {
         method: 'POST',
-        body: { email, password, displayName, consent: !!consent },
+        body: { email, password, displayName, consent: !!consent, hp: hp || '' },
     });
     if (data.session && data.session.token) setToken(data.session.token);
     return data.user;
+}
+
+/**
+ * Запрос восстановления пароля. Сервер всегда отвечает «ок» — наличие
+ * аккаунта с такой почтой не раскрывается.
+ */
+export async function requestPasswordReset(email, hp) {
+    await api('auth/forgot', { method: 'POST', body: { email, hp: hp || '' } });
+    return { ok: true };
+}
+
+/** Установить новый пароль по токену из письма. */
+export async function resetPassword(token, password) {
+    await api('auth/reset', { method: 'POST', body: { token, password } });
+    return { ok: true };
 }
 
 /** Вход. creds: { email, password }. */

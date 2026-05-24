@@ -22,7 +22,9 @@ function derive_username($pdo, $email) {
 
 /** POST auth/register — регистрация нового пользователя. */
 function handle_register($pdo) {
+    rate_limit($pdo, 'auth/register', 6, 3600);
     $b = body();
+    check_honeypot($b);
     $email       = strtolower(s($b['email'] ?? ''));
     $password    = is_scalar($b['password'] ?? null) ? (string)$b['password'] : '';
     $displayName = s($b['displayName'] ?? '');
@@ -62,6 +64,7 @@ function handle_register($pdo) {
 
 /** POST auth/login — вход. */
 function handle_login($pdo) {
+    rate_limit($pdo, 'auth/login', 20, 600);
     $b = body();
     $email    = strtolower(s($b['email'] ?? ''));
     $password = is_scalar($b['password'] ?? null) ? (string)$b['password'] : '';
@@ -132,4 +135,78 @@ function handle_update($pdo) {
     $st = $pdo->prepare('SELECT * FROM users WHERE id = ?');
     $st->execute([$user['id']]);
     json_out(['user' => public_user($st->fetch())]);
+}
+
+/**
+ * POST auth/forgot — запрос восстановления пароля.
+ * Ответ всегда одинаков (ok), чтобы не раскрывать, есть ли аккаунт.
+ */
+function handle_forgot($pdo) {
+    rate_limit($pdo, 'auth/forgot', 5, 3600);
+    $b = body();
+    check_honeypot($b);
+
+    $email = strtolower(s($b['email'] ?? ''));
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) fail('Введите корректный e-mail');
+
+    $st = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $st->execute([$email]);
+    $user = $st->fetch();
+
+    // Демо-авторы сообщества (seed) не могут восстанавливать пароль.
+    if ($user && ($user['password_hash'] ?? '') !== 'seed-no-login') {
+        // Старые токены этого пользователя — гасим.
+        $pdo->prepare('DELETE FROM password_resets WHERE user_id = ?')->execute([$user['id']]);
+
+        $token   = token_gen();
+        $expires = date('Y-m-d H:i:s', time() + 3600); // ссылка живёт 1 час
+        $pdo->prepare(
+            'INSERT INTO password_resets (token, user_id, created_at, expires_at) VALUES (?,?,?,?)'
+        )->execute([$token, $user['id'], now(), $expires]);
+
+        $link = site_base_url() . '/reset-password.html?token=' . $token;
+        $msg  = "Здравствуйте!\n\n"
+              . "Вы запросили восстановление пароля на сайте Jewerly of Soul.\n"
+              . "Чтобы задать новый пароль, перейдите по ссылке (действительна 1 час):\n\n"
+              . $link . "\n\n"
+              . "Если вы не запрашивали восстановление пароля — просто проигнорируйте это письмо, "
+              . "с вашим аккаунтом ничего не произойдёт.\n\n"
+              . "— Jewerly of Soul";
+        send_mail($user['email'], 'Восстановление пароля — Jewerly of Soul', $msg);
+    }
+
+    json_out(['ok' => true]);
+}
+
+/** POST auth/reset — установить новый пароль по токену из письма. */
+function handle_reset($pdo) {
+    rate_limit($pdo, 'auth/reset', 12, 3600);
+    $b = body();
+
+    $token    = s($b['token'] ?? '');
+    $password = is_scalar($b['password'] ?? null) ? (string)$b['password'] : '';
+
+    if ($token === '')             fail('Ссылка восстановления недействительна');
+    if (mb_strlen($password) < 6)  fail('Пароль должен быть не короче 6 символов');
+    if (mb_strlen($password) > 200) fail('Слишком длинный пароль');
+
+    $st = $pdo->prepare('SELECT * FROM password_resets WHERE token = ?');
+    $st->execute([$token]);
+    $row = $st->fetch();
+    if (!$row) fail('Ссылка восстановления недействительна или уже использована');
+
+    if (strtotime($row['expires_at']) < time()) {
+        $pdo->prepare('DELETE FROM password_resets WHERE token = ?')->execute([$token]);
+        fail('Срок действия ссылки истёк. Запросите восстановление пароля заново.');
+    }
+
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $pdo->prepare('UPDATE users SET password_hash = ? WHERE id = ?')
+        ->execute([$hash, $row['user_id']]);
+
+    // Токен использован — удаляем все токены и старые сессии пользователя.
+    $pdo->prepare('DELETE FROM password_resets WHERE user_id = ?')->execute([$row['user_id']]);
+    $pdo->prepare('DELETE FROM sessions WHERE user_id = ?')->execute([$row['user_id']]);
+
+    json_out(['ok' => true]);
 }

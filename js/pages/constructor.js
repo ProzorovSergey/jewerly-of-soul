@@ -12,6 +12,7 @@ import {
     computeBraceletLayout,
     canAddStone,
     totalStoneLength,
+    groupStones,
 } from '../core/bracelet.js';
 import { exportPNG, exportCard } from '../core/exporter.js';
 import * as auth from '../services/authService.js';
@@ -406,40 +407,55 @@ function renderSequence() {
         els.sequenceList.innerHTML = '<li class="sequence__empty">Пусто. Добавьте первый камень слева.</li>';
         return;
     }
-    els.sequenceList.innerHTML = stones.map((s, idx) => `
+    // Группируем: вместо строки на каждую бусину — «название × количество».
+    const groups = groupStones(stones);
+    els.sequenceList.innerHTML = groups.map((g, gi) => `
         <li class="sequence__item">
-            <div class="sequence__visual"><canvas data-seq-thumb="${idx}" width="28" height="28"></canvas></div>
+            <div class="sequence__visual"><canvas data-seq-thumb="${gi}" width="28" height="28"></canvas></div>
             <div class="sequence__body">
-                <div class="sequence__name">${s.stone.name}</div>
-                <div class="sequence__meta">${s.size} мм · ${s.stone.element}</div>
+                <div class="sequence__name">${escapeHtml(g.name)}${g.count > 1
+                    ? ` <span style="color:var(--accent);font-weight:600">×${g.count}</span>` : ''}</div>
+                <div class="sequence__meta">${g.size} мм · ${escapeHtml(g.element)}</div>
             </div>
-            <button class="sequence__remove" data-remove="${idx}" aria-label="удалить">
+            <button class="sequence__remove" data-remove-id="${escapeAttr(g.id)}" data-remove-size="${g.size}"
+                    aria-label="убрать одну бусину">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
         </li>
     `).join('');
 
-    // Превью каждого камня + подписка на PNG-альбедо
+    // Превью каждой группы камней + подписка на PNG-альбедо
     els.sequenceList.querySelectorAll('canvas[data-seq-thumb]').forEach(c => {
-        const idx = +c.dataset.seqThumb;
-        const item = stones[idx];
-        if (!item) return;
+        const gi = +c.dataset.seqThumb;
+        const g = groups[gi];
+        if (!g || !g.stone) return;
         const draw = () => {
             const dpr = window.devicePixelRatio || 1;
             c.width = 28 * dpr; c.height = 28 * dpr;
             const ctx = c.getContext('2d');
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             ctx.clearRect(0, 0, 28, 28);
-            const tex = generateStoneTexture(item.stone, 28, idx);
+            const tex = generateStoneTexture(g.stone, 28, gi);
             ctx.drawImage(tex, 0, 0, 28, 28);
         };
         draw();
-        onAlbedoReady(item.stoneId, draw);
+        onAlbedoReady(g.id, draw);
     });
 
-    els.sequenceList.querySelectorAll('button[data-remove]').forEach(btn => {
-        btn.addEventListener('click', () => removeStone(+btn.dataset.remove));
+    els.sequenceList.querySelectorAll('button[data-remove-id]').forEach(btn => {
+        btn.addEventListener('click', () => removeOneOfGroup(btn.dataset.removeId, +btn.dataset.removeSize));
     });
+}
+
+/** Убрать одну (последнюю) бусину заданного камня и размера. */
+function removeOneOfGroup(stoneId, size) {
+    const stones = state.bracelet.stones;
+    for (let i = stones.length - 1; i >= 0; i--) {
+        if (stones[i].stoneId === stoneId && stones[i].size === size) {
+            removeStone(i);
+            return;
+        }
+    }
 }
 
 // =================================================================
@@ -516,6 +532,10 @@ async function onSendOrder() {
         title: 'Оформление заявки',
         body: `
             <div style="display:flex; flex-direction:column; gap:14px">
+                <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+                    <label>Не заполняйте это поле
+                        <input type="text" id="ordHp" tabindex="-1" autocomplete="off"></label>
+                </div>
                 <p class="muted" style="font-size:13px; margin:-4px 0 2px; line-height:1.5">
                     Композиция: ${beads} ${plural(beads, 'бусина', 'бусины', 'бусин')}, длина ${lengthCm} см.
                     Мастер свяжется с вами, чтобы уточнить детали и цену.
@@ -558,6 +578,7 @@ async function onSendOrder() {
                 const contactValue  = root.querySelector('#ordContact').value.trim();
                 const comment       = root.querySelector('#ordComment').value.trim();
                 const consent       = root.querySelector('#ordConsent').checked;
+                const hp            = root.querySelector('#ordHp').value;
 
                 if (!contactName)  { toast.error('Укажите, как к вам обращаться'); return; }
                 if (!contactValue) { toast.error('Укажите контакт для связи'); return; }
@@ -565,7 +586,7 @@ async function onSendOrder() {
 
                 try {
                     const order = await orderService.create({
-                        contactName, contactMethod, contactValue, comment, consent,
+                        contactName, contactMethod, contactValue, comment, consent, hp,
                         composition,
                         braceletLength: state.bracelet.length,
                     });

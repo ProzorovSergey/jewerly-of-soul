@@ -12,6 +12,7 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/orders.php';
 require __DIR__ . '/ideas.php';
 require __DIR__ . '/users.php';
+require __DIR__ . '/ai.php';
 
 // --- CORS (на случай запросов с другого домена) ----------------------
 header('Access-Control-Allow-Origin: *');
@@ -33,6 +34,11 @@ try {
         case 'auth/logout':   handle_logout($pdo);   break;
         case 'auth/me':       handle_me($pdo);       break;
         case 'auth/update':   handle_update($pdo);   break;
+        case 'auth/forgot':   handle_forgot($pdo);   break;
+        case 'auth/reset':    handle_reset($pdo);    break;
+
+        // --- AI-описание энергетики ---
+        case 'ai/describe':   handle_ai_describe($pdo); break;
 
         // --- Заявки ---
         case 'orders/create': handle_order_create($pdo); break;

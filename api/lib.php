@@ -191,6 +191,93 @@ function public_user($row) {
     ];
 }
 
+/* =====================================================================
+ *  АНТИ-СПАМ, ПИСЬМА, СЛУЖЕБНОЕ
+ * ===================================================================== */
+
+/** IP клиента (для ограничения частоты запросов). */
+function client_ip() {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    return substr((string)$ip, 0, 45);
+}
+
+/**
+ * Ограничение частоты запросов. Если с одного IP по одному «ключу»
+ * за окно $windowSec было >= $maxHits обращений — прерываем с 429.
+ *
+ * Хранится в таблице rate_limits. Изредка чистим совсем старые записи.
+ */
+function rate_limit($pdo, $key, $maxHits, $windowSec) {
+    try {
+        $bucket    = client_ip() . '|' . $key;
+        $threshold = date('Y-m-d H:i:s', time() - $windowSec);
+
+        $st = $pdo->prepare('DELETE FROM rate_limits WHERE bucket = ? AND created_at < ?');
+        $st->execute([$bucket, $threshold]);
+
+        $st = $pdo->prepare('SELECT COUNT(*) FROM rate_limits WHERE bucket = ? AND created_at >= ?');
+        $st->execute([$bucket, $threshold]);
+        $hits = (int)$st->fetchColumn();
+
+        if ($hits >= $maxHits) {
+            fail('Слишком много запросов. Подождите немного и попробуйте снова.', 429);
+        }
+
+        $st = $pdo->prepare('INSERT INTO rate_limits (bucket, created_at) VALUES (?, ?)');
+        $st->execute([$bucket, now()]);
+
+        // Изредка подчищаем журнал целиком (старше суток).
+        if (random_int(1, 40) === 1) {
+            $pdo->prepare('DELETE FROM rate_limits WHERE created_at < ?')
+                ->execute([date('Y-m-d H:i:s', time() - 86400)]);
+        }
+    } catch (ApiError $e) {
+        throw $e;                       // 429 пробрасываем
+    } catch (Throwable $e) {
+        /* нет таблицы rate_limits и т.п. — не блокируем работу сайта */
+    }
+}
+
+/**
+ * Проверка honeypot-поля. Скрытое поле `hp` человек не видит и не
+ * заполняет; если оно пришло непустым — это бот.
+ */
+function check_honeypot($b) {
+    if (isset($b['hp']) && trim((string)$b['hp']) !== '') {
+        fail('Запрос отклонён анти-спам фильтром');
+    }
+}
+
+/** Базовый адрес сайта — для ссылок в письмах. */
+function site_base_url() {
+    $cfg = config();
+    $url = trim($cfg['site_url'] ?? '');
+    if ($url !== '') return rtrim($url, '/');
+
+    $https  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+           || (($_SERVER['SERVER_PORT'] ?? '') == 443);
+    $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    return ($https ? 'https' : 'http') . '://' . $host;
+}
+
+/** Отправить простое текстовое письмо (UTF-8). @return bool */
+function send_mail($to, $subject, $message) {
+    $cfg  = config();
+    $from = trim($cfg['mail_from'] ?? '');
+    if ($from === '') {
+        $host = preg_replace('/^www\./', '', $_SERVER['HTTP_HOST'] ?? 'localhost');
+        $from = 'noreply@' . $host;
+    }
+    $headers  = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "Content-Transfer-Encoding: 8bit\r\n";
+    $headers .= 'From: Jewerly of Soul <' . $from . ">\r\n";
+    $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+
+    if (!function_exists('mail')) return false;
+    return @mail($to, $encodedSubject, $message, $headers);
+}
+
 /** Объект заявки для отдачи клиенту. */
 function public_order($row) {
     if (!$row) return null;

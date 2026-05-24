@@ -143,6 +143,19 @@ export async function updateProfile(patch) {
     return users[idx];
 }
 
+/**
+ * Восстановление пароля в режиме предпросмотра (localStorage) не
+ * работает — письма отправлять некому. Заглушки сохраняют контракт
+ * с remote-версией, чтобы страницы не падали.
+ */
+export async function requestPasswordReset(email, hp) {
+    return { ok: true, preview: true };
+}
+
+export async function resetPassword(token, password) {
+    throw new Error('Восстановление пароля доступно только на основном сайте.');
+}
+
 /** Внутренняя функция: добавить юзера напрямую (для seed). */
 export function _seedUser(user) {
     const users = readUsers();
